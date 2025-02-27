@@ -1,5 +1,4 @@
-// filepath: /d:/Portfolio projects/hajar/src/components/Navbar.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
@@ -8,28 +7,50 @@ import '../css/navbar.css';
 
 const NavigationBar = () => {
   const { t, i18n } = useTranslation();
+  const [scrolled, setScrolled] = useState(false);
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 30) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar
+      bg={scrolled ? 'light' : 'dark'}
+      variant="dark"
+      expand="lg"
+      fixed="top"
+      className={scrolled ? 'navbar-scrolled' : ''}
+    >
       <Container>
-        <Navbar.Brand as={Link} to="/">My Portfolio</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/" className={scrolled ? 'text-dark' : 'text-light'}>My Portfolio</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/">{t('navbar.home')}</Nav.Link>
-            <Nav.Link as={Link} to="/photos">{t('navbar.photos')}</Nav.Link>
-            <Nav.Link as={Link} to="/about">{t('navbar.about')}</Nav.Link>
-            <Nav.Link as={Link} to="/titles">{t('navbar.titles')}</Nav.Link>
+            <Nav.Link as={Link} to="/" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.home')}</Nav.Link>
+            <Nav.Link as={Link} to="/photos" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.photos')}</Nav.Link>
+            <Nav.Link as={Link} to="/about" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.about')}</Nav.Link>
+            <Nav.Link as={Link} to="/titles" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.titles')}</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="https://www.facebook.com/profile.php?id=100008438296052" target="_blank"><FaFacebook /></Nav.Link>
-            <Nav.Link href="https://twitter.com" target="_blank"><FaTwitter /></Nav.Link>
-            <Nav.Link href="https://linkedin.com" target="_blank"><FaLinkedin /></Nav.Link>
-            <NavDropdown title="Language" id="basic-nav-dropdown">
+            <Nav.Link href="https://www.facebook.com/profile.php?id=100008438296052" target="_blank" className={scrolled ? 'text-dark' : 'text-light'}><FaFacebook /></Nav.Link>
+            <Nav.Link href="https://twitter.com" target="_blank" className={scrolled ? 'text-dark' : 'text-light'}><FaTwitter /></Nav.Link>
+            <Nav.Link href="https://linkedin.com" target="_blank" className={scrolled ? 'text-dark' : 'text-light'}><FaLinkedin /></Nav.Link>
+            <NavDropdown title="Language" id="basic-nav-dropdown" className={scrolled ? 'text-dark' : 'text-light'}>
               <NavDropdown.Item onClick={() => changeLanguage('en')}>English</NavDropdown.Item>
               <NavDropdown.Item onClick={() => changeLanguage('az')}>Azerbaycan</NavDropdown.Item>
             </NavDropdown>

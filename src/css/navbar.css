@@ -1,6 +1,7 @@
 /* filepath: /d:/Portfolio projects/hajar/src/css/navbar.css */
 .navbar {
     background-color: #343a40; /* Dark background color */
+    height: 60px;
   }
   
   .navbar-brand {
@@ -26,4 +27,17 @@
   
   .social-icons .nav-link:hover {
     color: #007bff;
+  }
+
+
+  .navbar-scrolled {
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .text-dark {
+    color: #000 !important;
+  }
+  
+  .text-light {
+    color: #fff !important;
   }

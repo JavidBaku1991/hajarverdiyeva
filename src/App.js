@@ -8,13 +8,6 @@ import Titles from './pages/Titles.js'
 import NavigationBar from './components/Navbar';
 import Footer from './components/Footer.js';
 import Beach from './pages/Beach.js';
-// import About from './pages/About.js'
-// import './index.css'; 
-// import FAQS from './pages/FAQS.js';
-// import Notes from './pages/Notes.js';
-// import Lessons from './pages/Lessons.js';
-// import Contacts from './pages/Contacts.js';
-// import Books from './pages/Books.js';
 
 
 function App() {
