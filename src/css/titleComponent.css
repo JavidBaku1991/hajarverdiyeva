@@ -1,0 +1,28 @@
+.title-slider {
+  margin: 2rem 0;
+}
+
+.title-item {
+  text-align: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+}
+
+.title-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.download-link {
+  display: block;
+  margin-top: 0.5rem;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.download-link:hover {
+  text-decoration: underline;
+}

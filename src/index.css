@@ -1,13 +1,11 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/* Importing other CSS files */
+@import url('../src/css/home.css');
+@import url('../src/css/footer.css');
+@import url('../src/css/about.css');
+@import url('../src/css/titles.css');
+@import url('../src/css/navbar.css');
+@import url('../src/css/photoFolder.css');
+@import url('../src/css/titleComponent.css')
+/*  */
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+/* You can add your custom styles here */

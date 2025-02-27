@@ -1,0 +1,26 @@
+.footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 1rem 0;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    height: 300px;
+    margin-top: 60px;
+
+  }
+  
+  .footer p {
+    margin: 0;
+  }
+  
+  .social-icons a {
+    color: #ffffff;
+    margin: 0 1rem; /* Added margin to space out the icons */
+    font-size: 1.5rem;
+    text-decoration: none;
+  }
+  
+  .social-icons a:hover {
+    color: #007bff;
+  }

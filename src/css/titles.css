@@ -1,0 +1,48 @@
+.titles-page {
+    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+    color: #333;
+    padding: 2rem 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .titles-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #2c3e50;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .titles-list {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .titles-list li {
+    margin-bottom: 1rem;
+  }
+  
+  .titles-list li button {
+    background: none;
+    border: none;
+    color: #2980b9;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .titles-list li button:hover {
+    color: #1a5276;
+  }
+  
+  .download-link {
+    margin-left: 1rem;
+    color: #2980b9;
+    text-decoration: none;
+  }
+  
+  .download-link:hover {
+    text-decoration: underline;
+  }

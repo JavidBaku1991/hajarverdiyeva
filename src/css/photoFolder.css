@@ -1,0 +1,15 @@
+/* filepath: /d:/Portfolio projects/hajar/src/css/photoFolder.css */
+.photo-folder {
+    margin: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .photo-folder:hover {
+    transform: scale(1.05);
+  }
+  
+  .photo-folder img {
+    height: 200px;
+    object-fit: cover;
+  }

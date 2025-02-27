@@ -1,24 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import {HashRouter,Routes,Route} from 'react-router-dom';
+
+import Home from './pages/Home.js'
+import Photos from './pages/Photos.js'
+import About from './pages/About.js'
+import Titles from './pages/Titles.js'
+import NavigationBar from './components/Navbar';
+import Footer from './components/Footer.js';
+import Beach from './pages/Beach.js';
+// import About from './pages/About.js'
+// import './index.css'; 
+// import FAQS from './pages/FAQS.js';
+// import Notes from './pages/Notes.js';
+// import Lessons from './pages/Lessons.js';
+// import Contacts from './pages/Contacts.js';
+// import Books from './pages/Books.js';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+
+  return (<div>
+       <HashRouter>
+       <NavigationBar />
+
+      <Routes>
+
+               <Route element={<Home />} path='/'  exact/>
+               <Route element={<Photos />} path='/photos'  exact/>
+               <Route element={<Beach />} path='/photos/beach'  exact/>
+               <Route element={<About />} path='/about'  exact/>
+               <Route element={<Titles />} path='/titles'  exact/>
+      
+      </Routes>
+      <Footer />
+      
+    </HashRouter>
+   
+  </div>
+    
   );
 }
 
