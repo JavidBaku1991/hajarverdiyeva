@@ -20,11 +20,15 @@ const TitleComponent = ({ titles }) => {
       <Slider {...settings}>
         {titles.map((title, index) => (
           <div key={index} className="title-item">
-            <img src={title.imageUrl} alt={title.name} className="title-image" />
-            <h4>{title.name}</h4>
-            <a href={title.url} download className="download-link">
-              Open
-            </a>
+            <div className="title-content">
+              <img src={title.imageUrl} alt={title.name} className="title-image" />
+              <div className="title-text">
+                <h4>{title.name}</h4>
+                <a href={title.url} download className="download-link">
+                  Open
+                </a>
+              </div>
+            </div>
           </div>
         ))}
       </Slider>

@@ -4,16 +4,17 @@ import '../css/titles.css';
 
 // Import PDF files
 import title1 from '../pdf/title1.pdf';
+import title1Image from '../photos/titles/hecer1.jpg';
 import title2 from '../pdf/title2.pdf';
 import title3 from '../pdf/title3.pdf';
 
 const titles = [
-  { name: 'Title 1', url: title1 },
-  { name: 'Title 2', url: title2 },
-  { name: 'Title 3', url: title3 },
-  { name: 'Title 4', url: title1 },
-  { name: 'Title 5', url: title2 },
-  { name: 'Title 6', url: title3 },
+  { name: 'Title 1', url: title1, imageUrl: title1Image },
+  { name: 'Title 2', url: title2, imageUrl: title1Image },
+  { name: 'Title 3', url: title3, imageUrl: title1Image },
+  { name: 'Title 4', url: title1, imageUrl: title1Image },
+  { name: 'Title 5', url: title2, imageUrl: title1Image },
+  { name: 'Title 6', url: title3, imageUrl: title1Image },
 ];
 
 const Titles = () => {
@@ -36,12 +37,15 @@ const Titles = () => {
               {titles.map((title, index) => (
                 <Col md={6} key={index} className="d-flex justify-content-center">
                   <div className="title-item">
-                    <Button variant="link" onClick={() => handleShow(title)}>
-                      {title.name}
-                    </Button>
-                    <a href={title.url} download className="download-link">
-                      Download
-                    </a>
+                    <img src={title.imageUrl} alt={title.name} className="title-image" />
+                    <div className="title-text">
+                      <Button variant="link" onClick={() => handleShow(title)}>
+                        {title.name}
+                      </Button>
+                      <a href={title.url} download className="download-link">
+                        Download
+                      </a>
+                    </div>
                   </div>
                 </Col>
               ))}

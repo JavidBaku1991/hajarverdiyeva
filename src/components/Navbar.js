@@ -26,7 +26,7 @@ const NavigationBar = () => {
             <Nav.Link as={Link} to="/titles">{t('navbar.titles')}</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="https://facebook.com" target="_blank"><FaFacebook /></Nav.Link>
+            <Nav.Link href="https://www.facebook.com/profile.php?id=100008438296052" target="_blank"><FaFacebook /></Nav.Link>
             <Nav.Link href="https://twitter.com" target="_blank"><FaTwitter /></Nav.Link>
             <Nav.Link href="https://linkedin.com" target="_blank"><FaLinkedin /></Nav.Link>
             <NavDropdown title="Language" id="basic-nav-dropdown">

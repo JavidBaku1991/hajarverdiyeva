@@ -1,11 +1,10 @@
-// filepath: /d:/Portfolio projects/hajar/src/pages/Home.js
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; // Correct import statement
 import YouTubeVideo from '../components/YouTubeVideo';
 import TitleComponent from '../components/TitleComponent';
 import '../css/home.css';
 import heroImg from '../photos/5.jpg';
-
 
 // images for titles
 import hecer1 from '../photos/titles/hecer1.jpg';
@@ -20,14 +19,10 @@ const videos = [
 ];
 
 const titles = [
-  { name: 'Title 1', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/' , imageUrl: hecer1},
-  
-  { name: 'Title 2', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/',imageUrl: hecer1 },
-  
-  { name: 'Title 3', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/', imageUrl: hecer1},
-  
-  { name: 'Title 4', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/' ,imageUrl: hecer1},
-  
+  { name: 'Title 1', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/', imageUrl: hecer1 },
+  { name: 'Title 2', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/', imageUrl: hecer1 },
+  { name: 'Title 3', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/', imageUrl: hecer1 },
+  { name: 'Title 4', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/', imageUrl: hecer1 },
 ];
 
 const Home = () => {
@@ -58,6 +53,9 @@ const Home = () => {
           <Col>
             <h2 className="title-section-title">My Online Titles</h2>
             <TitleComponent titles={titles} />
+            <div className="d-flex justify-content-center">
+              <Link to="/titles" className="more-link">More</Link>
+            </div>
           </Col>
         </Row>
       </Container>

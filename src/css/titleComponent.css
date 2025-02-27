@@ -8,12 +8,26 @@
   background: #f8f9fa;
   border: 1px solid #dee2e6;
   border-radius: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .title-image {
-  width: 100%;
+  width: 40%;
   height: auto;
-  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+.title-text {
+  width: 60%;
+  text-align: left;
 }
 
 .download-link {
