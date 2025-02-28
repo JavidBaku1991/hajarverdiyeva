@@ -33,7 +33,7 @@ const NavigationBar = () => {
   return (
     <Navbar
       bg={scrolled ? 'light' : 'dark'}
-      variant="dark"
+      variant={scrolled ? 'light' : 'dark'}
       expand="lg"
       fixed="top"
       className={scrolled ? 'navbar-scrolled' : ''}
@@ -42,7 +42,7 @@ const NavigationBar = () => {
         <Navbar.Brand as={Link} to="/" className={scrolled ? 'text-dark' : 'text-light'}>
           <GiGreekTemple className='logo' />Həcər Verdiyeva
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" className={scrolled ? 'text-dark' : 'text-light'} />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.home')}</Nav.Link>
@@ -50,7 +50,7 @@ const NavigationBar = () => {
             <Nav.Link as={Link} to="/about" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.about')}</Nav.Link>
             <Nav.Link as={Link} to="/titles" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.titles')}</Nav.Link>
           </Nav>
-          <Nav>
+          <Nav className="social-icons">
             <Nav.Link href="https://www.facebook.com/profile.php?id=100008438296052" target="_blank" className={scrolled ? 'text-dark' : 'text-light'} title="Facebook">
               <FaFacebook />
             </Nav.Link>
