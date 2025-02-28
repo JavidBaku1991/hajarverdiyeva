@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'; // Correct import statement
 import YouTubeVideo from '../components/YouTubeVideo';
 import TitleComponent from '../components/TitleComponent';
 import '../css/home.css';
-import heroImg from '../photos/5.jpg';
+import heroImg from '../photos/hecer3.jpg';
 
 // images for titles
 import hecer1 from '../photos/titles/hecer1.jpg';
@@ -31,9 +31,9 @@ const Home = () => {
       <div className="hero-container">
         <img src={heroImg} alt="Hero" className="hero-image" />
         <div className="hero-content">
-          <h1>Welcome to My Portfolio</h1>
-          <h3>Discover My Work</h3>
-          <p>This is a brief introduction to my portfolio. Explore my projects and videos below.</p>
+          <h1>Həcər Verdiyeva</h1>
+          <h3>Tarix elmləri doktoru</h3>
+          <p>Veb-səhifədə tarixçinin fəaliyyətinə dair bütün məlumatları tapa bilərsiniz</p>
         </div>
       </div>
       <Container>

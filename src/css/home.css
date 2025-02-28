@@ -10,11 +10,12 @@
 }
 
 .hero-image {
+  box-shadow: 0px 0px 5px #fff;
   width: 60%; /* Adjusted width */
   height: 100%;
   object-fit: cover;
   position: absolute;
-  top: 0;
+  top: 20px;
   right: 0; /* Positioned to the right */
   clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%); /* Diagonal left */
   z-index: 1;

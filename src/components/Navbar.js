@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import '../css/navbar.css';
+import { GiGreekTemple } from "react-icons/gi";
+import { SiAcademia } from "react-icons/si";
 
 const NavigationBar = () => {
   const { t, i18n } = useTranslation();
@@ -37,7 +39,9 @@ const NavigationBar = () => {
       className={scrolled ? 'navbar-scrolled' : ''}
     >
       <Container>
-        <Navbar.Brand as={Link} to="/" className={scrolled ? 'text-dark' : 'text-light'}>My Portfolio</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/" className={scrolled ? 'text-dark' : 'text-light'}>
+          <GiGreekTemple className='logo' />Həcər Verdiyeva
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -47,9 +51,18 @@ const NavigationBar = () => {
             <Nav.Link as={Link} to="/titles" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.titles')}</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="https://www.facebook.com/profile.php?id=100008438296052" target="_blank" className={scrolled ? 'text-dark' : 'text-light'}><FaFacebook /></Nav.Link>
-            <Nav.Link href="https://twitter.com" target="_blank" className={scrolled ? 'text-dark' : 'text-light'}><FaTwitter /></Nav.Link>
-            <Nav.Link href="https://linkedin.com" target="_blank" className={scrolled ? 'text-dark' : 'text-light'}><FaLinkedin /></Nav.Link>
+            <Nav.Link href="https://www.facebook.com/profile.php?id=100008438296052" target="_blank" className={scrolled ? 'text-dark' : 'text-light'} title="Facebook">
+              <FaFacebook />
+            </Nav.Link>
+            <Nav.Link href="https://twitter.com" target="_blank" className={scrolled ? 'text-dark' : 'text-light'} title="Twitter">
+              <FaTwitter />
+            </Nav.Link>
+            <Nav.Link href="https://linkedin.com" target="_blank" className={scrolled ? 'text-dark' : 'text-light'} title="LinkedIn">
+              <FaLinkedin />
+            </Nav.Link>
+            <Nav.Link href="https://bakustate.academia.edu/HajarVerdiyeva" target="_blank" className={scrolled ? 'text-dark' : 'text-light'} title="Academia">
+              <SiAcademia />
+            </Nav.Link>
             <NavDropdown title="Language" id="basic-nav-dropdown" className={scrolled ? 'text-dark' : 'text-light'}>
               <NavDropdown.Item onClick={() => changeLanguage('en')}>English</NavDropdown.Item>
               <NavDropdown.Item onClick={() => changeLanguage('az')}>Azerbaycan</NavDropdown.Item>

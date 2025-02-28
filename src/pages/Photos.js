@@ -4,8 +4,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import PhotoFolder from '../components/PhotoFolder';
 import '../css/photoFolder.css';
 
+import image1 from '../photos/2.jpg';
+
 const photoFolders = [
-  { title: 'Beach', imageUrl: '/photos/1.jpg', route: '/photos/beach' },
+  { title: 'Beach', imageUrl: image1, route: '/photos/beach' },
   { title: 'Mountains', imageUrl: '/photos/2.jpg', route: '/photos/mountains' },
   { title: 'City', imageUrl: '/photos/3.jpg', route: '/photos/city' },
   { title: 'Forest', imageUrl: '/photos/4.jpg', route: '/photos/forest' },
