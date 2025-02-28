@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/hajarverdiyeva/static/css/main.e0934b53.css",
-    "main.js": "/hajarverdiyeva/static/js/main.67b8939a.js",
+    "main.css": "/hajarverdiyeva/static/css/main.d7dd2ed4.css",
+    "main.js": "/hajarverdiyeva/static/js/main.84fe73c4.js",
     "static/media/10.jpg": "/hajarverdiyeva/static/media/10.4fed09f91a4ad2c06802.jpg",
     "static/media/2.jpg": "/hajarverdiyeva/static/media/2.48d36b529a4b4707146e.jpg",
     "static/media/title3.pdf": "/hajarverdiyeva/static/media/title3.82a4925ad46caf6f3068.pdf",
@@ -14,11 +14,11 @@
     "static/media/slick.ttf": "/hajarverdiyeva/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/hajarverdiyeva/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/hajarverdiyeva/index.html",
-    "main.e0934b53.css.map": "/hajarverdiyeva/static/css/main.e0934b53.css.map",
-    "main.67b8939a.js.map": "/hajarverdiyeva/static/js/main.67b8939a.js.map"
+    "main.d7dd2ed4.css.map": "/hajarverdiyeva/static/css/main.d7dd2ed4.css.map",
+    "main.84fe73c4.js.map": "/hajarverdiyeva/static/js/main.84fe73c4.js.map"
   },
   "entrypoints": [
-    "static/css/main.e0934b53.css",
-    "static/js/main.67b8939a.js"
+    "static/css/main.d7dd2ed4.css",
+    "static/js/main.84fe73c4.js"
   ]
 }
