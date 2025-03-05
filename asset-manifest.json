@@ -1,24 +1,28 @@
 {
   "files": {
-    "main.css": "/hajarverdiyeva/static/css/main.d7dd2ed4.css",
-    "main.js": "/hajarverdiyeva/static/js/main.84fe73c4.js",
+    "main.css": "/hajarverdiyeva/static/css/main.5f3c5541.css",
+    "main.js": "/hajarverdiyeva/static/js/main.14e25875.js",
     "static/media/10.jpg": "/hajarverdiyeva/static/media/10.4fed09f91a4ad2c06802.jpg",
     "static/media/2.jpg": "/hajarverdiyeva/static/media/2.48d36b529a4b4707146e.jpg",
-    "static/media/title3.pdf": "/hajarverdiyeva/static/media/title3.82a4925ad46caf6f3068.pdf",
+    "static/media/title1.pdf": "/hajarverdiyeva/static/media/title1.90b1429ce07edb3aa151.pdf",
+    "static/media/title3.pdf": "/hajarverdiyeva/static/media/title3.578679581381a4135f52.pdf",
+    "static/media/title2.pdf": "/hajarverdiyeva/static/media/title2.8fb5625490e68a16d2af.pdf",
+    "static/media/home2.jpg": "/hajarverdiyeva/static/media/home2.cd023f6d9421bae53cd9.jpg",
+    "static/media/home3.jpg": "/hajarverdiyeva/static/media/home3.3e6d785a21e2da64823b.jpg",
     "static/media/hecer3.jpg": "/hajarverdiyeva/static/media/hecer3.56935523901ff1999d8e.jpg",
-    "static/media/hecer1.jpg": "/hajarverdiyeva/static/media/hecer1.8297a6ea4820d8483785.jpg",
-    "static/media/title1.pdf": "/hajarverdiyeva/static/media/title1.ebdefadc5e0634e551e2.pdf",
-    "static/media/title2.pdf": "/hajarverdiyeva/static/media/title2.74c5d4791d0feb84c3a1.pdf",
+    "static/media/home1.jpg": "/hajarverdiyeva/static/media/home1.d878a31f24284be8029d.jpg",
+    "static/media/home4.jpg": "/hajarverdiyeva/static/media/home4.b0ef181132abc371283d.jpg",
+    "static/media/home5.jpg": "/hajarverdiyeva/static/media/home5.17f02517cce53d66f094.jpg",
     "static/media/slick.svg": "/hajarverdiyeva/static/media/slick.2630a3e3eab21c607e21.svg",
     "static/media/slick.eot": "/hajarverdiyeva/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/hajarverdiyeva/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/hajarverdiyeva/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/hajarverdiyeva/index.html",
-    "main.d7dd2ed4.css.map": "/hajarverdiyeva/static/css/main.d7dd2ed4.css.map",
-    "main.84fe73c4.js.map": "/hajarverdiyeva/static/js/main.84fe73c4.js.map"
+    "main.5f3c5541.css.map": "/hajarverdiyeva/static/css/main.5f3c5541.css.map",
+    "main.14e25875.js.map": "/hajarverdiyeva/static/js/main.14e25875.js.map"
   },
   "entrypoints": [
-    "static/css/main.d7dd2ed4.css",
-    "static/js/main.84fe73c4.js"
+    "static/css/main.5f3c5541.css",
+    "static/js/main.14e25875.js"
   ]
 }
