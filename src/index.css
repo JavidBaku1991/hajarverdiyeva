@@ -6,6 +6,7 @@
 @import url('../src/css/navbar.css');
 @import url('../src/css/photoFolder.css');
 @import url('../src/css/titleComponent.css');
+@import url('../src/css/contacts.css');
 /* Adjust the top padding to match the height of the Navbar */
 body {
     padding-top: 60px; /* Adjust this value to match the height of your Navbar */

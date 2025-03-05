@@ -1,6 +1,5 @@
 .navbar {
-  transition: background-color 0.3s ease-in-out;
-}
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;}
 
 .navbar-dark {
   background-color: #343a40; /* Dark background color */
@@ -112,4 +111,10 @@
   position: relative;
   bottom: 3px;
   right: 10px;
+}
+
+.navbar .dropdown-item {
+  color: #000 !important; /* Set the color to black */
+  width: 80%;
+  font-size: 20px;
 }

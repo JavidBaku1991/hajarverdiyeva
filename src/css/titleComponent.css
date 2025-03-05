@@ -1,43 +1,104 @@
 .title-slider {
-  margin: 2rem 0;
+  width: 100%;
+  gap: 20px; /* Add gap to ensure space between titles */
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 1000;
+  color: #333;
+}
+
+.slick-dots li button:before {
+  color: #150606;
+  font-size: 12px;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #000000;
 }
 
 .title-item {
-  text-align: center;
-  margin-right: 5px;
-  padding: 1rem;
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 0.25rem;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  background: #c5a3a3;
+  border-radius: 20px;
+  margin-left: 3px;
+  padding: 5px;
+  margin: 70px; /* Ensure margin to add more space between titles */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  height: 180px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
 }
 
-.title-content {
-  display: flex;
-  align-items: center;
-  width: 100%;
+.title-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .title-image {
-  width: 40%;
+  width: 50%; /* Ensure the image covers only 50% of the title */
   height: auto;
-  margin-right: 1rem;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 10px;
 }
 
-.title-text {
-  width: 60%;
-  text-align: left;
+.title-content {
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px;
+}
+
+.title-text h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
 }
 
 .download-link {
-  display: block;
-  margin-top: 0.5rem;
-  color: #007bff;
   text-decoration: none;
+  background-color: #007bff;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background 0.3s;
 }
 
 .download-link:hover {
+  background-color: #0056b3;
+}
+
+.title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.title-link:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .title-slider {
+    width: 95%;
+  }
+
+  .title-item {
+    padding: 10px;
+  }
+
+  .title-text h4 {
+    font-size: 16px;
+  }
+
+  .download-link {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
 }

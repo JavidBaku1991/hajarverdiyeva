@@ -4,7 +4,7 @@ import '../css/titles.css';
 
 // Import PDF files
 import title1 from '../pdf/title1.pdf';
-import title1Image from '../photos/titles/hecer1.jpg';
+import title1Image from '../photos/titles/home1.jpg';
 import title2 from '../pdf/title2.pdf';
 import title3 from '../pdf/title3.pdf';
 

@@ -13,20 +13,23 @@ const TitleComponent = ({ titles }) => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
+    centerMode: true,
+    centerPadding: '20px',
   };
 
   return (
     <div className="title-slider">
       <Slider {...settings}>
         {titles.map((title, index) => (
-          <div key={index} className="title-item">
+          <div key={index} className="title-item" >
             <div className="title-content">
-              <img src={title.imageUrl} alt={title.name} className="title-image" />
+              <img src={title.image} alt={title.name} className="title-image" />
               <div className="title-text">
-                <h4>{title.name}</h4>
-                <a href={title.url} download className="download-link">
-                  Open
-                </a>
+                <h4>
+                  <a href={title.url} download className="title-link">
+                    {title.name}
+                  </a>
+                </h4>
               </div>
             </div>
           </div>

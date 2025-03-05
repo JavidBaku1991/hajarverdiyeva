@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaLinkedin, FaGlobe } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import '../css/navbar.css';
 import { GiGreekTemple } from "react-icons/gi";
@@ -49,6 +49,7 @@ const NavigationBar = () => {
             <Nav.Link as={Link} to="/photos" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.photos')}</Nav.Link>
             <Nav.Link as={Link} to="/about" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.about')}</Nav.Link>
             <Nav.Link as={Link} to="/titles" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.titles')}</Nav.Link>
+            <Nav.Link as={Link} to="/contacts" className={scrolled ? 'text-dark' : 'text-light'}>Contact</Nav.Link>
           </Nav>
           <Nav className="social-icons">
             <Nav.Link href="https://www.facebook.com/profile.php?id=100008438296052" target="_blank" className={scrolled ? 'text-dark' : 'text-light'} title="Facebook">
@@ -63,9 +64,9 @@ const NavigationBar = () => {
             <Nav.Link href="https://bakustate.academia.edu/HajarVerdiyeva" target="_blank" className={scrolled ? 'text-dark' : 'text-light'} title="Academia">
               <SiAcademia />
             </Nav.Link>
-            <NavDropdown title="Language" id="basic-nav-dropdown" className={scrolled ? 'text-dark' : 'text-light'}>
-              <NavDropdown.Item onClick={() => changeLanguage('en')}>English</NavDropdown.Item>
-              <NavDropdown.Item onClick={() => changeLanguage('az')}>Azerbaycan</NavDropdown.Item>
+            <NavDropdown title={<FaGlobe />} id="basic-nav-dropdown" className={scrolled ? 'text-dark' : 'text-light'}>
+              <NavDropdown.Item onClick={() => changeLanguage('en')} >English</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => changeLanguage('az')} >Azerbaycan</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

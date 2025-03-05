@@ -1,28 +1,35 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom'; // Correct import statement
+import { Link } from 'react-router-dom';
 import YouTubeVideo from '../components/YouTubeVideo';
 import TitleComponent from '../components/TitleComponent';
 import '../css/home.css';
 import heroImg from '../photos/hecer3.jpg';
 
 // images for titles
-import hecer1 from '../photos/titles/hecer1.jpg';
+import hecer1 from '../photos/titles/home1.jpg';
+import hecer2 from '../photos/titles/home2.jpg';
+import hecer3 from '../photos/titles/home3.jpg';
+import hecer4 from '../photos/titles/home4.jpg';
+import hecer5 from '../photos/titles/home5.jpg';
 
 const videos = [
-  { videoId: 'K-wCck8Vkbw', title: 'Video 1' },
-  { videoId: '3JZ_D3ELwOQ', title: 'Video 2' },
-  { videoId: 'L_jWHffIx5E', title: 'Video 3' },
-  { videoId: 'eVTXPUF4Oz4', title: 'Video 4' },
-  { videoId: 'hTWKbfoikeg', title: 'Video 5' },
-  { videoId: 'kXYiU_JCYtU', title: 'Video 6' },
+  { videoId: 'K-wCck8Vkbw', title: '"Multikulturalizm" verilişi 23' },
+ 
+  { videoId: 'X0IB02XbXXQ', title: 'Французское издание о попытках арменизации албанского храма в Карабахе' },
+  { videoId: '5GSeEaKEqi8', title: 'Хроники переселения армян на Кавказ' }, 
+  { videoId: '3jnJmZS1qNc', title: '«Просто о сложном» : переселение армян на Кавказ. Передача вторая' }, 
+  { videoId: 'qsP-kGrf1MI', title: '«Просто о сложном»: переселение армян на Кавказ. Передача первая' }, 
+  { videoId: 'IVUfwIkdfoA', title: '«Просто о сложном»: переселение армян на Кавказ. Передача четвёртая' }, 
+
 ];
 
 const titles = [
-  { name: 'Title 1', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/', imageUrl: hecer1 },
-  { name: 'Title 2', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/', imageUrl: hecer1 },
-  { name: 'Title 3', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/', imageUrl: hecer1 },
-  { name: 'Title 4', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/', imageUrl: hecer1 },
+  { name: 'Первая мировая война и беженцы — мусульмане Кавказа', url: 'https://1905.az/ru/%D0%BF%D0%B5%D1%80%D0%B2%D0%B0%D1%8F-%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%8F-%D0%B2%D0%BE%D0%B9%D0%BD%D0%B0-%D0%B8-%D0%B1%D0%B5%D0%B6%D0%B5%D0%BD%D1%86%D1%8B-%D0%BC%D1%83%D1%81%D1%83%D0%BB%D1%8C/', image: hecer1 },
+  { name: 'Həcər Verdiyeva: “Tarixdə “Böyük Ərməniyyə” olmayıb.', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/', image: hecer5 },
+  { name: '“Erməni-qriqoryan kilsəsi XIX əsr ərzində alban irsini məhv edib, qarət edirdi”', url: 'https://1905.az/erm%C9%99ni-qriqoryan-kils%C9%99si-xix-%C9%99sr-%C9%99rzind%C9%99-alban-irsini-m%C9%99hv-edib-qar%C9%99t-edirdi/', image: hecer2},
+  { name: '“Erməni-qriqoryan kilsəsi XIX əsr ərzində alban irsini məhv edib, qarət edirdi”', url: 'https://br.az/politics/71069/na-matrice-istiny/', image:hecer3},
+  { name: 'Развязывая «узлы» истории', url: 'https://br.az/politics/63227/razvyazyvaya-uzly-istorii/', image: hecer4 }
 ];
 
 const Home = () => {
@@ -39,19 +46,17 @@ const Home = () => {
       <Container>
         <Row>
           <Col>
-            <h2 className="video-section-title">My YouTube Videos</h2>
           </Col>
         </Row>
         <Row>
           {videos.map((video, index) => (
-            <Col md={4} key={index} className="d-flex justify-content-center">
+            <Col md={4} key={index} className="d-flex justify-content-center  mt-5">
               <YouTubeVideo videoId={video.videoId} title={video.title} />
             </Col>
           ))}
         </Row>
         <Row>
           <Col>
-            <h2 className="title-section-title">My Online Titles</h2>
             <TitleComponent titles={titles} />
             <div className="d-flex justify-content-center">
               <Link to="/titles" className="more-link">More</Link>

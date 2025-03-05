@@ -8,6 +8,7 @@ import Titles from './pages/Titles.js'
 import NavigationBar from './components/Navbar';
 import Footer from './components/Footer.js';
 import Beach from './pages/Beach.js';
+import Contacts from './components/Contacts.js';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                <Route element={<Beach />} path='/photos/beach'  exact/>
                <Route element={<About />} path='/about'  exact/>
                <Route element={<Titles />} path='/titles'  exact/>
+               <Route element={<Contacts />} path='/contacts'  exact/>
       
       </Routes>
       <Footer />
