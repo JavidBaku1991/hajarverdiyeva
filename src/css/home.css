@@ -65,7 +65,24 @@
   font-size: 1.2rem;
 }
 
+.more-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 2px 35px;
+  background-color: #0f2134;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-bottom: 20px;
+}
 
+.more-link:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
 
 .video-section-title {
   font-size: 2rem;
@@ -91,6 +108,15 @@
 .youtube-video iframe {
 
   max-width: 100%;
-  height: 300px;
+  height: 250px;
 }
+
+
+.title{
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 4rem;
+  text-align: center;
+}
+
 

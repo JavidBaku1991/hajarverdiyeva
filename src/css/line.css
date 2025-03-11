@@ -1,0 +1,28 @@
+.contact-line{
+  position: absolute;
+  background-color: beige;
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  border: 2px solid rgb(167, 167, 167) ;
+  position: relative;
+ margin: 0 auto;
+ display: flex;
+ justify-content: center;
+  align-items: center;
+}
+
+.span{
+  position: relative;
+}
+
+.contact-hr{
+  position: relative;
+  display: flex;
+  width: 400px;
+  display: flex;
+  margin: 0 auto;
+  top:20px;
+  z-index: -1;
+
+}

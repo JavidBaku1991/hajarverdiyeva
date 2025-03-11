@@ -1,0 +1,17 @@
+.dissertations-container {
+    padding: 2rem 0;
+  }
+  
+  .dissertations-title {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .dissertation-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .dissertation-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+  }

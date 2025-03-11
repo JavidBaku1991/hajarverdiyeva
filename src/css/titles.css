@@ -5,13 +5,17 @@
     font-family: 'Arial', sans-serif;
   }
   
-  .titles-title {
+  .titles-page-title {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
     text-align: center;
     color: #2c3e50;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .titles-page-text{
+    
   }
   
   .titles-list {

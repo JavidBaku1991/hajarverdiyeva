@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
 const YouTubeVideo = ({ videoId, title }) => {
   return (
-    <div className="youtube-video">
-      <h4 className="video-title">{title}</h4>
+    <div className="youtube-video mb-5">
+      
       <iframe
         width="560"
         height="315"
@@ -14,6 +15,8 @@ const YouTubeVideo = ({ videoId, title }) => {
         allowFullScreen
         title={title}
       ></iframe>
+      <p className='dot'></p>
+      <h4 className="video-title">{title}</h4>
     </div>
   );
 };

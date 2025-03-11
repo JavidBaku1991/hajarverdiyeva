@@ -7,6 +7,11 @@
 @import url('../src/css/photoFolder.css');
 @import url('../src/css/titleComponent.css');
 @import url('../src/css/contacts.css');
+@import url('../src/css/videos.css');
+@import url('../src/css/interviews.css');
+@import url('../src/css/books.css');
+@import url('../src/css/line.css');
+@import url('../src/css/dissertations.css');
 /* Adjust the top padding to match the height of the Navbar */
 body {
     padding-top: 60px; /* Adjust this value to match the height of your Navbar */

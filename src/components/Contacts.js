@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import '../css/contacts.css';
+import { useNavigate } from 'react-router-dom'
+
+// import emailjs from 'emailjs-com';
+
+import contactImage from '../photos/titles/home2.jpg';
 
 const Contacts = () => {
   const [formData, setFormData] = useState({
@@ -19,32 +24,27 @@ const Contacts = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const navigate=useNavigate();
 
-    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID')
-      .then((result) => {
-        console.log(result.text);
-        alert('Message sent successfully!');
-      }, (error) => {
-        console.log(error.text);
-        alert('Failed to send message. Please try again.');
-      });
 
-    setFormData({
-      name: '',
-      surname: '',
-      email: '',
-      message: '',
-    });
-  };
+  const sendEmail =(e)=>{
+
+    e.preventDefault()
+    emailjs.sendForm('service_ursknit','template_64qmekz',e.target,'RV22WzPhD0vnOR09L').then(res=>{
+      console.log(res);
+    }).catch(err=>console.log(err))
+    navigate('/')
+}
+
+
 
   return (
     <Container className="contacts-page">
       <Row>
         <Col>
           <h1 className="contacts-title">Contact Us</h1>
-          <Form onSubmit={handleSubmit}>
+          <div className='contact-form'>
+              <Form onSubmit={sendEmail} className='contact-form-left'>
             <Form.Group controlId="formName">
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -86,10 +86,14 @@ const Contacts = () => {
                 required
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <button type="submit" className='contact-button'>
               Send
-            </Button>
+            </button>
           </Form>
+          <img src={contactImage}  className='contact-image'/>
+
+          </div>
+        
         </Col>
       </Row>
     </Container>

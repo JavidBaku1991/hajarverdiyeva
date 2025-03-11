@@ -1,0 +1,37 @@
+.interview-card {
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensure the card takes the full height of its container */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+.interview-card:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+
+  transform: scale(1.05);
+  transition: all 0.3s ease-in;
+}
+
+.interview-card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.interview-card .interview-card-body {
+  flex: 1; /* Allow the card body to take up the remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.interview-card .card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.interview-card .card-text {
+  margin-top: auto; /* Push the text to the bottom */
+}

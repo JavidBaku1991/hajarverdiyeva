@@ -1,5 +1,6 @@
 .navbar {
-  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;}
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
 
 .navbar-dark {
   background-color: #343a40; /* Dark background color */
@@ -118,3 +119,16 @@
   width: 80%;
   font-size: 20px;
 }
+
+.navbar-scrolled .fa-globe {
+  color: #000;
+}
+
+
+
+/* Ensure the dropdown opens on hover */
+.navbar-nav .dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; /* Adjust as needed */
+}
+

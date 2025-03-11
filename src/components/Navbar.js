@@ -46,9 +46,13 @@ const NavigationBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.home')}</Nav.Link>
-            <Nav.Link as={Link} to="/photos" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.photos')}</Nav.Link>
+            {/* <Nav.Link as={Link} to="/photos" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.photos')}</Nav.Link> */}
             <Nav.Link as={Link} to="/about" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.about')}</Nav.Link>
-            <Nav.Link as={Link} to="/titles" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.titles')}</Nav.Link>
+            <NavDropdown title={t('navbar.publications')} id="publications-dropdown" className={scrolled ? 'text-dark' : 'text-light'}>
+              <NavDropdown.Item as={Link} to="/dissertations">{t('navbar.dissertations')}</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/monographies">{t('navbar.monographies')}</NavDropdown.Item>
+            </NavDropdown>
+            <Nav.Link as={Link} to="/videos" className={scrolled ? 'text-dark' : 'text-light'}>Videos</Nav.Link>
             <Nav.Link as={Link} to="/contacts" className={scrolled ? 'text-dark' : 'text-light'}>Contact</Nav.Link>
           </Nav>
           <Nav className="social-icons">
@@ -64,9 +68,9 @@ const NavigationBar = () => {
             <Nav.Link href="https://bakustate.academia.edu/HajarVerdiyeva" target="_blank" className={scrolled ? 'text-dark' : 'text-light'} title="Academia">
               <SiAcademia />
             </Nav.Link>
-            <NavDropdown title={<FaGlobe />} id="basic-nav-dropdown" className={scrolled ? 'text-dark' : 'text-light'}>
-              <NavDropdown.Item onClick={() => changeLanguage('en')} >English</NavDropdown.Item>
-              <NavDropdown.Item onClick={() => changeLanguage('az')} >Azerbaycan</NavDropdown.Item>
+            <NavDropdown title={<FaGlobe className={scrolled ? 'text-dark' : 'text-light'} />} id="basic-nav-dropdown">
+              <NavDropdown.Item onClick={() => changeLanguage('en')}>English</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => changeLanguage('az')}>Azerbaycan</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
