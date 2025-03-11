@@ -1,28 +1,31 @@
 {
   "files": {
-    "main.css": "/hajarverdiyeva/static/css/main.5f3c5541.css",
-    "main.js": "/hajarverdiyeva/static/js/main.14e25875.js",
-    "static/media/10.jpg": "/hajarverdiyeva/static/media/10.4fed09f91a4ad2c06802.jpg",
-    "static/media/2.jpg": "/hajarverdiyeva/static/media/2.48d36b529a4b4707146e.jpg",
+    "main.css": "/hajarverdiyeva/static/css/main.03d6e2ab.css",
+    "main.js": "/hajarverdiyeva/static/js/main.4c8666fd.js",
     "static/media/title1.pdf": "/hajarverdiyeva/static/media/title1.90b1429ce07edb3aa151.pdf",
     "static/media/title3.pdf": "/hajarverdiyeva/static/media/title3.578679581381a4135f52.pdf",
     "static/media/title2.pdf": "/hajarverdiyeva/static/media/title2.8fb5625490e68a16d2af.pdf",
     "static/media/home2.jpg": "/hajarverdiyeva/static/media/home2.cd023f6d9421bae53cd9.jpg",
+    "static/media/footer.jpg": "/hajarverdiyeva/static/media/footer.c15bf9f550b748c69cce.jpg",
     "static/media/home3.jpg": "/hajarverdiyeva/static/media/home3.3e6d785a21e2da64823b.jpg",
     "static/media/hecer3.jpg": "/hajarverdiyeva/static/media/hecer3.56935523901ff1999d8e.jpg",
     "static/media/home1.jpg": "/hajarverdiyeva/static/media/home1.d878a31f24284be8029d.jpg",
+    "static/media/kitab4.jpg": "/hajarverdiyeva/static/media/kitab4.e63813c92faaffc56781.jpg",
+    "static/media/kitab2.jpg": "/hajarverdiyeva/static/media/kitab2.3bff255cc42c21d5152c.jpg",
     "static/media/home4.jpg": "/hajarverdiyeva/static/media/home4.b0ef181132abc371283d.jpg",
     "static/media/home5.jpg": "/hajarverdiyeva/static/media/home5.17f02517cce53d66f094.jpg",
+    "static/media/kitab5.jpg": "/hajarverdiyeva/static/media/kitab5.60d3a1e96cd1c18f3a4d.jpg",
+    "static/media/kitab3.jpg": "/hajarverdiyeva/static/media/kitab3.58aaa64ddc16ecc0ee53.jpg",
     "static/media/slick.svg": "/hajarverdiyeva/static/media/slick.2630a3e3eab21c607e21.svg",
     "static/media/slick.eot": "/hajarverdiyeva/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/hajarverdiyeva/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/hajarverdiyeva/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/hajarverdiyeva/index.html",
-    "main.5f3c5541.css.map": "/hajarverdiyeva/static/css/main.5f3c5541.css.map",
-    "main.14e25875.js.map": "/hajarverdiyeva/static/js/main.14e25875.js.map"
+    "main.03d6e2ab.css.map": "/hajarverdiyeva/static/css/main.03d6e2ab.css.map",
+    "main.4c8666fd.js.map": "/hajarverdiyeva/static/js/main.4c8666fd.js.map"
   },
   "entrypoints": [
-    "static/css/main.5f3c5541.css",
-    "static/js/main.14e25875.js"
+    "static/css/main.03d6e2ab.css",
+    "static/js/main.4c8666fd.js"
   ]
 }
