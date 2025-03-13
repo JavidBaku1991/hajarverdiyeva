@@ -7,7 +7,7 @@ const Books = ({ books }) => {
   return (
     <Row>
       {books.map((book, index) => (
-        <Col key={index} className="mb-4 d-flex ">
+        <Col key={index} xs={6} sm={6 }md={4} lg={3} className="mb-4 d-flex">
           <Card className="book-card w-100 mt-5">
             <Card.Img variant="top" src={book.image} />
             <Card.Body className="book-card-body">

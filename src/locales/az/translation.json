@@ -1,10 +1,23 @@
 {
-    "navbar": {
-      "home": "Əsas səhifə",
-      "photos": "Şəkillər",
-      "about": "Haqqımda",
-      "publications": "Elmi nəşrlər",
-      "monographies": "Monografiyalar",
-      "dissertations": "Dissertasiyalar"
-    }
+  "navbar": {
+    "brand": "Həcər Verdiyeva",
+    "home": "Əsas səhifə",
+    "photos": "Şəkillər",
+    "about": "Haqqımda",
+    "publications": "Elmi nəşrlər",
+    "monographies": "Monografiyalar",
+    "dissertations": "Dissertasiyalar",
+    "videos": "Videolar",
+    "contact": "Əlaqə",
+    "doctors": "Həkimlər",
+    "lawyers": "Hüquqşünaslar"
+  },
+  "contacts": {
+    "title": "Bizimlə əlaqə saxlayın",
+    "name": "Ad",
+    "surname": "Soyad",
+    "email": "Elektron poçt",
+    "message": "Mesaj",
+    "send": "Göndər"
   }
+}

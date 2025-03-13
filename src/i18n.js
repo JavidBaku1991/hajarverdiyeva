@@ -1,29 +1,28 @@
-// filepath: /d:/Portfolio projects/hajar/src/i18n.js
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-
-// Import translation files
-import translationEN from './locales/en/translation.json';
-import translationAZ from './locales/az/translation.json';
-
-const resources = {
-  en: {
-    translation: translationEN,
-  },
-  az: {
-    translation: translationAZ,
-  },
-};
+import en from './locales/en/translation.json';
+import az from './locales/az/translation.json';
+import ru from './locales/ru/translation.json';
 
 i18n
   .use(initReactI18next)
   .init({
-    resources,
-    lng: 'en', // Default language
+    resources: {
+      en: {
+        translation: en
+      },
+      az: {
+        translation: az
+      },
+      ru: {
+        translation: ru
+      }
+    },
+    lng: 'en', // default language
     fallbackLng: 'en',
     interpolation: {
-      escapeValue: false,
-    },
+      escapeValue: false
+    }
   });
 
 export default i18n;

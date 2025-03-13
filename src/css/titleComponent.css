@@ -11,6 +11,7 @@
 
 .slick-dots li button:before {
   color: #150606;
+  font-size: 12px;
 }
 
 .slick-dots li.slick-active button:before {
@@ -23,10 +24,11 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: #ffffff;
+  background: #c5a3a3;
   border-radius: 20px;
   margin-left: 3px;
-  margin: 70px 20px 20px; /* Ensure margin to add more space between titles */
+  padding: 5px;
+  margin: 70px; /* Ensure margin to add more space between titles */
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   height: 180px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
@@ -99,9 +101,4 @@
     font-size: 12px;
     padding: 6px 12px;
   }
-}
-
-
-.titles-title{
-  margin-bottom: -30px;
 }

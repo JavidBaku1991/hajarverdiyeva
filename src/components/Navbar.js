@@ -40,7 +40,7 @@ const NavigationBar = () => {
     >
       <Container>
         <Navbar.Brand as={Link} to="/" className={scrolled ? 'text-dark' : 'text-light'}>
-          <GiGreekTemple className='logo' />Həcər Verdiyeva
+          <GiGreekTemple className='logo' />{t('navbar.brand')}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className={scrolled ? 'text-dark' : 'text-light'} />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -51,9 +51,10 @@ const NavigationBar = () => {
             <NavDropdown title={t('navbar.publications')} id="publications-dropdown" className={scrolled ? 'text-dark' : 'text-light'}>
               <NavDropdown.Item as={Link} to="/dissertations">{t('navbar.dissertations')}</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/monographies">{t('navbar.monographies')}</NavDropdown.Item>
+          
             </NavDropdown>
-            <Nav.Link as={Link} to="/videos" className={scrolled ? 'text-dark' : 'text-light'}>Videos</Nav.Link>
-            <Nav.Link as={Link} to="/contacts" className={scrolled ? 'text-dark' : 'text-light'}>Contact</Nav.Link>
+            <Nav.Link as={Link} to="/videos" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.videos')}</Nav.Link>
+            <Nav.Link as={Link} to="/contacts" className={scrolled ? 'text-dark' : 'text-light'}>{t('navbar.contact')}</Nav.Link>
           </Nav>
           <Nav className="social-icons">
             <Nav.Link href="https://www.facebook.com/profile.php?id=100008438296052" target="_blank" className={scrolled ? 'text-dark' : 'text-light'} title="Facebook">
@@ -70,7 +71,8 @@ const NavigationBar = () => {
             </Nav.Link>
             <NavDropdown title={<FaGlobe className={scrolled ? 'text-dark' : 'text-light'} />} id="basic-nav-dropdown">
               <NavDropdown.Item onClick={() => changeLanguage('en')}>English</NavDropdown.Item>
-              <NavDropdown.Item onClick={() => changeLanguage('az')}>Azerbaycan</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => changeLanguage('az')}>Azərbaycanca</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => changeLanguage('ru')}>Русский</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

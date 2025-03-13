@@ -1,10 +1,23 @@
 {
-    "navbar": {
-      "home": "Home",
-      "photos": "Photos",
-      "about": "About",
-      "publications": "Publications",
-      "monographies": "Monographies",
-      "dissertations": "Dissertations"
-    }
+  "navbar": {
+    "brand": "Hajar Verdiyeva",
+    "home": "Home",
+    "photos": "Photos",
+    "about": "About",
+    "publications": "Publications",
+    "monographies": "Monographies",
+    "dissertations": "Dissertations",
+    "videos": "Videos",
+    "contact": "Contact",
+    "doctors": "Doctors",
+    "lawyers": "Lawyers"
+  },
+  "contacts": {
+    "title": "Contact Us",
+    "name": "Name",
+    "surname": "Surname",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send"
   }
+}

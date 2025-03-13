@@ -1,8 +1,23 @@
 {
-    "navbar": {
-      "home": "Əsas səhifə",
-      "photos": "Qalereya",
-      "about": "Haqqımda",
-      "titles": "Məqalələr"
-    }
+  "navbar": {
+    "brand": "Хаджар Вердиева",
+    "home": "Главная",
+    "photos": "Фотографии",
+    "about": "О нас",
+    "publications": "Публикации",
+    "monographies": "Монографии",
+    "dissertations": "Диссертации",
+    "videos": "Видео",
+    "contact": "Контакты",
+    "doctors": "Доктора",
+    "lawyers": "Юристы"
+  },
+  "contacts": {
+    "title": "Свяжитесь с нами",
+    "name": "Имя",
+    "surname": "Фамилия",
+    "email": "Электронная почта",
+    "message": "Сообщение",
+    "send": "Отправить"
   }
+}
