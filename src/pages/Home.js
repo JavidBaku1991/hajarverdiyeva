@@ -10,7 +10,6 @@ import heroImg from '../photos/hecer3.jpg';
 import TitleLine from '../components/TitleLine';
 
 // images for books
-import kitab1 from '../photos/books/kitab1.png';
 import kitab2 from '../photos/books/kitab2.jpg';
 import kitab3 from '../photos/books/kitab3.jpg';
 import kitab4 from '../photos/books/kitab4.jpg';
@@ -42,7 +41,6 @@ const titles = [
 ];
 
 const books = [
-  { title: 'Book 1', image: kitab1 },
   { title: 'Book 2', image: kitab2 },
   { title: 'Book 3', image: kitab3 },
   { title: 'Book 4', image: kitab4 },

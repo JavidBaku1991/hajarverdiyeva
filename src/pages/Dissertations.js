@@ -56,9 +56,14 @@ const Dissertations = () => {
                       {dissertation.description}
                     </Typography>
                   </Box>
-                  <Button variant="contained" color="primary" onClick={() => handleClickOpen(dissertation)}>
-                    Open
-                  </Button>
+                  <Box>
+                    <Button variant="contained" color="primary" onClick={() => handleClickOpen(dissertation)}>
+                      Open
+                    </Button>
+                    <Button variant="contained" color="secondary" href={dissertation.url} download>
+                      Download
+                    </Button>
+                  </Box>
                 </Box>
               </CardContent>
             </Card>
