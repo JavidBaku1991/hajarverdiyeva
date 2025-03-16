@@ -56,7 +56,7 @@ const Dissertations = () => {
                       {dissertation.description}
                     </Typography>
                   </Box>
-                  <Box>
+                  <Box display="flex" flexDirection="row" gap={2}>
                     <Button variant="contained" color="primary" onClick={() => handleClickOpen(dissertation)}>
                       Open
                     </Button>

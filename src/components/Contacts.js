@@ -38,57 +38,57 @@ const Contacts = () => {
   return (
     <Container className="contacts-page">
       <Row>
-        <Col>
+        <Col xs={12} md={6}>
           <h1 className="contacts-title">{t('contacts.title')}</h1>
-          <div className='contact-form'>
-            <Form onSubmit={sendEmail} className='contact-form-left'>
-              <Form.Group controlId="formName">
-                <Form.Label>{t('contacts.name')}</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-              <Form.Group controlId="formSurname">
-                <Form.Label>{t('contacts.surname')}</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="surname"
-                  value={formData.surname}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-              <Form.Group controlId="formEmail">
-                <Form.Label>{t('contacts.email')}</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-              <Form.Group controlId="formMessage">
-                <Form.Label>{t('contacts.message')}</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={3}
-                  required
-                />
-              </Form.Group>
-              <Button type="submit" className='contact-button'>
-                {t('contacts.send')}
-              </Button>
-            </Form>
-            <img src={contactImage} className='contact-image' alt="Contact" />
-          </div>
+          <Form onSubmit={sendEmail} className='contact-form'>
+            <Form.Group controlId="formName">
+              <Form.Label>{t('contacts.name')}</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formSurname">
+              <Form.Label>{t('contacts.surname')}</Form.Label>
+              <Form.Control
+                type="text"
+                name="surname"
+                value={formData.surname}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formEmail">
+              <Form.Label>{t('contacts.email')}</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+            <Form.Group controlId="formMessage">
+              <Form.Label>{t('contacts.message')}</Form.Label>
+              <Form.Control
+                as="textarea"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows={3}
+                required
+              />
+            </Form.Group>
+            <Button type="submit" className='contact-button mt-4' >
+              {t('contacts.send')}
+            </Button>
+          </Form>
+        </Col>
+        <Col xs={12} md={6} className="d-flex justify-content-center align-items-center">
+          <img src={contactImage} className='contact-image' alt="Contact" />
         </Col>
       </Row>
     </Container>

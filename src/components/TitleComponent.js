@@ -14,28 +14,53 @@ const TitleComponent = ({ titles }) => {
     autoplay: true,
     autoplaySpeed: 2000,
     centerMode: true,
-    centerPadding: '20px',
+    centerPadding: '40px',
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          centerMode: false, // Disable centering at this size
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          centerMode: false, // Disable centering at this size
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          centerMode: false, // Disable centering at this size
+        },
+      },
+    ],
+    
   };
 
   return (
-    <div className="title-slider">
-      <Slider {...settings}>
-        {titles.map((title, index) => (
-          <div key={index} className="title-item" >
-            <div className="title-content">
-              <img src={title.image} alt={title.name} className="title-image" />
-              <div className="title-text">
-                <h4>
-                  <a href={title.url} download className="title-link">
-                    {title.name}
-                  </a>
-                </h4>
-              </div>
-            </div>
+<div key={window.innerWidth}>
+  <Slider {...settings}>
+    {titles.map((title, index) => (
+      <div key={index} className="title-item">
+        <div className="title-content">
+          <img src={title.image} alt={title.name} className="title-image" />
+          <div className="title-text">
+            <h4>
+              <a href={title.url} download className="title-link">
+                {title.name}
+              </a>
+            </h4>
           </div>
-        ))}
-      </Slider>
-    </div>
+        </div>
+      </div>
+    ))}
+  </Slider>
+</div>
+
   );
 };
 

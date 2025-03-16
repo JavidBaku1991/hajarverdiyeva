@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Container, Grid, Card, CardContent, CardMedia, Typography, Button, Dialog, DialogContent, DialogTitle, Box } from '@mui/material';
+// import '../css/monographies.css';
 
 // Import PDF files
 import monography1 from '../pdf/title1.pdf';
-import monography1Image from '../photos/titles/home1.jpg';
-import monography2 from '../pdf/title2.pdf';
-import monography3 from '../pdf/title3.pdf';
+import monography2 from '../pdf/title1.pdf';
+import monography3 from '../pdf/title1.pdf';
+
+import monography1Image from '../photos/10.jpg';
 
 const monographies = [
   { title: 'Monography 1', url: monography1, image: monography1Image, description: 'Description 1' },
@@ -31,14 +33,14 @@ const Monographies = () => {
   };
 
   return (
-    <Container className="monographies-container">
+    <Container className="dissertations-container">
       <Typography variant="h4" component="h1" gutterBottom className="monographies-title">
         Monographies
       </Typography>
       <Grid container spacing={4}>
         {monographies.map((monography, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card className="monography-card">
+            <Card className="dissertation-card">
               <CardMedia
                 component="img"
                 height="200"
@@ -55,7 +57,7 @@ const Monographies = () => {
                       {monography.description}
                     </Typography>
                   </Box>
-                  <Box>
+                  <Box display="flex" flexDirection="row" gap={2}>
                     <Button variant="contained" color="primary" onClick={() => handleClickOpen(monography)}>
                       Open
                     </Button>
