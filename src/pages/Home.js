@@ -8,13 +8,13 @@ import Books from '../components/Books';
 import '../css/home.css';
 import heroImg from '../photos/hecer3.jpg';
 import TitleLine from '../components/TitleLine';
+import kitabPdf from '../pdf/title1.pdf';
 
 // images for books
 import kitab2 from '../photos/books/kitab2.jpg';
 import kitab3 from '../photos/books/kitab3.jpg';
 import kitab4 from '../photos/books/kitab4.jpg';
 import kitab5 from '../photos/books/kitab5.jpg';
-
 // images for titles
 import hecer1 from '../photos/titles/home1.jpg';
 import hecer2 from '../photos/titles/home2.jpg';
@@ -41,10 +41,10 @@ const titles = [
 ];
 
 const books = [
-  { title: 'Book 2', image: kitab2 },
-  { title: 'Book 3', image: kitab3 },
-  { title: 'Book 4', image: kitab4 },
-  { title: 'Book 5', image: kitab5 },
+  { title: 'Book 2', image: kitab2, description: 'Description of book 2' , url: kitabPdf},
+  { title: 'Book 3', image: kitab3 , description: 'Description of book 3', url: kitabPdf},
+  { title: 'Book 4', image: kitab4 , description: 'Description of book 3', url: kitabPdf},
+  { title: 'Book 5', image: kitab5 , description: 'Description of book 3', url: kitabPdf},
 ];
 
 const Home = () => {
@@ -59,13 +59,18 @@ const Home = () => {
         </div>
       </div>
       <Container>
+      
         <Row>
           <Col >
+          <TitleLine title='Kitablar' />
             <Books books={books} />
           </Col>
-        </Row> <Row className='home-titles-container mt-5'>
+        </Row>
+        <TitleLine title='Məqalələr' />
+
+         <Row className='home-titles-container mt-5'>
           <Col>
-          <TitleLine title='Məqalələr' />
+        
             <TitleComponent titles={titles} /> 
           </Col>
         </Row>

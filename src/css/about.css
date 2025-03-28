@@ -1,32 +1,78 @@
+/* General styling for the about page */
 .about-page {
-  padding: 2rem 0;
+  padding: 2rem 1rem;
+  background-color: #f9f9f9; /* Light background for contrast */
+  color: #333; /* Dark text for readability */
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
 }
 
+/* Styling for the image */
 .about-image {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
   width: 100%;
+  max-width: 400px; /* Limit the image size */
   height: auto;
   border-radius: 10px;
+  margin: 0 auto; /* Center the image */
+  display: block;
+  border: 5px solid #ddd; /* Add a decorative border */
 }
 
+/* Title styling */
 .about-title {
   margin-top: 1rem;
   font-size: 2rem;
   font-weight: bold;
+  text-align: center;
+  color: #007bff; /* Highlighted color for the title */
 }
 
+/* Description styling */
 .about-description {
   margin-top: 1rem;
   font-size: 1.2rem;
+  text-align: justify; /* Justify the text for a clean look */
+  color: #555; /* Subtle text color */
 }
 
+/* Subtitle styling */
 .about-subtitle {
   margin-top: 2rem;
   font-size: 1.5rem;
   font-weight: bold;
+  color: #333;
+  border-left: 5px solid #007bff; /* Decorative border */
+  padding-left: 1rem; /* Add padding for spacing */
 }
 
+/* List styling */
 .about-list {
   margin-top: 1rem;
   list-style-type: disc;
   padding-left: 1.5rem;
+  color: #555;
+}
+
+.about-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .about-title {
+    font-size: 1.8rem;
+  }
+
+  .about-description {
+    font-size: 1rem;
+  }
+
+  .about-subtitle {
+    font-size: 1.3rem;
+  }
+
+  .about-image {
+    max-width: 300px; /* Adjust image size for smaller screens */
+  }
 }

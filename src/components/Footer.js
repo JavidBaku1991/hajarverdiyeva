@@ -5,6 +5,9 @@ import footerBg from '../photos/footer.jpg'; // Replace with the actual image pa
 import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
 import { SiAcademia } from 'react-icons/si';
 
+
+
+
 const Footer = () => {
   return (
     <footer className="footer">
@@ -19,7 +22,6 @@ const Footer = () => {
               <Col md={4} className="footer-col">
                 <h5>Contact</h5>
                 <p>Email: hacar2002@yahoo.com</p>
-                <p>Phone: +123 456 7890</p>
               </Col>
               <Col md={4} className="footer-col">
                 <h5>Follow Us</h5>
@@ -48,6 +50,7 @@ const Footer = () => {
                 <p>&copy; {new Date().getFullYear()} Həcər Verdiyeva. All rights reserved.</p>
               </Col>
       </Container>
+
     </footer>
   );
 };

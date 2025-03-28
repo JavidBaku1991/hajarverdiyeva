@@ -1,0 +1,111 @@
+.contacts-page {
+	padding: 2rem 0;
+  }
+  
+  .contacts-title {
+	margin-bottom: 2rem;
+	text-align: center;
+  }
+  
+  .contact-form {
+	width: 100%;
+  }
+  
+  .contact-image-container {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+  }
+  
+  .contact-image {
+	margin-top: 20px;
+	width: 100%;
+	height: auto;
+	border-radius: 15px; /* Rounded corners */
+	border: 5px solid #ddd; /* Add a border */
+  }
+  
+  .contact-image-container::before,
+  .contact-image-container::after {
+	content: '';
+	position: absolute;
+	width: 50%;
+	height: 2px;
+	background-color: #333;
+	transition: all 0.3s ease;
+  }
+  
+  .contact-image-container::before {
+	top: 0;
+	left: 0;
+  }
+  
+  .contact-image-container::after {
+	bottom: 0;
+	right: 0;
+  }
+  
+  .contact-image-container:hover::before,
+  .contact-image-container:hover::after {
+	width: 100%; /* Extend the lines on hover */
+  }
+  
+  .contact-button {
+	position: relative;
+	display: inline-block;
+	padding: 0.75rem 2rem;
+	font-size: 1rem;
+	font-weight: bold;
+	color: white;
+	background-color: #007bff;
+	border: 2px solid transparent;
+	border-radius: 5px;
+	overflow: hidden;
+	cursor: pointer;
+	transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .contact-button:hover {
+	background-color: #0056b3;
+	color: #fff;
+  }
+  
+  .contact-button::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 2px solid transparent;
+	border-radius: 50%;
+	box-sizing: border-box;
+	animation: circle-border 1.5s linear infinite;
+	pointer-events: none;
+  }
+  
+  @keyframes circle-border {
+	0% {
+	  transform: scale(1);
+	  border-color: rgba(255, 255, 255, 0.5);
+	}
+	50% {
+	  transform: scale(1.5);
+	  border-color: rgba(255, 255, 255, 0.2);
+	}
+	100% {
+	  transform: scale(1);
+	  border-color: rgba(255, 255, 255, 0.5);
+	}
+  }
+  
+  @media (max-width: 768px) {
+	.contact-image-container {
+	  margin-top: 1rem;
+	}
+  
+	.contact-button {
+	  width: 100%; /* Make the button full width on mobile */
+	  padding: 10px; /* Adjust padding for better appearance */
+	}
+  }

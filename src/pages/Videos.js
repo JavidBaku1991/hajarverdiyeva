@@ -1,33 +1,50 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import YouTubeVideo from '../components/YouTubeVideo';
-import '../css/videos.css';
 
-const videos = [
-  { videoId: 'K-wCck8Vkbw', title: '"Multikulturalizm" verilişi 23' },
-  { videoId: 'X0IB02XbXXQ', title: 'Французское издание о попытках арменизации албанского храма в Карабахе' },
-  { videoId: '5GSeEaKEqi8', title: 'Хроники переселения армян на Кавказ' },
-  { videoId: '3jnJmZS1qNc', title: '«Просто о сложном» : переселение армян на Кавказ. Передача вторая' },
-  { videoId: 'qsP-kGrf1MI', title: '«Просто о сложном»: переселение армян на Кавказ. Передача первая' },
-  { videoId: 'IVUfwIkdfoA', title: '«Просто о сложном»: переселение армян на Кавказ. Передача четвёртая' },
-  { videoId: 'KFJAqsjZVQw', title: '«Просто о сложном»: переселение армян на Кавказ. Передача третья' },
-  { videoId: 'OQp3ifptP2k', title: '«Просто о сложном» переселение армян на Кавказ' },
-];
+import React, { useState } from 'react';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import YouTubeVideo from '../components/YouTubeVideo'; // Assuming you have a YouTubeVideo component
 
-const Videos = () => {
+const Videos = ({ videos }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const videosPerPage = 6;
+
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(videos.length / videosPerPage);
+
+  // Get the videos for the current page
+  const indexOfLastVideo = currentPage * videosPerPage;
+  const indexOfFirstVideo = indexOfLastVideo - videosPerPage;
+  const currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
-    <Container className="videos-page">
+    <Container>
       <Row>
-        <Col>
-          <h1 className="videos-title">My YouTube Videos</h1>
-        </Col>
-      </Row>
-      <Row>
-        {videos.map((video, index) => (
-          <Col md={4} key={index} className="d-flex justify-content-center mt-4">
+        <h1 className='mt-4 d-flex justify-content-center'>My videos</h1>
+        {currentVideos.map((video, index) => (
+          <Col md={4} key={index} className="d-flex justify-content-center mt-2 mb-5">
             <YouTubeVideo videoId={video.videoId} title={video.title} />
           </Col>
         ))}
+      </Row>
+      <Row className="justify-content-center mt-5">
+        <Col md="auto">
+          <div className="pagination mt-5">
+            {Array.from({ length: totalPages }, (_, index) => (
+              <Button
+                key={index}
+                variant={currentPage === index + 1 ? 'dark' : 'outline-secondary'}
+                onClick={() => handlePageChange(index + 1)}
+                className="mx-1"
+              >
+                {index + 1}
+              </Button>
+            ))}
+          </div>
+        </Col>
       </Row>
     </Container>
   );
