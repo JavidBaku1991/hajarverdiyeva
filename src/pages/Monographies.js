@@ -3,19 +3,24 @@ import { Container, Grid, Card, CardContent, CardMedia, Typography, Button, Dial
 // import '../css/monographies.css';
 
 // Import PDF files
-import monography1 from '../pdf/title1.pdf';
-import monography2 from '../pdf/title1.pdf';
-import monography3 from '../pdf/title1.pdf';
+import CingizPdf from '../pdf/monoqrafiyalar/cingiz.pdf';
+import DokavkazskayaPdf from '../pdf/monoqrafiyalar/dok.pdf';
+import NemtsiPdf from '../pdf/monoqrafiyalar/nem.pdf';
+import PeresPdf from '../pdf/monoqrafiyalar/peres.pdf';
+import RodosPdf from '../pdf/monoqrafiyalar/rodos.pdf';
 
-import monography1Image from '../photos/10.jpg';
+import Cingiz from '../photos/books/cingiz.jpg';
+import Dokavkazskaya from '../photos/books/dok.jpg';
+import Nemtsi from '../photos/books/nem.png';
+import Peres from '../photos/books/peres.jpg';
+import Rodos from '../photos/books/rodos.jpg';
 
 const monographies = [
-  { title: 'Monography 1', url: monography1, image: monography1Image, description: 'Description 1' },
-  { title: 'Monography 2', url: monography2, image: monography1Image, description: 'Description 1' },
-  { title: 'Monography 3', url: monography3, image: monography1Image, description: 'Description 1' },
-  { title: 'Monography 4', url: monography1, image: monography1Image, description: 'Description 1' },
-  { title: 'Monography 5', url: monography2, image: monography1Image, description: 'Description 1' },
-  { title: 'Monography 6', url: monography3, image: monography1Image, description: 'Description 1' },
+  { title: "Немцы в Азербайджане:Абдуллаев, Сеидов, Вердиева Неизвестные страницы", url: CingizPdf, image: Cingiz, description: 'Description 1' },
+  { title: 'Докавказская история армян ', url: DokavkazskayaPdf, image: Dokavkazskaya, description: 'Description 1' },
+  { title: 'Немцы  в Северном  Азербайджане ', url: NemtsiPdf, image: Nemtsi, description: 'Description 1' },
+  { title: 'ПЕРЕСЕЛЕНЧЕСКАЯ ПОЛИТИКА  РОССИЙСКОЙ ИМПЕРИИ  В СЕВЕРНОМ АЗЕРБАЙДЖАНЕ  (XIX - начале XX вв.) ', url: PeresPdf, image: Peres, description: 'Description 1' },
+  { title: '«РОДОСЛОВНАЯ» АРМЯН И ИХ МИГРАЦИЯ НА КАВКАЗ С БАЛКАН ', url: RodosPdf, image: Rodos, description: 'Description 1' },
 ];
 
 const Monographies = () => {
@@ -34,39 +39,41 @@ const Monographies = () => {
 
   return (
     <Container className="dissertations-container">
-      <Typography variant="h4" component="h1" gutterBottom className="monographies-title">
+      <Typography variant="h4" component="h1" gutterBottom className="monographies-title  text-center">
         Monographies
       </Typography>
       <Grid container spacing={4}>
         {monographies.map((monography, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card className="dissertation-card">
+            <Card className="monography-card dissertation-card ">
               <CardMedia
                 component="img"
                 height="200"
                 image={monography.image}
                 alt={monography.title}
               />
-              <CardContent>
-                <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center">
-                  <Box>
-                    <Typography variant="h5" component="div">
-                      {monography.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {monography.description}
-                    </Typography>
-                  </Box>
-                  <Box display="flex" flexDirection="row" gap={2}>
-                    <Button variant="contained" color="primary" onClick={() => handleClickOpen(monography)}>
-                      Open
-                    </Button>
-                    <Button variant="contained" color="secondary" href={monography.url} download>
-                      Download
-                    </Button>
-                  </Box>
-                </Box>
-              </CardContent>
+          <CardContent>
+  <Box display="flex" flexDirection="row" gap={2} className="monography-buttons d-flex justify-content-center align-items-center">
+    <Button variant="contained" color="primary" onClick={() => handleClickOpen(monography)}>
+      Open
+    </Button>
+    <Button variant="contained" color="secondary" href={monography.url} download>
+      Download
+    </Button>
+  </Box>
+  <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">
+    <Box>
+      <Typography
+        variant="h6"
+        component="div"
+        className="monography-title"
+        align="center" // Centers the text
+      >
+        {monography.title}
+      </Typography>
+    </Box>
+  </Box>
+</CardContent>
             </Card>
           </Grid>
         ))}

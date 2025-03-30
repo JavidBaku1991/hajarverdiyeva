@@ -21,9 +21,8 @@ const Videos = ({ videos }) => {
   };
 
   return (
-    <Container>
+    <Container className='videos-container'>
       <Row>
-        <h1 className='mt-4 d-flex justify-content-center'>My videos</h1>
         {currentVideos.map((video, index) => (
           <Col md={4} key={index} className="d-flex justify-content-center mt-2 mb-5">
             <YouTubeVideo videoId={video.videoId} title={video.title} />

@@ -10,7 +10,7 @@ import { SiAcademia } from 'react-icons/si';
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="footer absolute-bottom">
       <Container>
         <Row>
           <Col md={3} className="footer-image-col">

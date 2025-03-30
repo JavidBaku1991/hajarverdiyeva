@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import '../css/about.css';
 import { useTranslation } from 'react-i18next';
-import about from '../photos/15.jpg';
+import about from '../photos/hajar12.jpg';
 
 const About = () => {
   const { t, i18n } = useTranslation();
