@@ -19,5 +19,27 @@
     "email": "Elektron poçt",
     "message": "Mesaj",
     "send": "Göndər"
-  }
+  },
+  "hero": {
+    "title": "Həcər Verdiyeva",
+    "subtitle": "Tarix elmləri doktoru",
+    "description": "Veb-səhifədə tarixçinin fəaliyyəti, elmi tədqiqatları, nəşrləri və digər məlumatlar təqdim olunur."
+  },
+  "read-more": "Daha çox",
+  "titles-title":"Məqalələr",
+  "interviews-title":"Müsahibələr",
+  "videos-title":"Videolar",
+  "books-title":"Kitablar",
+  "footer": {
+    "copyright": "© 2025 Həcər Verdiyeva. Bütün hüquqlar qorunur.",
+    "contact": "Əlaqə",
+    "email": "Elektron poçt",
+    "follow-us": "Bizi izləyin",
+    "social-media": {
+        "facebook": "Facebook",
+        "twitter": "Twitter",
+        "linkedin": "LinkedIn",
+        "academia": "Academia"
+    }
+}
 }

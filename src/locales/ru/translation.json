@@ -19,5 +19,28 @@
     "email": "Электронная почта",
     "message": "Сообщение",
     "send": "Отправить"
-  }
+  },
+"hero": {
+    "title": "Хаджар Вердиева",
+    "subtitle": "Доктор исторических наук",
+    "description": "На веб-сайте представлены деятельность историка, его научные исследования, публикации и другая информация."
+},
+  "read-more": "Читать далее",
+  "titles-title": "Заголовки",
+"interviews-title": "Интервью",
+"videos-title": "Видео",
+"books-title":"Книги",
+
+"footer": {
+    "copyright": "© 2025 Хаджар Вердиева. Все права защищены.",
+    "contact": "Контакты",
+    "email": "Электронная почта",
+    "follow-us": "Следите за нами",
+    "social-media": {
+        "facebook": "Facebook",
+        "twitter": "Twitter",
+        "linkedin": "LinkedIn",
+        "academia": "Academia"
+    }
+}
 }

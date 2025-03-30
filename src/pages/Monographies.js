@@ -39,7 +39,7 @@ const Monographies = () => {
 
   return (
     <Container className="dissertations-container">
-      <Typography variant="h4" component="h1" gutterBottom className="monographies-title  text-center">
+      <Typography variant="h4" component="h1" gutterBottom className="monographies-title title text-center">
         Monographies
       </Typography>
       <Grid container spacing={4}>

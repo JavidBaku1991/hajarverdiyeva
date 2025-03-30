@@ -2,11 +2,10 @@ import React from 'react'
 
 function TitleLine({title}) {
   return (
-    <div>
-    <hr className='contact-hr mt-1'/>
-        <p className='contact-line' > <span className='span uppercase'>{title}</span>   </p>
+<div class="eleven mt-4">
+  <h1>{title}</h1>
+</div>
        
-    </div>
   )
 }
 

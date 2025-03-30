@@ -14,14 +14,14 @@ import Videos from './pages/Videos.js'; // Import the Videos page
 
 
 const videos = [
-  { videoId: 'K-wCck8Vkbw', title: '"Multikulturalizm" verilişi 23' },
-  { videoId: 'X0IB02XbXXQ', title: 'Французское издание о попытках арменизации албанского храма в Карабахе' },
-  { videoId: '5GSeEaKEqi8', title: 'Хроники переселения армян на Кавказ' },
-  { videoId: '3jnJmZS1qNc', title: '«Просто о сложном» : переселение армян на Кавказ. Передача вторая' },
-  { videoId: 'qsP-kGrf1MI', title: '«Просто о сложном»: переселение армян на Кавказ. Передача первая' },
-  { videoId: 'IVUfwIkdfoA', title: '«Просто о сложном»: переселение армян на Кавказ. Передача четвёртая' },
-  { videoId: 'KFJAqsjZVQw', title: '«Просто о сложном»: переселение армян на Кавказ. Передача третья' },
-  { videoId: 'OQp3ifptP2k', title: '«Просто о сложном» переселение армян на Кавказ' },
+  { videoId: 'K-wCck8Vkbw' },
+  { videoId: 'X0IB02XbXXQ'},
+  { videoId: '0i23vP2xULE'},
+  { videoId: '3jnJmZS1qNc' },
+  { videoId: 'qsP-kGrf1MI' },
+  { videoId: 'IVUfwIkdfoA' },
+  { videoId: 'KFJAqsjZVQw' },
+  { videoId: 'OQp3ifptP2k'},
 ];
 
 function App() {

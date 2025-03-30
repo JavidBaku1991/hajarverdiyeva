@@ -8,6 +8,8 @@ margin-top: 100px;
   margin-top: 1rem;
 }
 
+
+
 .pagination .btn {
   margin: 0 0.25rem;
   padding: 0.5rem 1rem;
@@ -36,4 +38,51 @@ margin-top: 100px;
 .pagination .btn-outline-primary:hover {
   background-color: #000000; /* Change background on hover */
   color: white; /* Change text color on hover */
+}
+
+/* component */
+
+
+/* Container for the YouTube video */
+.youtube-video-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: #f9f9f9; /* Light background for contrast */
+  border: 1px solid #ddd; /* Subtle border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for the container */
+.youtube-video-container:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Styling for the iframe (YouTube video) */
+.youtube-video iframe {
+  width: 100%;
+  max-width: 560px; /* Limit the maximum width */
+  height: 315px; /* Maintain aspect ratio */
+  border-radius: 10px; /* Rounded corners for the video */
+  border: none; /* Remove iframe border */
+}
+
+/* Styling for the video title */
+.youtube-video-title {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333; /* Dark text for readability */
+}
+
+.youtube-video-title h4 {
+  margin: 0;
+  padding: 0;
 }

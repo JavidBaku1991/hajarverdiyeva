@@ -63,9 +63,7 @@ const NavigationBar = () => {
             <Nav.Link href="https://twitter.com" target="_blank" className={scrolled ? 'text-dark' : 'text-light'} title="Twitter">
               <FaTwitter />
             </Nav.Link>
-            <Nav.Link href="https://linkedin.com" target="_blank" className={scrolled ? 'text-dark' : 'text-light'} title="LinkedIn">
-              <FaLinkedin />
-            </Nav.Link>
+     
             <Nav.Link href="https://bakustate.academia.edu/HajarVerdiyeva" target="_blank" className={scrolled ? 'text-dark' : 'text-light'} title="Academia">
               <SiAcademia />
             </Nav.Link>

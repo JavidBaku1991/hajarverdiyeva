@@ -19,5 +19,29 @@
     "email": "Email",
     "message": "Message",
     "send": "Send"
-  }
+  },
+ "hero": {
+    "title": "Hajar Verdiyeva",
+    "subtitle": "Doctor of Historical Sciences",
+    "description": "The website presents the historian's activities, scientific research, publications, and other information."
+},
+"read-more": "Read more",
+"titles-title":"Titles",
+"interviews-title":"Interviews",
+"videos-title":"Videos",
+"books-title":"Books",
+
+"footer": {
+    "copyright": "© 2025 Hajar Verdiyeva. All rights reserved.",
+    "contact": "Contact",
+    "email": "Email",
+    "follow-us": "Follow Us",
+    "social-media": {
+        "facebook": "Facebook",
+        "twitter": "Twitter",
+        "linkedin": "LinkedIn",
+        "academia": "Academia"
+    }
+}
+
 }

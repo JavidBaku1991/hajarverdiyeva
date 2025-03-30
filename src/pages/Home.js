@@ -20,7 +20,9 @@ import hecer2 from '../photos/titles/home2.jpg';
 import hecer3 from '../photos/hajar12.jpg';
 import hecer4 from '../photos/titles/home4.jpg';
 import hecer5 from '../photos/hajar11.png';
+import { useTranslation } from 'react-i18next';
 
+ 
 const videos = [
   { videoId: 'X0IB02XbXXQ', title: 'Французское издание о попытках арменизации албанского храма в Карабахе' },
   { videoId: '0i23vP2xULE', title: 'Хроники переселения армян на Кавказ' },
@@ -29,7 +31,7 @@ const videos = [
 
 const interviews = [
   { name: 'Həcər Verdiyeva: “Tarixdə “Böyük Ərməniyyə” olmayıb.', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/', image: hecer5 },
-  { name: 'Həcər Verdiyeva: “Tarixdə “Böyük Ərməniyyə” olmayıb.', url: 'https://1905.az/erm%C9%99ni-qriqoryan-kils%C9%99si-xix-%C9%99sr-%C9%99rzind%C9%99-alban-irsini-m%C9%99hv-edib-qar%C9%99t-edirdi/', image: hecer2 },
+  { name: '“Erməni-qriqoryan kilsəsi XIX əsr ərzində alban irsini məhv edib, qarət edirdi”', url: 'https://1905.az/erm%C9%99ni-qriqoryan-kils%C9%99si-xix-%C9%99sr-%C9%99rzind%C9%99-alban-irsini-m%C9%99hv-edib-qar%C9%99t-edirdi/', image: hecer2 },
   { name: 'Развязывая «узлы» истории', url: 'https://br.az/politics/63227/razvyazyvaya-uzly-istorii/', image: hecer4 }
 ];
 
@@ -47,25 +49,30 @@ const books = [
 ];
 
 const Home = () => {
+
+  const { t, i18n } = useTranslation();
+
+
+
   return (
     <div className="bg-light text-dark">
       <div className="hero-container">
         <img src={heroImg} alt="Hero" className="hero-image" />
         <div className="hero-content">
-          <h1>Həcər Verdiyeva</h1>
-          <h3>Tarix elmləri doktoru</h3>
-          <p>Veb-səhifədə tarixçinin fəaliyyətinə dair bütün məlumatları tapa bilərsiniz</p>
+        <h1 className="hero-title">{t('hero.title')}</h1>
+        <h2 className="hero-subtitle">{t('hero.subtitle')}</h2>
+        <p className="hero-description">{t('hero.description')}</p>
         </div>
       </div>
       <Container>
       
         <Row>
           <Col >
-          <TitleLine title='Kitablar' />
+          <TitleLine title={t('books-title')} />
             <Books books={books} />
           </Col>
         </Row>
-        <TitleLine title='Məqalələr' />
+        <TitleLine title={t('titles-title')} />
 
          <Row className='home-titles-container mt-5'>
           <Col>
@@ -76,7 +83,7 @@ const Home = () => {
        
         <Row>
           <Col className='mt-5' >
-          <TitleLine title='Müsahibələr' />
+          <TitleLine title={t('interviews-title')} />
 
             <Interviews interviews={interviews} >
               
@@ -85,7 +92,7 @@ const Home = () => {
         </Row>
        
         <Row className='mb-5 mt-5'>
-        <TitleLine title='Videolar' />
+        <TitleLine title={t('videos-title')} />
 <div className='mb-4'></div>
           {videos.map((video, index) => (
             <Col md={4} key={index} className="d-flex justify-content-center mt-2 mb-5">

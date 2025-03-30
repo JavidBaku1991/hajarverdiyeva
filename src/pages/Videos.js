@@ -37,7 +37,7 @@ const Videos = ({ videos }) => {
                 key={index}
                 variant={currentPage === index + 1 ? 'dark' : 'outline-secondary'}
                 onClick={() => handlePageChange(index + 1)}
-                className="mx-1"
+                className="mb-5"
               >
                 {index + 1}
               </Button>
