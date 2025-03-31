@@ -148,3 +148,24 @@
   height: 50vh;
   border-radius: 20px;
 }
+
+
+@media (max-width: 768px) {
+  .hero-container {
+    padding: 1rem;
+    background-color: #ffffff; /* Darker background for mobile */
+    border-radius: 0; /* Remove rounded corners */
+  }
+
+  .hero-container h1 {
+    font-size: 2rem; /* Smaller font size for mobile */
+  }
+
+  .hero-container h2 {
+    font-size: 1.5rem; /* Smaller font size for mobile */
+  }
+
+  .hero-container p {
+    font-size: 1rem; /* Smaller font size for mobile */
+  }
+}
