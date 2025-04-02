@@ -10,7 +10,8 @@
     "videos": "Videos",
     "contact": "Contact",
     "doctors": "Doctors",
-    "lawyers": "Lawyers"
+    "lawyers": "Lawyers",
+     "titles":"Articles"
   },
   "contacts": {
     "title": "Contact Us",
@@ -42,6 +43,9 @@
         "linkedin": "LinkedIn",
         "academia": "Academia"
     }
-}
+   
+
+} ,
+"open":"Open"
 
 }

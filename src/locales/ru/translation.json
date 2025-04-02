@@ -10,7 +10,9 @@
     "videos": "Видео",
     "contact": "Контакты",
     "doctors": "Доктора",
-    "lawyers": "Юристы"
+    "lawyers": "Юристы",
+    "titles": "Статьи"
+    
   },
   "contacts": {
     "title": "Свяжитесь с нами",
@@ -42,5 +44,6 @@
         "linkedin": "LinkedIn",
         "academia": "Academia"
     }
-}
+},
+    "open": "Открыть"
 }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Container, Grid, Card, CardContent, Typography, Button, Dialog, DialogContent, DialogTitle, Box } from '@mui/material';
+import { Container, Grid, Card, CardContent, Typography, Button, Dialog, DialogContent, DialogTitle, Box, Pagination } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+
 
 // Import PDF files
 import amea from '../pdf/titles/amea.pdf';
@@ -15,7 +17,7 @@ import terihi from '../pdf/titles/tarihi.pdf';
 import umumitarix from '../pdf/titles/umumitarix.pdf';
 import vliyaniye from '../pdf/titles/vliyaniye.pdf';
 
-import img from '../photos/footer.jpg'; // Replace with the actual image path
+import img from '../photos/hajar11.png'; // Replace with the actual image path
 
 const titles = [
   { title: 'TARİXİ REALLIĞIN İZİ İLƏ: ERMƏNİ ƏFSANƏLƏRİNİN ACI HƏQİQƏTLƏRİ ', url: amea },
@@ -33,8 +35,16 @@ const titles = [
 ];
 
 const TitlesPage = () => {
+  
   const [open, setOpen] = useState(false);
   const [selectedTitle, setSelectedTitle] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1); // State for the current page
+  const itemsPerPage = 8; // Number of titles per page
+
+  // Calculate the titles to display on the current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentTitles = titles.slice(startIndex, endIndex);
 
   const handleClickOpen = (title) => {
     setSelectedTitle(title);
@@ -46,55 +56,61 @@ const TitlesPage = () => {
     setSelectedTitle(null);
   };
 
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+      const { t } = useTranslation();
+  
+
   return (
     <Container className="titles-container">
       <Typography variant="h4" component="h1" gutterBottom className="titles-title text-center">
         Titles
       </Typography>
       <Grid container spacing={4}>
-        {titles.map((title, index) => (
-          <Grid item xs={4} key={index}>
-            <Card className="title-card"
-                sx={{
-                    backgroundImage: `url(${img})`, // Use the imported image dynamically
-                    backgroundSize: 'cover', // Ensure the image covers the card
-                    backgroundPosition: 'center', // Center the image
-                    borderRadius: '15px', // Rounded corners
-                    padding: '1rem',
-                    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', // Subtle shadow
-                    height: '250px', // Set a fixed height for the card
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                }}
+        {currentTitles.map((title, index) => (
+          <Grid item lg={3} md={4} xs={12} key={index}>
+            <Card
+              className="title-card"
+              sx={{
+                backgroundImage: `url(${img})`, // Use the imported image dynamically
+                backgroundSize: 'cover', // Ensure the image covers the card
+                backgroundPosition: 'center', // Center the image
+                borderRadius: '15px', // Rounded corners
+                display: 'flex',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                height: '250px',
+              }}
             >
               <CardContent>
                 <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
                   <Box display="flex" flexDirection="row" gap={2}>
                     <Button variant="contained" color="primary" onClick={() => handleClickOpen(title)}>
-                      Open
+                      {t('open')}
                     </Button>
                     <Button variant="contained" color="secondary" href={title.url} download>
-                      Download
+                      {t('download')}
                     </Button>
                   </Box>
-                   <Typography
-                    variant="h6"
-                    component="div"
-                    className="title-name"
-                    align="center"
-                  >
+                  <Typography component="div" className="title-name" align="center">
                     {title.title}
                   </Typography>
-                 
                 </Box>
               </CardContent>
             </Card>
           </Grid>
         ))}
       </Grid>
+
+      {/* Pagination Component */}
+      <Box display="flex" justifyContent="center" mt={4}>
+        <Pagination
+          count={Math.ceil(titles.length / itemsPerPage)} // Total number of pages
+          page={currentPage}
+          onChange={handlePageChange}
+          color="primary"
+        />
+      </Box>
 
       <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
         <DialogTitle>{selectedTitle?.title}</DialogTitle>

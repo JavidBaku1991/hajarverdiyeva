@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 import { Container, Grid, Card, CardContent, CardMedia, Typography, Button, Dialog, DialogContent, DialogTitle, Box } from '@mui/material';
 import '../css/dissertations.css';
+import doktorskaya from '../pdf/doktors.pdf';
+import doktorsImg from '../photos/hajar12.jpg';
+import { useTranslation } from 'react-i18next';
+
+
 
 const dissertations = [
-  // Example: { title: 'Title 1', url: title1, image: title1Image, description: 'Description 1' }
+  { title: 'ДОКТОРСКАЯ ДИССЕРТАЦИЯ', url: doktorskaya, image: doktorsImg },
 ];
 
 const Dissertations = () => {
+    const { t } = useTranslation();
+  
   const [open, setOpen] = useState(false);
   const [selectedDissertation, setSelectedDissertation] = useState(null);
 
@@ -21,13 +28,13 @@ const Dissertations = () => {
   };
 
   return (
-    <Container className="dissertations-container">
+    <Container className="dissertations-container ">
       <Typography variant="h4" component="h1" gutterBottom className="dissertations-title">
         Dissertations
       </Typography>
 
       {dissertations.length > 0 ? (
-        <Grid container spacing={4}>
+        <Grid container spacing={4} >
           {dissertations.map((dissertation, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Card className="dissertation-card">
@@ -38,7 +45,7 @@ const Dissertations = () => {
                   alt={dissertation.title}
                 />
                 <CardContent>
-                  <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center">
+                  <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">
                     <Box>
                       <Typography variant="h5" component="div">
                         {dissertation.title}
@@ -49,10 +56,10 @@ const Dissertations = () => {
                     </Box>
                     <Box display="flex" flexDirection="row" gap={2}>
                       <Button variant="contained" color="primary" onClick={() => handleClickOpen(dissertation)}>
-                        Open
+                        {t('open')}
                       </Button>
                       <Button variant="contained" color="secondary" href={dissertation.url} download>
-                        Download
+                        {t('download')}
                       </Button>
                     </Box>
                   </Box>

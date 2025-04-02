@@ -62,12 +62,17 @@
 
 /* Title card styling with glassmorphism and background image */
 .title-card {
-  background: url('../pdf/İrəvan-1796.jpg') no-repeat center center / cover; /* Add background image */
   border-radius: 15px; /* Rounded corners */
   padding: 1rem;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 height: 250px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  /* From https://css.glass */
+background: rgba(255, 255, 255, 0.69);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(7.7px);
+-webkit-backdrop-filter: blur(7.7px);
+border: 1px solid rgba(255, 255, 255, 0.44);/* Smooth hover effect */
 }
 
 

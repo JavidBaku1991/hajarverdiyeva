@@ -21,6 +21,8 @@ import rodos from '../pdf/monoqrafiyalar/rodos.pdf';
 import kitab2 from '../photos/books/nem.png';
 import kitab1 from '../photos/books/dok.jpg';
 import kitab3 from '../photos/books/cingiz.jpg';
+import rodos1 from '../photos/books/rodos.jpg';
+
 
 // images for titles
 import hecer1 from '../photos/titles/home1.jpg';
@@ -50,9 +52,9 @@ const titles = [
 ];
 
 const books = [
-  { title: 'Немцы  в Северном  Азербайджане', image: kitab2, description: 'Description of book 2' , url: nem},
+  { title: 'Немцы  в Северном  Азербайджане', image: kitab2, url: nem},
   { title: 'Немцы в Азербайджане:Абдуллаев, Сеидов, Вердиева Неизвестные страницы', image: kitab3 , url: cin},
-  { title: '«РОДОСЛОВНАЯ» АРМЯН И ИХ МИГРАЦИЯ НА КАВКАЗ С БАЛКАН',  url: rodos},
+  { title: '«РОДОСЛОВНАЯ» АРМЯН И ИХ МИГРАЦИЯ НА КАВКАЗ С БАЛКАН', image:rodos1,  url: rodos},
   { title: 'Докавказская история армян ', image: kitab1 , url: dok},
 ];
 

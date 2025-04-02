@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Grid, Card, CardContent, CardMedia, Typography, Button, Dialog, DialogContent, DialogTitle, Box } from '@mui/material';
-// import '../css/monographies.css';
+import { useTranslation } from 'react-i18next';
 
-// Import PDF files
 import CingizPdf from '../pdf/monoqrafiyalar/cingiz.pdf';
 import DokavkazskayaPdf from '../pdf/monoqrafiyalar/dok.pdf';
 import NemtsiPdf from '../pdf/monoqrafiyalar/nem.pdf';
@@ -24,6 +23,8 @@ const monographies = [
 ];
 
 const Monographies = () => {
+      const { t } = useTranslation();
+  
   const [open, setOpen] = useState(false);
   const [selectedMonography, setSelectedMonography] = useState(null);
 
@@ -55,10 +56,10 @@ const Monographies = () => {
           <CardContent>
   <Box display="flex" flexDirection="row" gap={2} className="monography-buttons d-flex justify-content-center align-items-center">
     <Button variant="contained" color="primary" onClick={() => handleClickOpen(monography)}>
-      Open
+      {t('open')}
     </Button>
     <Button variant="contained" color="secondary" href={monography.url} download>
-      Download
+      {t('download')}
     </Button>
   </Box>
   <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">

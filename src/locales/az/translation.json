@@ -10,7 +10,8 @@
     "videos": "Videolar",
     "contact": "Əlaqə",
     "doctors": "Həkimlər",
-    "lawyers": "Hüquqşünaslar"
+    "lawyers": "Hüquqşünaslar",
+    "titles":"Məqalələr"
   },
   "contacts": {
     "title": "Bizimlə əlaqə saxlayın",
@@ -41,5 +42,7 @@
         "linkedin": "LinkedIn",
         "academia": "Academia"
     }
-}
+}    
+,"open":"Aç"
+
 }
