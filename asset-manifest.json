@@ -1,21 +1,33 @@
 {
   "files": {
-    "main.css": "/hajarverdiyeva/static/css/main.bd6e00d0.css",
-    "main.js": "/hajarverdiyeva/static/js/main.be6abf1f.js",
-    "static/media/irevan.pdf": "/hajarverdiyeva/static/media/irevan.c0a4b30014ff329efd09.pdf",
+    "main.css": "/hajarverdiyeva/static/css/main.892159b7.css",
+    "main.js": "/hajarverdiyeva/static/js/main.a543fdf3.js",
     "static/media/cingiz.pdf": "/hajarverdiyeva/static/media/cingiz.01babaad8b529c12b901.pdf",
     "static/media/peres.pdf": "/hajarverdiyeva/static/media/peres.1ba5810bea6839d425e0.pdf",
+    "static/media/tarihi.pdf": "/hajarverdiyeva/static/media/tarihi.866ed691a97ce3ac5cb9.pdf",
     "static/media/nem.pdf": "/hajarverdiyeva/static/media/nem.34e0cd4659fc501ed160.pdf",
     "static/media/dok.pdf": "/hajarverdiyeva/static/media/dok.5d2fdce49fff6b2ab98b.pdf",
     "static/media/rodos.pdf": "/hajarverdiyeva/static/media/rodos.3458a59a996d921ff739.pdf",
+    "static/media/vliyaniye.pdf": "/hajarverdiyeva/static/media/vliyaniye.90b1429ce07edb3aa151.pdf",
+    "static/media/tarheq.pdf": "/hajarverdiyeva/static/media/tarheq.578679581381a4135f52.pdf",
+    "static/media/amea.pdf": "/hajarverdiyeva/static/media/amea.106c95ae82d654584a82.pdf",
+    "static/media/soceco.pdf": "/hajarverdiyeva/static/media/soceco.04c7c91d2408e58198a1.pdf",
+    "static/media/gerceginmatrisi.pdf": "/hajarverdiyeva/static/media/gerceginmatrisi.fae10afe06a640087af9.pdf",
+    "static/media/ermenisorunu.pdf": "/hajarverdiyeva/static/media/ermenisorunu.f5b2c337da92b3165d35.pdf",
     "static/media/hajar11.png": "/hajarverdiyeva/static/media/hajar11.21dd0168c937731bf75e.png",
+    "static/media/namatrise.pdf": "/hajarverdiyeva/static/media/namatrise.8fb5625490e68a16d2af.pdf",
     "static/media/home2.jpg": "/hajarverdiyeva/static/media/home2.cd023f6d9421bae53cd9.jpg",
+    "static/media/onthelevel.pdf": "/hajarverdiyeva/static/media/onthelevel.116a8d30728c1225436a.pdf",
     "static/media/footer.jpg": "/hajarverdiyeva/static/media/footer.c15bf9f550b748c69cce.jpg",
+    "static/media/bitva.pdf": "/hajarverdiyeva/static/media/bitva.eeee34dc6daa8a40a592.pdf",
     "static/media/hajar12.jpg": "/hajarverdiyeva/static/media/hajar12.75f4d73df21cd087ac77.jpg",
+    "static/media/irevan.pdf": "/hajarverdiyeva/static/media/irevan.8b7d5debe09531faf62b.pdf",
+    "static/media/umumitarix.pdf": "/hajarverdiyeva/static/media/umumitarix.aa7147fcc06bf6757de2.pdf",
     "static/media/home1.jpg": "/hajarverdiyeva/static/media/home1.d878a31f24284be8029d.jpg",
     "static/media/rodos.jpg": "/hajarverdiyeva/static/media/rodos.e63813c92faaffc56781.jpg",
     "static/media/peres.jpg": "/hajarverdiyeva/static/media/peres.3bff255cc42c21d5152c.jpg",
     "static/media/home4.jpg": "/hajarverdiyeva/static/media/home4.b0ef181132abc371283d.jpg",
+    "static/media/İrəvan-1796.jpg": "/hajarverdiyeva/static/media/İrəvan-1796.0ef8e94c3179758da4bd.jpg",
     "static/media/cingiz.jpg": "/hajarverdiyeva/static/media/cingiz.60d3a1e96cd1c18f3a4d.jpg",
     "static/media/dok.jpg": "/hajarverdiyeva/static/media/dok.58aaa64ddc16ecc0ee53.jpg",
     "static/media/slick.svg": "/hajarverdiyeva/static/media/slick.2630a3e3eab21c607e21.svg",
@@ -23,11 +35,11 @@
     "static/media/slick.ttf": "/hajarverdiyeva/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/hajarverdiyeva/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/hajarverdiyeva/index.html",
-    "main.bd6e00d0.css.map": "/hajarverdiyeva/static/css/main.bd6e00d0.css.map",
-    "main.be6abf1f.js.map": "/hajarverdiyeva/static/js/main.be6abf1f.js.map"
+    "main.892159b7.css.map": "/hajarverdiyeva/static/css/main.892159b7.css.map",
+    "main.a543fdf3.js.map": "/hajarverdiyeva/static/js/main.a543fdf3.js.map"
   },
   "entrypoints": [
-    "static/css/main.bd6e00d0.css",
-    "static/js/main.be6abf1f.js"
+    "static/css/main.892159b7.css",
+    "static/js/main.a543fdf3.js"
   ]
 }
