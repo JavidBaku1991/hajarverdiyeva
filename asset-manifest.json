@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/hajarverdiyeva/static/css/main.892159b7.css",
-    "main.js": "/hajarverdiyeva/static/js/main.a543fdf3.js",
+    "main.css": "/hajarverdiyeva/static/css/main.5a9c0563.css",
+    "main.js": "/hajarverdiyeva/static/js/main.cff9c8ee.js",
     "static/media/cingiz.pdf": "/hajarverdiyeva/static/media/cingiz.01babaad8b529c12b901.pdf",
     "static/media/peres.pdf": "/hajarverdiyeva/static/media/peres.1ba5810bea6839d425e0.pdf",
     "static/media/tarihi.pdf": "/hajarverdiyeva/static/media/tarihi.866ed691a97ce3ac5cb9.pdf",
     "static/media/nem.pdf": "/hajarverdiyeva/static/media/nem.34e0cd4659fc501ed160.pdf",
     "static/media/dok.pdf": "/hajarverdiyeva/static/media/dok.5d2fdce49fff6b2ab98b.pdf",
+    "static/media/doktors.pdf": "/hajarverdiyeva/static/media/doktors.34eac330e0d24fe704cd.pdf",
     "static/media/rodos.pdf": "/hajarverdiyeva/static/media/rodos.3458a59a996d921ff739.pdf",
     "static/media/vliyaniye.pdf": "/hajarverdiyeva/static/media/vliyaniye.90b1429ce07edb3aa151.pdf",
     "static/media/tarheq.pdf": "/hajarverdiyeva/static/media/tarheq.578679581381a4135f52.pdf",
@@ -27,7 +28,6 @@
     "static/media/rodos.jpg": "/hajarverdiyeva/static/media/rodos.e63813c92faaffc56781.jpg",
     "static/media/peres.jpg": "/hajarverdiyeva/static/media/peres.3bff255cc42c21d5152c.jpg",
     "static/media/home4.jpg": "/hajarverdiyeva/static/media/home4.b0ef181132abc371283d.jpg",
-    "static/media/İrəvan-1796.jpg": "/hajarverdiyeva/static/media/İrəvan-1796.0ef8e94c3179758da4bd.jpg",
     "static/media/cingiz.jpg": "/hajarverdiyeva/static/media/cingiz.60d3a1e96cd1c18f3a4d.jpg",
     "static/media/dok.jpg": "/hajarverdiyeva/static/media/dok.58aaa64ddc16ecc0ee53.jpg",
     "static/media/slick.svg": "/hajarverdiyeva/static/media/slick.2630a3e3eab21c607e21.svg",
@@ -35,11 +35,11 @@
     "static/media/slick.ttf": "/hajarverdiyeva/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/hajarverdiyeva/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/hajarverdiyeva/index.html",
-    "main.892159b7.css.map": "/hajarverdiyeva/static/css/main.892159b7.css.map",
-    "main.a543fdf3.js.map": "/hajarverdiyeva/static/js/main.a543fdf3.js.map"
+    "main.5a9c0563.css.map": "/hajarverdiyeva/static/css/main.5a9c0563.css.map",
+    "main.cff9c8ee.js.map": "/hajarverdiyeva/static/js/main.cff9c8ee.js.map"
   },
   "entrypoints": [
-    "static/css/main.892159b7.css",
-    "static/js/main.a543fdf3.js"
+    "static/css/main.5a9c0563.css",
+    "static/js/main.cff9c8ee.js"
   ]
 }
