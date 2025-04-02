@@ -73,6 +73,9 @@ const NavigationBar = () => {
               <NavDropdown.Item as={Link} to="/monographies" onClick={() => setExpanded(false)}>
                 {t('navbar.monographies')}
               </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/titles" onClick={() => setExpanded(false)}>
+                {t('navbar.titles')}
+              </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link as={Link} to="/videos" className={scrolled ? 'text-dark' : 'text-light'} onClick={() => setExpanded(false)}>
               {t('navbar.videos')}

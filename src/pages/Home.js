@@ -7,12 +7,20 @@ import Books from '../components/Books';
 import '../css/home.css';
 import heroImg from '../photos/hajar12.jpg';
 import TitleLine from '../components/TitleLine';
-import kitabPdf from '../pdf/kitablar/irevan.pdf';
+
+
+
+import nem from '../pdf/monoqrafiyalar/nem.pdf';
+import dok from '../pdf/monoqrafiyalar/dok.pdf';
+import cin  from '../pdf/monoqrafiyalar/cingiz.pdf';
+import rodos from '../pdf/monoqrafiyalar/rodos.pdf';
+
+
+
 // images for books
 import kitab2 from '../photos/books/nem.png';
 import kitab1 from '../photos/books/dok.jpg';
 import kitab3 from '../photos/books/cingiz.jpg';
-import kitab4 from '../photos/books/rodos.jpg';
 
 // images for titles
 import hecer1 from '../photos/titles/home1.jpg';
@@ -42,10 +50,10 @@ const titles = [
 ];
 
 const books = [
-  { title: 'Book 2', image: kitab2, description: 'Description of book 2' , url: kitabPdf},
-  { title: 'Book 3', image: kitab3 , description: 'Description of book 3', url: kitabPdf},
-  { title: 'Book 4', image: kitab4 , description: 'Description of book 3', url: kitabPdf},
-  { title: 'Book 5', image: kitab1 , description: 'Description of book 3', url: kitabPdf},
+  { title: 'Немцы  в Северном  Азербайджане', image: kitab2, description: 'Description of book 2' , url: nem},
+  { title: 'Немцы в Азербайджане:Абдуллаев, Сеидов, Вердиева Неизвестные страницы', image: kitab3 , url: cin},
+  { title: '«РОДОСЛОВНАЯ» АРМЯН И ИХ МИГРАЦИЯ НА КАВКАЗ С БАЛКАН',  url: rodos},
+  { title: 'Докавказская история армян ', image: kitab1 , url: dok},
 ];
 
 const Home = () => {
@@ -68,7 +76,6 @@ const Home = () => {
       
         <Row>
           <Col >
-          <TitleLine title={t('books-title')} />
             <Books books={books} />
           </Col>
         </Row>
