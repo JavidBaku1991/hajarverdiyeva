@@ -43,6 +43,33 @@
         "academia": "Academia"
     }
 }    
-,"open":"Aç"
+,"open":"Aç",
+"download":"Yüklə",
+"about": {
+    "brand": "Həcər Verdiyeva",
+    "researchInterests": {
+      "title": "Elmi tədqiqatlar",
+      "item1": "Kvant mexanikası",
+      "item2": "Parçacıq fizikas",
+      "item3": "Astrofizika",
+      "item4": "Biokimya"
+    },
+    "education": {
+      "title": "Təhsil",
+      "description": "O, 1979-cu ildə orta məktəbi bitirmiş və 1986-cı ildə Bakı Dövlət Universitetinin Tarix fakültəsini fərqlənmə diplomu ilə bitirmişdir."
+    },
+    "teaching": {
+      "title": "Tədris fəaliyyəti",
+      "description": "1979-cu ildən H.Y. Verdiyeva müxtəlif vəzifələrdə, o cümlədən Azərbaycan Tibb Universitetində baş preparator, baş laborant və müəllim kimi çalışmışdır."
+    },
+    "research": {
+      "title": "Elmi fəaliyyət",
+      "description": "H.Y.Verdiyeva 1993-cü ildə “XIX əsrin birinci yarısında Şimali Azərbaycanın əhalisi” adlı namizədlik dissertasiyasını, 2005-ci ildə “XIX-XX əsrin əvvəllərində Rusiya imperiyasının Şimali Azərbaycanda köçürmə siyasəti” adlı doktorluq dissertasiyasını müdafiə etmişdir. Rusiya Federasiyası, Almaniya, Türkiyə və Azərbaycan Respublikasında keçirilmiş beynəlxalq konfransların iştirakçısı olmuşdur. Azərbaycan tarixinin Yeni və Ən Yeni dövrlərinin etno-konfessional, konfliktologiya və Qafqazın aktual problemlərini öyrənir. O, 9 monoqrafiya, 101 elmi məqalənin müəllifidir. 4 dərsliyin həmmüəllifidir. H.Y.Verdiyeva ARP İİ SSA tərəfindən nəşr edilən “В поисках истины…Лицо армянства. Архив Политических Документов Управления Делами Президента Азербайджанской Республики.Документы свидетельствуют” adlı sənədlər toplu-kitabının(2011) həmmüəllifi, «Неизвестные страницы истории: беженцы - мусульмане (1918-1920 гг.)» sənədlər toplusunun (2018) tərtibatçısıdır. "
+    },
+    "otherActivities": {
+      "title": "Digər fəaliyyətlər",
+      "description": "2011-2015-ci illərdə Azərbaycan Respublikası Prezidentinin İşlər İdarəsinin Siyasi sənədlər Arxivinin(ARP İİ SSA) elmi araşdırmalar və nəşr şöbəsində məsləhətçi, 2015-2017-ci illərdə Azərbaycan Respublikası Prezidentinin Administrasiyasının Azərbaycan Respublikasının millətlərarası multikulturalizm və dini məsələlər üzrə Dövlət müşaviri xidmətində böyük məsləhətçi işləmişdir. 2017-ci ildən Azərbaycan Respublikası Prezidentinin İşlər İdarəsinin Siyasi sənədlər Arxivinin elmi katibidir."
+    }
+  }
 
 }

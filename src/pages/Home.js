@@ -53,7 +53,7 @@ const titles = [
 
 const books = [
   { title: 'Немцы  в Северном  Азербайджане', image: kitab2, url: nem},
-  { title: 'Немцы в Азербайджане:Абдуллаев, Сеидов, Вердиева Неизвестные страницы', image: kitab3 , url: cin},
+  { title: 'Немцы в Азербайджане', image: kitab3 , url: cin},
   { title: '«РОДОСЛОВНАЯ» АРМЯН И ИХ МИГРАЦИЯ НА КАВКАЗ С БАЛКАН', image:rodos1,  url: rodos},
   { title: 'Докавказская история армян ', image: kitab1 , url: dok},
 ];
