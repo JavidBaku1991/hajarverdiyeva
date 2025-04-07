@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/hajarverdiyeva/static/css/main.85221691.css",
-    "main.js": "/hajarverdiyeva/static/js/main.0e47c9ee.js",
+    "main.css": "/hajarverdiyeva/static/css/main.c09736df.css",
+    "main.js": "/hajarverdiyeva/static/js/main.e4428520.js",
     "static/media/cingiz.pdf": "/hajarverdiyeva/static/media/cingiz.01babaad8b529c12b901.pdf",
     "static/media/peres.pdf": "/hajarverdiyeva/static/media/peres.1ba5810bea6839d425e0.pdf",
     "static/media/tarihi.pdf": "/hajarverdiyeva/static/media/tarihi.866ed691a97ce3ac5cb9.pdf",
@@ -35,11 +35,11 @@
     "static/media/slick.ttf": "/hajarverdiyeva/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/hajarverdiyeva/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/hajarverdiyeva/index.html",
-    "main.85221691.css.map": "/hajarverdiyeva/static/css/main.85221691.css.map",
-    "main.0e47c9ee.js.map": "/hajarverdiyeva/static/js/main.0e47c9ee.js.map"
+    "main.c09736df.css.map": "/hajarverdiyeva/static/css/main.c09736df.css.map",
+    "main.e4428520.js.map": "/hajarverdiyeva/static/js/main.e4428520.js.map"
   },
   "entrypoints": [
-    "static/css/main.85221691.css",
-    "static/js/main.0e47c9ee.js"
+    "static/css/main.c09736df.css",
+    "static/js/main.e4428520.js"
   ]
 }
