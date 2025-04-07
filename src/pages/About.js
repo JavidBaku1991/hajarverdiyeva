@@ -17,13 +17,13 @@ const About = () => {
           </Col>
           <Col md={8}>
             <h1 className="about-title">{t('about.brand')}</h1>
-            <h2 className="about-subtitle">{t('about.researchInterests.title')}</h2>
+            {/* <h2 className="about-subtitle">{t('about.researchInterests.title')}</h2>
             <ul className="about-list">
               <li>{t('about.researchInterests.item1')}</li>
               <li>{t('about.researchInterests.item2')}</li>
               <li>{t('about.researchInterests.item3')}</li>
               <li>{t('about.researchInterests.item4')}</li>
-            </ul>
+            </ul> */}
           </Col>
         </Row>
         <Row>

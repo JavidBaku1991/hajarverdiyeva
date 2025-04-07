@@ -20,7 +20,7 @@ const Interviews = ({ interviews }) => {
             <Card.Body className="interview-card-body">
               <Card.Title>{interview.name}</Card.Title>
               <Card.Text>
-                <a href={interview.url} target="_blank" rel="noopener noreferrer">
+                <a href={interview.url} target="_blank" rel="noopener noreferrer" className='more-link'>
                 {t('read-more')}
                 </a>
               </Card.Text>

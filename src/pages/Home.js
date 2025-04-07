@@ -1,5 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Link as RouterLink } from 'react-router-dom'; // Import RouterLink for MUI Button
+import { Button } from '@mui/material'; // Import MUI Button
 import YouTubeVideo from '../components/YouTubeVideo';
 import TitleComponent from '../components/TitleComponent';
 import Interviews from '../components/Interviews';
@@ -109,6 +111,17 @@ const Home = () => {
               <YouTubeVideo videoId={video.videoId} title={video.title} />
             </Col>
           ))}
+          <p className="d-flex justify-content-center">
+            <Button
+              component={RouterLink}
+              to="/videos"
+              variant="contained"
+              color="primary"
+              className="more-link"
+            >
+              {t('read-more')}
+            </Button>
+          </p>
         </Row>
       </Container>
     </div>

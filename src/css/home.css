@@ -88,9 +88,12 @@
 
 .more-link {
   display: inline-block;
+  justify-self: center;
+  justify-content: center;
   margin-top: 10px;
   padding: 2px 35px;
   background-color: #0f2134;
+width: 120px;
   color: white;
   border-radius: 5px;
   text-decoration: none;
@@ -98,10 +101,11 @@
   font-weight: bold;
   transition: background-color 0.3s, transform 0.3s;
   margin-bottom: 20px;
+  background-color: #0f2134;
 }
 
 .more-link:hover {
-  background-color: #0056b3;
+  background-color: #68737f;
   transform: scale(1.05);
 }
 
