@@ -7,8 +7,9 @@ import TitleComponent from '../components/TitleComponent';
 import Interviews from '../components/Interviews';
 import Books from '../components/Books';
 import '../css/home.css';
-import heroImg from '../photos/hajar12.jpg';
+import heroImg from '../photos/hajar12.png';
 import TitleLine from '../components/TitleLine';
+import SocialSpeedDial from '../components/SocialSpeedDial';
 
 
 
@@ -29,7 +30,7 @@ import rodos1 from '../photos/books/rodos.jpg';
 // images for titles
 import hecer1 from '../photos/titles/home1.jpg';
 import hecer2 from '../photos/titles/home2.jpg';
-import hecer3 from '../photos/hajar12.jpg';
+import hecer3 from '../photos/hajar12.png';
 import hecer4 from '../photos/titles/home4.jpg';
 import hecer5 from '../photos/hajar11.png';
 import { useTranslation } from 'react-i18next';
@@ -124,6 +125,7 @@ const Home = () => {
           </p>
         </Row>
       </Container>
+      <SocialSpeedDial /> {/* Add the Speed Dial */}
     </div>
   );
 };

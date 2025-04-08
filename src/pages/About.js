@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import '../css/about.css';
 import { useTranslation } from 'react-i18next';
-import about from '../photos/hajar12.jpg';
+import about from '../photos/hajar12.png';
 
 const About = () => {
   const { t } = useTranslation();
@@ -28,19 +28,19 @@ const About = () => {
         </Row>
         <Row>
           <div className="about-section">
-            <h3 className="section-title">{t('about.education.title')}</h3>
+            <h5 className="section-title">{t('about.education.title')}</h5>
             <p className="section-description">{t('about.education.description')}</p>
           </div>
           <div className="about-section">
-            <h3 className="section-title">{t('about.teaching.title')}</h3>
+            <h5 className="section-title">{t('about.teaching.title')}</h5>
             <p className="section-description">{t('about.teaching.description')}</p>
           </div>
           <div className="about-section">
-            <h3 className="section-title">{t('about.research.title')}</h3>
+            <h5 className="section-title">{t('about.research.title')}</h5>
             <p className="section-description">{t('about.research.description')}</p>
           </div>
           <div className="about-section">
-            <h3 className="section-title">{t('about.otherActivities.title')}</h3>
+            <h5 className="section-title">{t('about.otherActivities.title')}</h5>
             <p className="section-description">{t('about.otherActivities.description')}</p>
           </div>
         </Row>

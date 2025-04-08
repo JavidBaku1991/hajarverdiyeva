@@ -1,0 +1,74 @@
+{
+  "navbar": {
+    "brand": "Hajar Verdiyeva",
+    "home": "Home",
+    "photos": "Photos",
+    "about": "About",
+    "publications": "Publications",
+    "monographies": "Monographs",
+    "dissertations": "Dissertations",
+    "videos": "Videos",
+    "contact": "Contact",
+    "doctors": "Doctors",
+    "lawyers": "Lawyers",
+    "titles": "Articles"
+  },
+  "contacts": {
+    "title": "Contact Us",
+    "name": "Name",
+    "surname": "Surname",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send"
+  },
+  "hero": {
+    "title": "Hajar Verdiyeva",
+    "subtitle": "Doctor of Historical Sciences",
+    "description": "The website presents the historian's activities, scientific research, publications, and other information."
+  },
+  "read-more": "Read More",
+  "titles-title": "Articles",
+  "interviews-title": "Interviews",
+  "videos-title": "Videos",
+  "books-title": "Books",
+  "footer": {
+    "copyright": "© 2025 Hajar Verdiyeva. All rights reserved.",
+    "contact": "Contact",
+    "email": "Email",
+    "follow-us": "Follow Us",
+    "social-media": {
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn",
+      "academia": "Academia"
+    }
+  },
+  "open": "Open",
+  "download": "Download",
+  "about": {
+    "brand": "Hajar Verdiyeva",
+    "researchInterests": {
+      "title": "Research Interests",
+      "item1": "Quantum Mechanics",
+      "item2": "Particle Physics",
+      "item3": "Astrophysics",
+      "item4": "Biochemistry"
+    },
+    "education": {
+      "title": "Education",
+      "description": "She graduated from high school in 1979 and received her degree with honors from the Faculty of History at Baku State University in 1986."
+    },
+    "teaching": {
+      "title": "Teaching Activities",
+      "description": "Since 1979, H.Y. Verdiyeva has been working in various roles, including senior preparator, senior laboratory assistant, and teacher at Azerbaijan Medical University."
+    },
+    "research": {
+      "title": "Research Activities",
+      "description": "H.Y. Verdiyeva defended her PhD dissertation in 1993 and her doctoral dissertation in 2005. She has participated in international conferences in Russia, Germany, Turkey, and Azerbaijan. She is the author of 9 monographs, 101 scientific articles, and co-author of 4 textbooks. H.Y. Verdiyeva is also a co-author of the document collection 'In Search of Truth... The Face of Armenians' (2011) and the compiler of 'Unknown Pages of History: Refugees - Muslims (1918-1920)' (2018)."
+    },
+    "otherActivities": {
+      "title": "Other Activities",
+      "description": "From 2011 to 2015, she worked as a consultant in the Scientific Research and Publication Department of the Political Documents Archive of the Presidential Administration of Azerbaijan. From 2015 to 2017, she served as a senior consultant in the State Advisor Service on Multiculturalism and Religious Affairs of the Presidential Administration of Azerbaijan. Since 2017, she has been the scientific secretary of the Political Documents Archive of the Presidential Administration of Azerbaijan."
+    }
+  }
+}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, Grid, Card, CardContent, CardMedia, Typography, Button, Dialog, DialogContent, DialogTitle, Box } from '@mui/material';
 import '../css/dissertations.css';
 import doktorskaya from '../pdf/doktors.pdf';
-import doktorsImg from '../photos/hajar12.jpg';
+import doktorsImg from '../photos/hajar12.png';
 import { useTranslation } from 'react-i18next';
 
 
