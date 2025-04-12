@@ -14,7 +14,7 @@ const Interviews = ({ interviews }) => {
     <Row>
       
       {interviews.map((interview, index) => (
-        <Col md={4} key={index} className="mb-4 d-flex mt-5">
+        <Col lg={3} md={4}  sm={6} key={index} className="mb-4 d-flex mt-5">
           <Card className="interview-card w-100">
             <Card.Img variant="top" src={interview.image} />
             <Card.Body className="interview-card-body">
