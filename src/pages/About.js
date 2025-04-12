@@ -2,47 +2,38 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import '../css/about.css';
 import { useTranslation } from 'react-i18next';
-import about from '../photos/hajar12.png';
+import about from '../photos/hajar1.png';
 
 const About = () => {
   const { t } = useTranslation();
   return (
     <div className="about-page">
       <Container>
-        <Row className="about-content">
-          <Col md={4} className="d-flex justify-content-center align-items-center">
-            <div className="about-image-container">
-              <img src={about} alt="About" className="about-image" />
-            </div>
+        <Row className="about-content align-items-center">
+          <Col md={4} className="about-image-container">
+            <img src={about} alt="About" className="about-image" />
           </Col>
           <Col md={8}>
             <h1 className="about-title">{t('about.brand')}</h1>
-            {/* <h2 className="about-subtitle">{t('about.researchInterests.title')}</h2>
-            <ul className="about-list">
-              <li>{t('about.researchInterests.item1')}</li>
-              <li>{t('about.researchInterests.item2')}</li>
-              <li>{t('about.researchInterests.item3')}</li>
-              <li>{t('about.researchInterests.item4')}</li>
-            </ul> */}
-          </Col>
-        </Row>
-        <Row>
-          <div className="about-section">
+            <p className="about-description">{t('hero.description')}</p>
             <h5 className="section-title">{t('about.education.title')}</h5>
             <p className="section-description">{t('about.education.description')}</p>
-          </div>
-          <div className="about-section">
             <h5 className="section-title">{t('about.teaching.title')}</h5>
             <p className="section-description">{t('about.teaching.description')}</p>
-          </div>
-          <div className="about-section">
+          </Col>
+         
+         
+      <Row className='mt-5'>
+      <Col md={6} className="about-section">
             <h5 className="section-title">{t('about.research.title')}</h5>
             <p className="section-description">{t('about.research.description')}</p>
-          </div>
-          <div className="about-section">
+          </Col>
+          <Col md={6} className="about-section">
             <h5 className="section-title">{t('about.otherActivities.title')}</h5>
             <p className="section-description">{t('about.otherActivities.description')}</p>
-          </div>
+          </Col>
+      </Row>
+          
         </Row>
       </Container>
     </div>
