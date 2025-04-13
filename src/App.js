@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home.js';
 import About from './pages/About.js';
@@ -26,7 +26,7 @@ const videos = [
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <HashRouter>
         <NavigationBar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -39,7 +39,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
