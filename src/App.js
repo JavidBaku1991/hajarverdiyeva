@@ -9,18 +9,18 @@ import NavigationBar from './components/Navbar';
 import Footer from './components/Footer.js';
 import TitlesPage from './pages/TitlesPage.js';
 import Contacts from './components/Contacts.js';
-import Videos from './pages/Videos.js'; 
+import Videos from './pages/Videos.js';
 import NotFound from './pages/NotFound.js';
 
 const videos = [
   { videoId: 'K-wCck8Vkbw' },
-  { videoId: 'X0IB02XbXXQ'},
-  { videoId: '0i23vP2xULE'},
+  { videoId: 'X0IB02XbXXQ' },
+  { videoId: '0i23vP2xULE' },
   { videoId: '3jnJmZS1qNc' },
   { videoId: 'qsP-kGrf1MI' },
   { videoId: 'IVUfwIkdfoA' },
   { videoId: 'KFJAqsjZVQw' },
-  { videoId: 'OQp3ifptP2k'},
+  { videoId: 'OQp3ifptP2k' },
 ];
 
 function App() {

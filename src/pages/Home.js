@@ -66,7 +66,7 @@ const books = [
 
 const Home = () => {
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
 
 
