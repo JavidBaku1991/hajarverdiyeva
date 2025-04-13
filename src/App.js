@@ -1,5 +1,5 @@
 import './App.css';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home.js';
 import About from './pages/About.js';
@@ -25,20 +25,22 @@ const videos = [
 
 function App() {
   return (
-    <HashRouter>
-      <NavigationBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/dissertations" element={<Dissertations />} />
-        <Route path="/monographies" element={<Monographies />} />
-        <Route path="/titles" element={<TitlesPage />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="/videos" element={<Videos videos={videos} />} />
-        <Route path="*" element={<NotFound />} /> {/* This will catch unmatched routes */}
-      </Routes>
-      <Footer />
-    </HashRouter>
+    <div>
+      <BrowserRouter>
+        <NavigationBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/dissertations" element={<Dissertations />} />
+          <Route path="/monographies" element={<Monographies />} />
+          <Route path="/titles" element={<TitlesPage />} />
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/videos" element={<Videos videos={videos} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </div>
   );
 }
 
