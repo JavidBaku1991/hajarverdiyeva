@@ -1,5 +1,5 @@
 import './App.css';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home.js';
 import About from './pages/About.js';
@@ -10,7 +10,7 @@ import Footer from './components/Footer.js';
 import TitlesPage from './pages/TitlesPage.js';
 import Contacts from './components/Contacts.js';
 import Videos from './pages/Videos.js'; 
-import NotFound from './pages/NotFound.js'; // Import NotFound page
+import NotFound from './pages/NotFound.js';
 
 const videos = [
   { videoId: 'K-wCck8Vkbw' },
@@ -26,20 +26,20 @@ const videos = [
 function App() {
   return (
     <div>
-      <HashRouter>
+      <BrowserRouter>
         <NavigationBar />
         <Routes>
-          <Route element={<Home />} path='/' exact />
-          <Route element={<About />} path='/about' exact />
-          <Route element={<Dissertations />} path='/dissertations' exact />
-          <Route element={<Monographies />} path='/monographies' exact />
-          <Route element={<TitlesPage />} path='/titles' exact />
-          <Route element={<Contacts />} path='/contacts' exact />
-          <Route element={<Videos videos={videos} />} path='/videos' exact />
-          <Route element={<NotFound />} path='*' /> {/* Add NotFound route */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/dissertations" element={<Dissertations />} />
+          <Route path="/monographies" element={<Monographies />} />
+          <Route path="/titles" element={<TitlesPage />} />
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/videos" element={<Videos videos={videos} />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 }
