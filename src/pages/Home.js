@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async'; // Import Helmet
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link as RouterLink } from 'react-router-dom'; // Import RouterLink for MUI Button
 import { Button } from '@mui/material'; // Import MUI Button
@@ -72,6 +73,15 @@ const Home = () => {
 
   return (
     <div className="bg-light text-dark">
+      <Helmet>
+        <title>Hajar Verdiyeva - Home</title>
+        <meta name="description" content="Doctor of Historical Sciences. The website presents the historian's activities, scientific research, publications, and other information." />
+        <meta property="og:title" content="Hajar Verdiyeva - Home" />
+        <meta property="og:description" content="The website presents the historian's activities, scientific research, publications, and other information." />
+        <meta property="og:image" content="https://hajarverdiyeva.az/hajar12.png" />
+        <meta property="og:url" content="https://hajarverdiyeva.az" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <div className="hero-container">
         <img src={heroImg} alt="Hero" className="hero-image" />
         <div className="hero-content">
