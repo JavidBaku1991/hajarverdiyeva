@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async'; // Import HelmetProvider
+
 import Home from './pages/Home.js';
 import About from './pages/About.js';
 import Dissertations from './pages/Dissertations.js';
@@ -25,7 +25,7 @@ const videos = [
 
 function App() {
   return (
-    <HelmetProvider>
+    <div>
       <BrowserRouter>
         <NavigationBar />
         <Routes>
@@ -40,7 +40,7 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
-    </HelmetProvider>
+    </div>
   );
 }
 
