@@ -33,6 +33,7 @@ import hecer2 from '../photos/titles/home2.jpg';
 import hecer3 from '../photos/hajar12.png';
 import hecer4 from '../photos/titles/home4.jpg';
 import hecer5 from '../photos/hajar11.png';
+import hecer8 from '../photos/hajar1.jpg';
 import { useTranslation } from 'react-i18next';
 
 
@@ -48,8 +49,10 @@ const interviews = [
   { name: 'Həcər Verdiyeva: “Tarixdə “Böyük Ərməniyyə” olmayıb.', url: 'https://1905.az/hecer-verdiyeva-tarixde-boyuk-ermeniyye-olmayib/', image: hecer5 },
   { name: '“Erməni-qriqoryan kilsəsi XIX əsr ərzində alban irsini məhv edib, qarət edirdi”', url: 'https://1905.az/erm%C9%99ni-qriqoryan-kils%C9%99si-xix-%C9%99sr-%C9%99rzind%C9%99-alban-irsini-m%C9%99hv-edib-qar%C9%99t-edirdi/', image: hecer2 },
   { name: 'Развязывая «узлы» истории', url: 'https://br.az/politics/63227/razvyazyvaya-uzly-istorii/', image: hecer4 },
-  { name: 'Архитектура вне времени', url: 'https://baki-baku.az/%D0%B0%D1%80%D1%85%D0%B8%D1%82%D0%B5%D0%BA%D1%82%D1%83%D1%80%D0%B0-%D0%B2%D0%BD%D0%B5-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B8/?fbclid=IwZXh0bgNhZW0CMTEAAR7T2upPLZLKcAh2Xop5Jp_vUT4IdCPoqCrUoCMSxmyQI-tL9OgETARdpQ3WqA_aem_RCNz06CnFG1sO8bN70pjMg', image: hecer7 }
+  { name: 'Архитектура вне времени', url: 'https://baki-baku.az/%D0%B0%D1%80%D1%85%D0%B8%D1%82%D0%B5%D0%BA%D1%82%D1%83%D1%80%D0%B0-%D0%B2%D0%BD%D0%B5-%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%B8/?fbclid=IwZXh0bgNhZW0CMTEAAR7T2upPLZLKcAh2Xop5Jp_vUT4IdCPoqCrUoCMSxmyQI-tL9OgETARdpQ3WqA_aem_RCNz06CnFG1sO8bN70pjMg', image: hecer7 },
+  { name: 'История, искаженная догмой', url: 'https://br.az/politics/79452/istoriya-iskazhennaya-dogmoy/https://br.az/politics/79452/istoriya-iskazhennaya-dogmoy/?fbclid=IwY2xjawKArJxleHRuA2FlbQIxMQBicmlkETEyaWVUSGplY29NS1NsODdXAR66nWfEw_q5AJIrxs6aB0_HBQF3I6ouU9oW2XsDf0selhVkdrQdUBdGT7lGhA_aem_okc8tzfp0txYI818OwKgHg', image: hecer8 }
 ];
+
 
 const titles = [
   { name: 'Первая мировая война и беженцы — мусульмане Кавказа', url: 'https://1905.az/ru/%D0%BF%D0%B5%D1%80%D0%B2%D0%B0%D1%8F-%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%8F-%D0%B2%D0%BE%D0%B9%D0%BD%D0%B0-%D0%B8-%D0%B1%D0%B5%D0%B6%D0%B5%D0%BD%D1%86%D1%8B-%D0%BC%D1%83%D1%81%D1%83%D0%BB%D1%8C/', image: hecer1 },
