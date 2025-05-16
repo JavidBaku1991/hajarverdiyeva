@@ -2,10 +2,9 @@ import React from 'react'
 
 function TitleLine({title}) {
   return (
-<div class="eleven mt-4">
-  <h1>{title}</h1>
-</div>
-       
+    <div className="eleven mt-4">
+      <h1>{title}</h1>
+    </div>
   )
 }
 
