@@ -21,9 +21,8 @@ import Contacts from './components/Contacts.js';
 import Videos from './pages/Videos.js';
 import NotFound from './pages/NotFound.js';
 import AdminLogin from './pages/AdminLogin.js';
-import AdminDashboard from './pages/AdminDashboard.js';
 import ProtectedRoute from './components/ProtectedRoute';
-import Admin from './components/Admin';
+import Admin from './pages/Admin';
 
 // Initial videos data
 const initialVideos = [
@@ -115,10 +114,10 @@ function App() {
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route
-            path="/admin/dashboard"
+            path="/admin"
             element={
               <ProtectedRoute>
-                <AdminDashboard 
+                <Admin 
                   videos={videos} 
                   setVideos={setVideos}
                   interviews={interviews}
@@ -127,7 +126,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/admin" element={<Admin />} />
           
           <Route path="*" element={<NotFound />} />
         </Routes>

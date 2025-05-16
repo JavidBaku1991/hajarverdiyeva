@@ -1,7 +1,14 @@
 const mongoose = require('mongoose');
 
-const bookSchema = new mongoose.Schema({
+const articleSchema = new mongoose.Schema({
   title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String
+  },
+  file: {
     type: String,
     required: true
   },
@@ -9,12 +16,10 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  pdfUrl: {
+  language: {
     type: String,
-    required: true
-  },
-  description: {
-    type: String
+    enum: ['az', 'en'],
+    default: 'az'
   },
   createdAt: {
     type: Date,
@@ -22,4 +27,4 @@ const bookSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Book', bookSchema); 
+module.exports = mongoose.model('Article', articleSchema); 

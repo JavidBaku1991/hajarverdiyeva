@@ -34,17 +34,13 @@ import hecer5 from '../photos/hajar11.png';
 import hecer8 from '../photos/hajar1.jpg';
 import hecer7 from '../photos/interview4.png';
 
-const Home = ({ interviews }) => {
+const Home = () => {
   const { t } = useTranslation();
   const [videos, setVideos] = useState([]);
+  const [interviews, setInterviews] = useState([]);
+  const [titles, setTitles] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const titles = [
-    { name: 'Первая мировая война и беженцы — мусульмане Кавказа', url: 'https://1905.az/ru/%D0%BF%D0%B5%D1%80%D0%B2%D0%B0%D1%8F-%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%8F-%D0%B2%D0%BE%D0%B9%D0%BD%D0%B0-%D0%B8-%D0%B1%D0%B5%D0%B6%D0%B5%D0%BD%D1%86%D1%8B-%D0%BC%D1%83%D1%81%D1%83%D0%BB%D1%8C/', image: hecer1 },
-    { name: '"Erməni-qriqoryan kilsəsi XIX əsr ərzində alban irsini məhv edib, qarət edirdi"', url: 'https://1905.az/erm%C9%99ni-qriqoryan-kils%C9%99si-xix-%C9%99sr-%C9%99rzind%C9%99-alban-irsini-m%C9%99hv-edib-qar%C9%99t-edirdi/', image: hecer2 },
-    { name: '"На матрице истины"', url: 'https://br.az/politics/71069/na-matrice-istiny/', image: hecer3 },
-  ];
 
   const books = [
     { title: 'Немцы  в Северном  Азербайджане', image: kitab2, url: nem },
@@ -54,64 +50,50 @@ const Home = ({ interviews }) => {
   ];
 
   useEffect(() => {
-    const fetchVideos = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true);
-        console.log('Starting to fetch videos...');
+        console.log('Starting to fetch data...');
         
-        const response = await axios.get('http://localhost:5000/api/videos', {
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-        });
+        const [videosRes, interviewsRes, titlesRes] = await Promise.all([
+          axios.get('http://localhost:5000/api/videos'),
+          axios.get('http://localhost:5000/api/interviews'),
+          axios.get('http://localhost:5000/api/titles')
+        ]);
         
-        console.log('Raw response:', response);
-        console.log('Response status:', response.status);
-        console.log('Response data:', JSON.stringify(response.data, null, 2));
-        
-        if (response.data && Array.isArray(response.data)) {
-          console.log('Number of videos received:', response.data.length);
-          
-          // Filter out invalid videos and sort by createdAt
-          const validVideos = response.data
-            .filter(video => {
-              const isValid = video && video.videoId && video.videoId.trim();
-              if (!isValid) {
-                console.log('Invalid video found:', video);
-              }
-              return isValid;
-            })
+        // Handle videos
+        if (videosRes.data && Array.isArray(videosRes.data)) {
+          const validVideos = videosRes.data
+            .filter(video => video && video.videoId && video.videoId.trim())
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-          
-          console.log('Valid videos after filtering:', JSON.stringify(validVideos, null, 2));
           setVideos(validVideos);
-        } else {
-          console.error('Invalid response format:', response.data);
-          setError('Invalid response format from server');
+        }
+
+        // Handle interviews
+        if (interviewsRes.data && Array.isArray(interviewsRes.data)) {
+          const validInterviews = interviewsRes.data
+            .filter(interview => interview && interview.title && interview.url)
+            .sort((a, b) => new Date(b.date) - new Date(a.date));
+          setInterviews(validInterviews);
+        }
+
+        // Handle titles
+        if (titlesRes.data && Array.isArray(titlesRes.data)) {
+          const validTitles = titlesRes.data
+            .filter(title => title && title.name && title.url && title.image)
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          setTitles(validTitles);
         }
       } catch (error) {
-        console.error('Error fetching videos:', {
-          message: error.message,
-          response: error.response ? {
-            status: error.response.status,
-            data: error.response.data
-          } : 'No response',
-          request: error.request ? 'Request was made but no response received' : 'No request was made'
-        });
-        setError(`Failed to fetch videos: ${error.message}`);
+        console.error('Error fetching data:', error);
+        setError(`Failed to fetch data: ${error.message}`);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchVideos();
+    fetchData();
   }, []);
-
-  // Debug videos state changes
-  useEffect(() => {
-    console.log('Videos state updated:', videos);
-  }, [videos]);
 
   return (
     <div className="bg-light text-dark">
@@ -133,14 +115,26 @@ const Home = ({ interviews }) => {
 
         <Row className='home-titles-container mt-5'>
           <Col>
-            <TitleComponent titles={titles} />
+            {loading ? (
+              <div className="text-center w-100">Loading titles...</div>
+            ) : titles.length === 0 ? (
+              <div className="text-center w-100">No titles available</div>
+            ) : (
+              <TitleComponent titles={titles} />
+            )}
           </Col>
         </Row>
 
         <Row>
           <Col className='mt-5'>
             <TitleLine title={t('interviews-title')} />
-            <Interviews interviews={interviews} />
+            {loading ? (
+              <div className="text-center w-100">Loading interviews...</div>
+            ) : interviews.length === 0 ? (
+              <div className="text-center w-100">No interviews available</div>
+            ) : (
+              <Interviews interviews={interviews} />
+            )}
           </Col>
         </Row>
 
@@ -153,20 +147,17 @@ const Home = ({ interviews }) => {
           ) : videos.length === 0 ? (
             <div className="text-center w-100">No videos available</div>
           ) : (
-            videos.map((video, index) => {
-              console.log('Rendering video:', video);
-              return (
-                <Col md={4} key={video._id} className="d-flex justify-content-center mt-2 mb-5">
-                  <div style={{ width: '100%', maxWidth: '400px' }}>
-                    <YouTubeVideo 
-                      videoId={video.videoId} 
-                      title={video.title}
-                      description={video.description}
-                    />
-                  </div>
-                </Col>
-              );
-            })
+            videos.map((video, index) => (
+              <Col md={4} key={video._id} className="d-flex justify-content-center mt-2 mb-5">
+                <div style={{ width: '100%', maxWidth: '400px' }}>
+                  <YouTubeVideo 
+                    videoId={video.videoId} 
+                    title={video.title}
+                    description={video.description}
+                  />
+                </div>
+              </Col>
+            ))
           )}
           <p className="d-flex justify-content-center">
             <Button

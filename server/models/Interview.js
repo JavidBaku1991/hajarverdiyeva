@@ -22,7 +22,7 @@ const interviewSchema = new mongoose.Schema({
   },
   language: {
     type: String,
-    enum: ['az', 'ru', 'en'],
+    enum: ['az', 'en'],
     default: 'az'
   }
 });

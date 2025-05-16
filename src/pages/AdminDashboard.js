@@ -9,8 +9,7 @@ const AdminDashboard = ({ videos, setVideos, interviews, setInterviews }) => {
   const [previewImage, setPreviewImage] = useState(null);
   const fileInputRef = useRef(null);
   const [items, setItems] = useState({
-    titles: [],
-    monographies: []
+    titles: []
   });
 
   const handleLogout = () => {
@@ -203,41 +202,6 @@ const AdminDashboard = ({ videos, setVideos, interviews, setInterviews }) => {
             </Form.Group>
           </>
         );
-      case 'monographies':
-        return (
-          <>
-            <Form.Group className="mb-3">
-              <Form.Label>Title</Form.Label>
-              <Form.Control
-                type="text"
-                name="title"
-                value={formData.title || ''}
-                onChange={handleInputChange}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Image URL</Form.Label>
-              <Form.Control
-                type="url"
-                name="image"
-                value={formData.image || ''}
-                onChange={handleInputChange}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>PDF URL</Form.Label>
-              <Form.Control
-                type="url"
-                name="url"
-                value={formData.url || ''}
-                onChange={handleInputChange}
-                required
-              />
-            </Form.Group>
-          </>
-        );
       default:
         return null;
     }
@@ -323,19 +287,6 @@ const AdminDashboard = ({ videos, setVideos, interviews, setInterviews }) => {
                 <h3>Manage Titles</h3>
                 <Button variant="primary" onClick={handleShowModal}>
                   Add New Title
-                </Button>
-              </div>
-              {renderTable()}
-            </Col>
-          </Row>
-        </Tab>
-        <Tab eventKey="monographies" title="Monographies">
-          <Row>
-            <Col>
-              <div className="d-flex justify-content-between align-items-center mb-3">
-                <h3>Manage Monographies</h3>
-                <Button variant="primary" onClick={handleShowModal}>
-                  Add New Monography
                 </Button>
               </div>
               {renderTable()}

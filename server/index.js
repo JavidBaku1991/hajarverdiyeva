@@ -26,18 +26,22 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Import routes
 const authRoutes = require('./routes/auth');
 const uploadRoutes = require('./routes/upload');
-const bookRoutes = require('./routes/books');
 const interviewRoutes = require('./routes/interviews');
 const videoRoutes = require('./routes/videos');
 const titleRoutes = require('./routes/titles');
+const monographRoutes = require('./routes/monographs');
+const articleRoutes = require('./routes/articles');
+const dissertationRoutes = require('./routes/dissertations');
 
 // Use routes
 app.use('/api/auth', authRoutes);
 app.use('/api/upload', uploadRoutes);
-app.use('/api/books', bookRoutes);
 app.use('/api/interviews', interviewRoutes);
 app.use('/api/videos', videoRoutes);
 app.use('/api/titles', titleRoutes);
+app.use('/api/monographs', monographRoutes);
+app.use('/api/articles', articleRoutes);
+app.use('/api/dissertations', dissertationRoutes);
 
 // MongoDB Connection
 const MONGODB_URI = 'mongodb+srv://javidbaku1991:bObGBgvj6rdcWfCD@cluster0.leawlg5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';

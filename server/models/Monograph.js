@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 
-const titleSchema = new mongoose.Schema({
-  name: {
+const monographSchema = new mongoose.Schema({
+  title: {
     type: String,
     required: true
   },
-  url: {
+  description: {
+    type: String
+  },
+  file: {
     type: String,
     required: true
   },
@@ -24,4 +27,4 @@ const titleSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Title', titleSchema); 
+module.exports = mongoose.model('Monograph', monographSchema); 

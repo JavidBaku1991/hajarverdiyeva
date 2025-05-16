@@ -6,8 +6,10 @@ const Interview = require('../models/Interview');
 router.get('/', async (req, res) => {
   try {
     const interviews = await Interview.find().sort({ date: -1 });
+    console.log('Fetched interviews:', interviews);
     res.json(interviews);
   } catch (error) {
+    console.error('Error fetching interviews:', error);
     res.status(500).json({ message: 'Error fetching interviews', error: error.message });
   }
 });
@@ -15,10 +17,13 @@ router.get('/', async (req, res) => {
 // Add a new interview
 router.post('/', async (req, res) => {
   try {
+    console.log('Received interview data:', req.body);
     const interview = new Interview(req.body);
     const savedInterview = await interview.save();
+    console.log('Saved interview:', savedInterview);
     res.status(201).json(savedInterview);
   } catch (error) {
+    console.error('Error creating interview:', error);
     res.status(400).json({ message: 'Error creating interview', error: error.message });
   }
 });

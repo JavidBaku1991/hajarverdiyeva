@@ -7,16 +7,14 @@ const Admin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState('books');
+  const [activeTab, setActiveTab] = useState('interviews');
 
   // Form states
-  const [bookForm, setBookForm] = useState({ title: '', image: '', pdfUrl: '', description: '' });
   const [interviewForm, setInterviewForm] = useState({ title: '', image: '', url: '', description: '', language: 'az' });
   const [videoForm, setVideoForm] = useState({ videoId: '', title: '', description: '', language: 'az' });
   const [titleForm, setTitleForm] = useState({ name: '', url: '', image: '', language: 'az' });
 
   // Data states
-  const [books, setBooks] = useState([]);
   const [interviews, setInterviews] = useState([]);
   const [videos, setVideos] = useState([]);
   const [titles, setTitles] = useState([]);
@@ -33,14 +31,12 @@ const Admin = () => {
 
   const fetchData = async () => {
     try {
-      const [booksRes, interviewsRes, videosRes, titlesRes] = await Promise.all([
-        axios.get(`${API_URL}/books`),
+      const [interviewsRes, videosRes, titlesRes] = await Promise.all([
         axios.get(`${API_URL}/interviews`),
         axios.get(`${API_URL}/videos`),
         axios.get(`${API_URL}/titles`)
       ]);
 
-      setBooks(booksRes.data);
       setInterviews(interviewsRes.data);
       setVideos(videosRes.data);
       setTitles(titlesRes.data);
@@ -74,10 +70,6 @@ const Admin = () => {
       };
 
       switch (type) {
-        case 'book':
-          await axios.post(`${API_URL}/books`, bookForm, config);
-          setBookForm({ title: '', image: '', pdfUrl: '', description: '' });
-          break;
         case 'interview':
           await axios.post(`${API_URL}/interviews`, interviewForm, config);
           setInterviewForm({ title: '', image: '', url: '', description: '', language: 'az' });
@@ -167,52 +159,6 @@ const Admin = () => {
       </Row>
 
       <Tabs activeKey={activeTab} onSelect={(k) => setActiveTab(k)} className="mb-4">
-        <Tab eventKey="books" title="Books">
-          <Card>
-            <Card.Body>
-              <h3>Add New Book</h3>
-              <Form onSubmit={(e) => handleSubmit(e, 'book')}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Title</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={bookForm.title}
-                    onChange={(e) => setBookForm({ ...bookForm, title: e.target.value })}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Image URL</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={bookForm.image}
-                    onChange={(e) => setBookForm({ ...bookForm, image: e.target.value })}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>PDF URL</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={bookForm.pdfUrl}
-                    onChange={(e) => setBookForm({ ...bookForm, pdfUrl: e.target.value })}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    value={bookForm.description}
-                    onChange={(e) => setBookForm({ ...bookForm, description: e.target.value })}
-                  />
-                </Form.Group>
-                <Button variant="primary" type="submit">Add Book</Button>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Tab>
-
         <Tab eventKey="interviews" title="Interviews">
           <Card>
             <Card.Body>
@@ -252,7 +198,6 @@ const Admin = () => {
                     onChange={(e) => setInterviewForm({ ...interviewForm, language: e.target.value })}
                   >
                     <option value="az">Azerbaijani</option>
-                    <option value="ru">Russian</option>
                     <option value="en">English</option>
                   </Form.Select>
                 </Form.Group>
@@ -266,23 +211,16 @@ const Admin = () => {
           <Card>
             <Card.Body>
               <h3>Add New Video</h3>
-              {videoError && <div className="alert alert-danger">{videoError}</div>}
               <Form onSubmit={(e) => handleSubmit(e, 'video')}>
                 <Form.Group className="mb-3">
-                  <Form.Label>Video ID or YouTube URL</Form.Label>
+                  <Form.Label>Video ID</Form.Label>
                   <Form.Control
                     type="text"
                     value={videoForm.videoId}
-                    onChange={(e) => {
-                      setVideoForm({ ...videoForm, videoId: e.target.value });
-                      setVideoError('');
-                    }}
-                    placeholder="Enter YouTube video ID or URL"
+                    onChange={(e) => setVideoForm({ ...videoForm, videoId: e.target.value })}
                     required
                   />
-                  <Form.Text className="text-muted">
-                    Enter the YouTube video ID (e.g., X0IB02XbXXQ) or paste the full YouTube URL
-                  </Form.Text>
+                  {videoError && <div className="text-danger">{videoError}</div>}
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Label>Title</Form.Label>
@@ -294,21 +232,12 @@ const Admin = () => {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
-                  <Form.Label>Description</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    value={videoForm.description}
-                    onChange={(e) => setVideoForm({ ...videoForm, description: e.target.value })}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
                   <Form.Label>Language</Form.Label>
                   <Form.Select
                     value={videoForm.language}
                     onChange={(e) => setVideoForm({ ...videoForm, language: e.target.value })}
                   >
                     <option value="az">Azerbaijani</option>
-                    <option value="ru">Russian</option>
                     <option value="en">English</option>
                   </Form.Select>
                 </Form.Group>
@@ -357,7 +286,6 @@ const Admin = () => {
                     onChange={(e) => setTitleForm({ ...titleForm, language: e.target.value })}
                   >
                     <option value="az">Azerbaijani</option>
-                    <option value="ru">Russian</option>
                     <option value="en">English</option>
                   </Form.Select>
                 </Form.Group>
