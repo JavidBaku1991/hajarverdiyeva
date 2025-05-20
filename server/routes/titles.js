@@ -6,8 +6,10 @@ const Title = require('../models/Title');
 router.get('/', async (req, res) => {
   try {
     const titles = await Title.find().sort({ createdAt: -1 });
+    console.log('Fetched titles:', titles);
     res.json(titles);
   } catch (error) {
+    console.error('Error fetching titles:', error);
     res.status(500).json({ message: 'Error fetching titles', error: error.message });
   }
 });
@@ -15,10 +17,13 @@ router.get('/', async (req, res) => {
 // Add a new title
 router.post('/', async (req, res) => {
   try {
+    console.log('Received title data:', req.body);
     const title = new Title(req.body);
     const savedTitle = await title.save();
+    console.log('Saved title:', savedTitle);
     res.status(201).json(savedTitle);
   } catch (error) {
+    console.error('Error creating title:', error);
     res.status(400).json({ message: 'Error creating title', error: error.message });
   }
 });

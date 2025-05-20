@@ -34,10 +34,56 @@ import hecer5 from '../photos/hajar11.png';
 import hecer8 from '../photos/hajar1.jpg';
 import hecer7 from '../photos/interview4.png';
 
+// Initial state values
+const initialVideos = [];
+const initialInterviews = [];
+
 const Home = () => {
   const { t } = useTranslation();
-  const [videos, setVideos] = useState([]);
-  const [interviews, setInterviews] = useState([]);
+  const [videos, setVideos] = useState(() => {
+    const savedVideos = localStorage.getItem('videos');
+    if (savedVideos) {
+      try {
+        const parsed = JSON.parse(savedVideos);
+        return parsed.map(video => {
+          if (video.videoId.startsWith('blob:')) {
+            const matchingVideo = initialVideos.find(v => v.videoId === video.videoId);
+            if (matchingVideo) {
+              return { ...video, videoId: matchingVideo.videoId };
+            }
+          }
+          return video;
+        });
+      } catch (e) {
+        console.error('Error parsing saved videos:', e);
+        return initialVideos;
+      }
+    }
+    return initialVideos;
+  });
+
+  const [interviews, setInterviews] = useState(() => {
+    const savedInterviews = localStorage.getItem('interviews');
+    if (savedInterviews) {
+      try {
+        const parsed = JSON.parse(savedInterviews);
+        return parsed.map(interview => {
+          if (interview.image.startsWith('blob:')) {
+            const matchingInterview = initialInterviews.find(i => i.name === interview.name);
+            if (matchingInterview) {
+              return { ...interview, image: matchingInterview.image };
+            }
+          }
+          return interview;
+        });
+      } catch (e) {
+        console.error('Error parsing saved interviews:', e);
+        return initialInterviews;
+      }
+    }
+    return initialInterviews;
+  });
+
   const [titles, setTitles] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -55,38 +101,22 @@ const Home = () => {
         setLoading(true);
         console.log('Starting to fetch data...');
         
-        const [videosRes, interviewsRes, titlesRes] = await Promise.all([
-          axios.get('http://localhost:5000/api/videos'),
-          axios.get('http://localhost:5000/api/interviews'),
-          axios.get('http://localhost:5000/api/titles')
-        ]);
-        
-        // Handle videos
-        if (videosRes.data && Array.isArray(videosRes.data)) {
-          const validVideos = videosRes.data
-            .filter(video => video && video.videoId && video.videoId.trim())
-            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-          setVideos(validVideos);
-        }
+        // Fetch videos
+        const videosResponse = await axios.get('http://localhost:5000/api/videos');
+        setVideos(videosResponse.data);
 
-        // Handle interviews
-        if (interviewsRes.data && Array.isArray(interviewsRes.data)) {
-          const validInterviews = interviewsRes.data
-            .filter(interview => interview && interview.title && interview.url)
-            .sort((a, b) => new Date(b.date) - new Date(a.date));
-          setInterviews(validInterviews);
-        }
+        // Fetch interviews
+        const interviewsResponse = await axios.get('http://localhost:5000/api/interviews');
+        setInterviews(interviewsResponse.data);
 
-        // Handle titles
-        if (titlesRes.data && Array.isArray(titlesRes.data)) {
-          const validTitles = titlesRes.data
-            .filter(title => title && title.name && title.url && title.image)
-            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-          setTitles(validTitles);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setError(`Failed to fetch data: ${error.message}`);
+        // Fetch titles from articles endpoint
+        const titlesResponse = await axios.get('http://localhost:5000/api/articles');
+        setTitles(titlesResponse.data);
+
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setError('Failed to load data. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -94,6 +124,11 @@ const Home = () => {
 
     fetchData();
   }, []);
+
+  // Save interviews to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('interviews', JSON.stringify(interviews));
+  }, [interviews]);
 
   return (
     <div className="bg-light text-dark">
@@ -171,6 +206,55 @@ const Home = () => {
             </Button>
           </p>
         </Row>
+
+        {/* Videos Section */}
+        <section className="mb-5">
+          <h2>{t('home.videos')}</h2>
+          <div className="row">
+            {videos.map((video, index) => (
+              <div key={index} className="col-md-4 mb-4">
+                <div className="card h-100">
+                  <div className="ratio ratio-16x9">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${video.videoId}`}
+                      title={video.title}
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                  <div className="card-body">
+                    <h5 className="card-title">{video.title}</h5>
+                    <p className="card-text">{video.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Titles Section */}
+        <section className="mb-5">
+          <h2>{t('home.titles')}</h2>
+          <div className="row">
+            {titles.map((title, index) => (
+              <div key={index} className="col-md-4 mb-4">
+                <div className="card h-100">
+                  <img 
+                    src={title.image} 
+                    className="card-img-top" 
+                    alt={title.title}
+                    style={{ height: '200px', objectFit: 'cover' }}
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title">{title.title}</h5>
+                    <a href={title.url} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                      {t('home.readMore')}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </Container>
       <SocialSpeedDial />
     </div>

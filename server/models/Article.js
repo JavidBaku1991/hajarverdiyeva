@@ -5,9 +5,6 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  description: {
-    type: String
-  },
   file: {
     type: String,
     required: true
@@ -15,16 +12,9 @@ const articleSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true
-  },
-  language: {
-    type: String,
-    enum: ['az', 'en'],
-    default: 'az'
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
   }
+}, {
+  timestamps: true
 });
 
 module.exports = mongoose.model('Article', articleSchema); 

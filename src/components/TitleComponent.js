@@ -37,8 +37,8 @@ const TitleComponent = ({ titles }) => {
   return (
     <div className="title-slider-container">
       <Slider {...settings}>
-        {titles.map((title, index) => (
-          <div key={title._id || index} className="title-item">
+        {titles.map((title) => (
+          <div key={title._id} className="title-item">
             <div className="title-content">
               <img src={title.image} alt={title.name} className="title-image" />
               <div className="title-text">

@@ -8,9 +8,9 @@ require('dotenv').config();
 const app = express();
 
 // Create uploads directory if it doesn't exist
-const uploadsDir = path.join(__dirname, 'uploads');
+const uploadsDir = path.join(__dirname, 'uploads', 'monographs');
 if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir);
+  fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
 // Middleware
@@ -28,7 +28,6 @@ const authRoutes = require('./routes/auth');
 const uploadRoutes = require('./routes/upload');
 const interviewRoutes = require('./routes/interviews');
 const videoRoutes = require('./routes/videos');
-const titleRoutes = require('./routes/titles');
 const monographRoutes = require('./routes/monographs');
 const articleRoutes = require('./routes/articles');
 const dissertationRoutes = require('./routes/dissertations');
@@ -38,7 +37,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/interviews', interviewRoutes);
 app.use('/api/videos', videoRoutes);
-app.use('/api/titles', titleRoutes);
 app.use('/api/monographs', monographRoutes);
 app.use('/api/articles', articleRoutes);
 app.use('/api/dissertations', dissertationRoutes);
@@ -61,6 +59,12 @@ mongoose.connect(MONGODB_URI, {
 // Basic route
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the Hajar Portfolio API' });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Something went wrong!', error: err.message });
 });
 
 // Start server

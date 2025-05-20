@@ -12,12 +12,12 @@ const Admin = () => {
   // Form states
   const [interviewForm, setInterviewForm] = useState({ title: '', image: '', url: '', description: '', language: 'az' });
   const [videoForm, setVideoForm] = useState({ videoId: '', title: '', description: '', language: 'az' });
-  const [titleForm, setTitleForm] = useState({ name: '', url: '', image: '', language: 'az' });
+  const [articleForm, setArticleForm] = useState({ name: '', url: '', image: '', language: 'az' });
 
   // Data states
   const [interviews, setInterviews] = useState([]);
   const [videos, setVideos] = useState([]);
-  const [titles, setTitles] = useState([]);
+  const [articles, setArticles] = useState([]);
 
   const [videoError, setVideoError] = useState('');
 
@@ -31,15 +31,15 @@ const Admin = () => {
 
   const fetchData = async () => {
     try {
-      const [interviewsRes, videosRes, titlesRes] = await Promise.all([
+      const [interviewsRes, videosRes, articlesRes] = await Promise.all([
         axios.get(`${API_URL}/interviews`),
         axios.get(`${API_URL}/videos`),
-        axios.get(`${API_URL}/titles`)
+        axios.get(`${API_URL}/articles`)
       ]);
 
       setInterviews(interviewsRes.data);
       setVideos(videosRes.data);
-      setTitles(titlesRes.data);
+      setArticles(articlesRes.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -94,9 +94,9 @@ const Admin = () => {
           setVideoForm({ videoId: '', title: '', description: '', language: 'az' });
           setVideoError('');
           break;
-        case 'title':
-          await axios.post(`${API_URL}/titles`, titleForm, config);
-          setTitleForm({ name: '', url: '', image: '', language: 'az' });
+        case 'article':
+          await axios.post(`${API_URL}/articles`, articleForm, config);
+          setArticleForm({ name: '', url: '', image: '', language: 'az' });
           break;
       }
 
@@ -247,17 +247,17 @@ const Admin = () => {
           </Card>
         </Tab>
 
-        <Tab eventKey="titles" title="Titles">
+        <Tab eventKey="articles" title="Articles">
           <Card>
             <Card.Body>
-              <h3>Add New Title</h3>
-              <Form onSubmit={(e) => handleSubmit(e, 'title')}>
+              <h3>Add New Article</h3>
+              <Form onSubmit={(e) => handleSubmit(e, 'article')}>
                 <Form.Group className="mb-3">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
-                    value={titleForm.name}
-                    onChange={(e) => setTitleForm({ ...titleForm, name: e.target.value })}
+                    value={articleForm.name}
+                    onChange={(e) => setArticleForm({ ...articleForm, name: e.target.value })}
                     required
                   />
                 </Form.Group>
@@ -265,8 +265,8 @@ const Admin = () => {
                   <Form.Label>URL</Form.Label>
                   <Form.Control
                     type="text"
-                    value={titleForm.url}
-                    onChange={(e) => setTitleForm({ ...titleForm, url: e.target.value })}
+                    value={articleForm.url}
+                    onChange={(e) => setArticleForm({ ...articleForm, url: e.target.value })}
                     required
                   />
                 </Form.Group>
@@ -274,22 +274,22 @@ const Admin = () => {
                   <Form.Label>Image URL</Form.Label>
                   <Form.Control
                     type="text"
-                    value={titleForm.image}
-                    onChange={(e) => setTitleForm({ ...titleForm, image: e.target.value })}
+                    value={articleForm.image}
+                    onChange={(e) => setArticleForm({ ...articleForm, image: e.target.value })}
                     required
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Label>Language</Form.Label>
                   <Form.Select
-                    value={titleForm.language}
-                    onChange={(e) => setTitleForm({ ...titleForm, language: e.target.value })}
+                    value={articleForm.language}
+                    onChange={(e) => setArticleForm({ ...articleForm, language: e.target.value })}
                   >
                     <option value="az">Azerbaijani</option>
                     <option value="en">English</option>
                   </Form.Select>
                 </Form.Group>
-                <Button variant="primary" type="submit">Add Title</Button>
+                <Button variant="primary" type="submit">Add Article</Button>
               </Form>
             </Card.Body>
           </Card>

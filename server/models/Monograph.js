@@ -5,9 +5,6 @@ const monographSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  description: {
-    type: String
-  },
   file: {
     type: String,
     required: true
@@ -15,11 +12,6 @@ const monographSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true
-  },
-  language: {
-    type: String,
-    enum: ['az', 'en'],
-    default: 'az'
   },
   createdAt: {
     type: Date,

@@ -11,10 +11,11 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
   const [activeTab, setActiveTab] = useState('interviews');
   const [titles, setTitles] = useState([]);
   const [formData, setFormData] = useState({
-    title: '',
+    name: '',
     description: '',
     file: '',
     image: '',
+    url: '',
     language: 'az'
   });
   const [editingId, setEditingId] = useState(null);
@@ -24,10 +25,10 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
   // Fetch data for each section
   const fetchTitles = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/titles');
+      const response = await axios.get('http://localhost:5000/api/articles');
       setTitles(response.data);
     } catch (error) {
-      setError('Error fetching titles');
+      setError('Error fetching articles');
       console.error('Error:', error);
     }
   };
@@ -36,35 +37,52 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
   const handleSubmit = async (e, type) => {
     e.preventDefault();
     try {
-      if (editingId) {
-        await axios.put(`http://localhost:5000/api/${type}/${editingId}`, formData);
+      if (type === 'titles') {
+        const titleData = {
+          title: formData.title,
+          url: formData.url,
+          image: formData.image
+        };
+
+        if (editingId) {
+          await axios.put(`http://localhost:5000/api/articles/${editingId}`, titleData);
+        } else {
+          const response = await axios.post('http://localhost:5000/api/articles', titleData);
+          setTitles([...titles, response.data]);
+        }
       } else {
-        await axios.post(`http://localhost:5000/api/${type}`, formData);
+        if (editingId) {
+          await axios.put(`http://localhost:5000/api/${type}/${editingId}`, formData);
+        } else {
+          const response = await axios.post(`http://localhost:5000/api/${type}`, formData);
+          if (type === 'titles') {
+            setTitles([...titles, response.data]);
+          }
+        }
       }
       setFormData({
         title: '',
-        description: '',
-        file: '',
-        image: '',
-        language: 'az'
+        url: '',
+        image: ''
       });
       setEditingId(null);
       if (type === 'titles') {
         fetchTitles();
       }
     } catch (error) {
-      setError(`Error saving ${type}`);
-      console.error('Error:', error);
+      console.error('Error saving:', error);
+      setError(`Error saving ${type}: ${error.response?.data?.message || error.message}`);
     }
   };
 
   // Handle edit for each section
   const handleEdit = (item, type) => {
     setFormData({
-      title: item.title,
+      name: item.name,
       description: item.description,
       file: item.file,
       image: item.image,
+      url: item.url,
       language: item.language
     });
     setEditingId(item._id);
@@ -74,7 +92,7 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
   const handleDelete = async (id, type) => {
     if (window.confirm(`Are you sure you want to delete this ${type.slice(0, -1)}?`)) {
       try {
-        await axios.delete(`http://localhost:5000/api/${type}/${id}`);
+        await axios.delete(`http://localhost:5000/api/${type === 'titles' ? 'articles' : type}/${id}`);
         if (type === 'titles') {
           fetchTitles();
         }
@@ -86,155 +104,160 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
   };
 
   // Handle video submission
-  const handleVideoSubmit = (e) => {
+  const handleVideoSubmit = async (e) => {
     e.preventDefault();
-    if (videoId) {
-      setVideos([...videos, { videoId }]);
-      setVideoId('');
+    try {
+      const response = await axios.post('http://localhost:5000/api/videos', {
+        title: formData.title,
+        videoId: formData.videoId,
+        description: formData.description
+      });
+      setVideos([...videos, response.data]);
+      setFormData({
+        ...formData,
+        title: '',
+        videoId: '',
+        description: ''
+      });
+    } catch (error) {
+      console.error('Error saving video:', error);
+      setError('Error saving video');
     }
   };
 
   // Handle video deletion
-  const handleVideoDelete = (index) => {
-    const newVideos = videos.filter((_, i) => i !== index);
-    setVideos(newVideos);
+  const handleVideoDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/videos/${id}`);
+      setVideos(videos.filter(video => video._id !== id));
+    } catch (error) {
+      console.error('Error deleting video:', error);
+      setError('Error deleting video');
+    }
   };
 
   // Handle interview submission
-  const handleInterviewSubmit = (e) => {
+  const handleInterviewSubmit = async (e) => {
     e.preventDefault();
-    if (formData.name && formData.url) {
-      setInterviews([...interviews, formData]);
-      setFormData({
-        name: '',
-        url: '',
-        image: ''
-      });
+    try {
+      if (formData.title && formData.url && formData.image) {
+        const response = await axios.post('http://localhost:5000/api/interviews', formData);
+        setInterviews([...interviews, response.data]);
+        setFormData({
+          title: '',
+          url: '',
+          image: ''
+        });
+      }
+    } catch (error) {
+      console.error('Error saving interview:', error);
+      setError('Error saving interview');
     }
   };
 
   // Handle interview deletion
-  const handleInterviewDelete = (index) => {
-    const newInterviews = interviews.filter((_, i) => i !== index);
-    setInterviews(newInterviews);
+  const handleInterviewDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/interviews/${id}`);
+      setInterviews(interviews.filter(interview => interview._id !== id));
+    } catch (error) {
+      console.error('Error deleting interview:', error);
+      setError('Error deleting interview');
+    }
   };
 
   // Render form for each section
-  const renderForm = (type) => (
-    <Form onSubmit={(e) => handleSubmit(e, type)}>
-      <Row>
-        <Col md={6}>
-          <Form.Group className="mb-3">
-            <Form.Label>Title</Form.Label>
+  const renderForm = (type) => {
+    const formFields = {
+      titles: [
+        { name: 'title', label: 'Title', type: 'text', required: true },
+        { name: 'url', label: 'URL', type: 'text', required: true },
+        { name: 'image', label: 'Image URL', type: 'text', required: true }
+      ],
+      videos: [
+        { name: 'title', label: 'Title', type: 'text', required: true },
+        { name: 'videoId', label: 'Video ID', type: 'text', required: true },
+        { name: 'description', label: 'Description', type: 'text', required: true }
+      ],
+      interviews: [
+        { name: 'title', label: 'Title', type: 'text', required: true },
+        { name: 'url', label: 'URL', type: 'text', required: true },
+        { name: 'image', label: 'Image URL', type: 'text', required: true },
+        { name: 'description', label: 'Description', type: 'text', required: true }
+      ]
+    };
+
+    if (!formFields[type]) {
+      console.error(`No form fields defined for type: ${type}`);
+      return <div>Error: Invalid form type</div>;
+    }
+
+    return (
+      <Form onSubmit={(e) => handleSubmit(e, type)}>
+        {formFields[type].map((field) => (
+          <Form.Group key={field.name} className="mb-3">
+            <Form.Label>{field.label}</Form.Label>
             <Form.Control
-              type="text"
-              value={formData.title}
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              required
+              type={field.type}
+              name={field.name}
+              value={formData[field.name] || ''}
+              onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
+              required={field.required}
+              placeholder={field.type === 'text' ? `Enter ${field.label.toLowerCase()}` : ''}
             />
           </Form.Group>
-        </Col>
-        <Col md={6}>
-          <Form.Group className="mb-3">
-            <Form.Label>Language</Form.Label>
-            <Form.Select
-              value={formData.language}
-              onChange={(e) => setFormData({ ...formData, language: e.target.value })}
-            >
-              <option value="az">Azerbaijani</option>
-              <option value="en">English</option>
-            </Form.Select>
-          </Form.Group>
-        </Col>
-      </Row>
-      <Form.Group className="mb-3">
-        <Form.Label>Description</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows={3}
-          value={formData.description}
-          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label>File URL</Form.Label>
-        <Form.Control
-          type="text"
-          value={formData.file}
-          onChange={(e) => setFormData({ ...formData, file: e.target.value })}
-          required
-        />
-      </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label>Image URL</Form.Label>
-        <Form.Control
-          type="text"
-          value={formData.image}
-          onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-          required
-        />
-      </Form.Group>
-      <Button type="submit" variant="primary">
-        {editingId ? 'Update' : 'Add'} {type.charAt(0).toUpperCase() + type.slice(1, -1)}
-      </Button>
-      {editingId && (
-        <Button
-          variant="secondary"
-          className="ms-2"
-          onClick={() => {
-            setEditingId(null);
-            setFormData({
-              title: '',
-              description: '',
-              file: '',
-              image: '',
-              language: 'az'
-            });
-          }}
-        >
-          Cancel
+        ))}
+        <Button variant="primary" type="submit">
+          {editingId ? 'Update' : 'Add'} {type.charAt(0).toUpperCase() + type.slice(1)}
         </Button>
-      )}
-    </Form>
-  );
+      </Form>
+    );
+  };
 
   // Render table for each section
-  const renderTable = (items, type) => (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Language</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {items.map((item) => (
-          <tr key={item._id}>
-            <td>{item.title}</td>
-            <td>{item.language}</td>
-            <td>
-              <Button
-                variant="warning"
-                size="sm"
-                className="me-2"
-                onClick={() => handleEdit(item, type)}
-              >
-                Edit
-              </Button>
-              <Button
-                variant="danger"
-                size="sm"
-                onClick={() => handleDelete(item._id, type)}
-              >
-                Delete
-              </Button>
-            </td>
+  const renderTable = (items, type) => {
+    if (!items || items.length === 0) {
+      return <p>No {type} available</p>;
+    }
+
+    return (
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>URL</th>
+            <th>Image URL</th>
+            <th>Actions</th>
           </tr>
-        ))}
-      </tbody>
-    </Table>
-  );
+        </thead>
+        <tbody>
+          {items.map((item, index) => {
+            // Create a unique key using multiple fallbacks
+            const uniqueKey = item._id || 
+                            item.id || 
+                            `${type}-${index}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+            
+            return (
+              <tr key={uniqueKey}>
+                <td>{item.name || item.title || 'N/A'}</td>
+                <td>{item.url || 'N/A'}</td>
+                <td>{item.image || 'N/A'}</td>
+                <td>
+                  <Button 
+                    variant="danger" 
+                    size="sm" 
+                    onClick={() => handleDelete(item._id || item.id, type)}
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+    );
+  };
 
   return (
     <Container className="mt-4">
@@ -242,144 +265,52 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
       {error && <div className="alert alert-danger">{error}</div>}
       <Tab.Container activeKey={activeTab} onSelect={(k) => setActiveTab(k)}>
         <Nav variant="tabs" className="mb-3">
-          <Nav.Item>
+          <Nav.Item key="interviews-tab">
             <Nav.Link eventKey="interviews">Interviews</Nav.Link>
           </Nav.Item>
-          <Nav.Item>
+          <Nav.Item key="videos-tab">
             <Nav.Link eventKey="videos">Videos</Nav.Link>
           </Nav.Item>
-          <Nav.Item>
+          <Nav.Item key="titles-tab">
             <Nav.Link eventKey="titles">Titles</Nav.Link>
           </Nav.Item>
-          <Nav.Item>
+          <Nav.Item key="monographs-tab">
             <Nav.Link eventKey="monographs">Monographs</Nav.Link>
           </Nav.Item>
-          <Nav.Item>
+          <Nav.Item key="articles-tab">
             <Nav.Link eventKey="articles">Articles</Nav.Link>
           </Nav.Item>
-          <Nav.Item>
+          <Nav.Item key="dissertations-tab">
             <Nav.Link eventKey="dissertations">Dissertations</Nav.Link>
           </Nav.Item>
         </Nav>
 
         <Tab.Content>
-          <Tab.Pane eventKey="interviews">
-            <h3>Add New Interview</h3>
-            <Form onSubmit={handleInterviewSubmit}>
-              <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={formData.name || ''}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>URL</Form.Label>
-                <Form.Control
-                  type="url"
-                  value={formData.url || ''}
-                  onChange={(e) => setFormData({ ...formData, url: e.target.value })}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Image URL</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={formData.image || ''}
-                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                  required
-                />
-              </Form.Group>
-              <Button type="submit" variant="primary">Add Interview</Button>
-            </Form>
-
-            <h3 className="mt-4">Interviews List</h3>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>URL</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {interviews.map((interview, index) => (
-                  <tr key={index}>
-                    <td>{interview.name}</td>
-                    <td>{interview.url}</td>
-                    <td>
-                      <Button
-                        variant="danger"
-                        size="sm"
-                        onClick={() => handleInterviewDelete(index)}
-                      >
-                        Delete
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
+          <Tab.Pane eventKey="interviews" key="interviews-pane">
+            <h3>Interviews</h3>
+            {renderForm('interviews')}
+            {renderTable(interviews, 'interviews')}
           </Tab.Pane>
-
-          <Tab.Pane eventKey="videos">
-            <h3>Add New Video</h3>
-            <Form onSubmit={handleVideoSubmit}>
-              <Form.Group className="mb-3">
-                <Form.Label>YouTube Video ID</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={videoId}
-                  onChange={(e) => setVideoId(e.target.value)}
-                  placeholder="Enter YouTube video ID"
-                  required
-                />
-              </Form.Group>
-              <Button type="submit" variant="primary">Add Video</Button>
-            </Form>
-
-            <h3 className="mt-4">Videos List</h3>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Video ID</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {videos.map((video, index) => (
-                  <tr key={index}>
-                    <td>{video.videoId}</td>
-                    <td>
-                      <Button
-                        variant="danger"
-                        size="sm"
-                        onClick={() => handleVideoDelete(index)}
-                      >
-                        Delete
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
+          <Tab.Pane eventKey="videos" key="videos-pane">
+            <h3>Videos</h3>
+            {renderForm('videos')}
+            {renderTable(videos, 'videos')}
           </Tab.Pane>
-
-          <Tab.Pane eventKey="titles">
-            <h3>{editingId ? 'Edit Title' : 'Add New Title'}</h3>
+          <Tab.Pane eventKey="titles" key="titles-pane">
+            <h3>Titles</h3>
             {renderForm('titles')}
+            {renderTable(titles, 'titles')}
           </Tab.Pane>
-
-          <Tab.Pane eventKey="monographs">
+          <Tab.Pane eventKey="monographs" key="monographs-pane">
+            <h3>Monographs</h3>
             <AdminMonographs />
           </Tab.Pane>
-          <Tab.Pane eventKey="articles">
+          <Tab.Pane eventKey="articles" key="articles-pane">
+            <h3>Articles</h3>
             <AdminArticles />
           </Tab.Pane>
-          <Tab.Pane eventKey="dissertations">
+          <Tab.Pane eventKey="dissertations" key="dissertations-pane">
+            <h3>Dissertations</h3>
             <AdminDissertations />
           </Tab.Pane>
         </Tab.Content>

@@ -16,13 +16,13 @@ import Dissertations from './pages/Dissertations.js';
 import Monographies from './pages/Monographies.js';
 import NavigationBar from './components/Navbar';
 import Footer from './components/Footer.js';
-import TitlesPage from './pages/TitlesPage.js';
 import Contacts from './components/Contacts.js';
 import Videos from './pages/Videos.js';
 import NotFound from './pages/NotFound.js';
 import AdminLogin from './pages/AdminLogin.js';
 import ProtectedRoute from './components/ProtectedRoute';
 import Admin from './pages/Admin';
+import Articles from './pages/Articles.js';
 
 // Initial videos data
 const initialVideos = [
@@ -107,7 +107,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/dissertations" element={<Dissertations />} />
           <Route path="/monographies" element={<Monographies />} />
-          <Route path="/titles" element={<TitlesPage />} />
+          <Route path="/articles" element={<Articles />} />
           <Route path="/contacts" element={<Contacts />} />
           <Route path="/videos" element={<Videos videos={videos} />} />
           

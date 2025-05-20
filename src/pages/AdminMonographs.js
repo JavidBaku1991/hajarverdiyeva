@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
+import { Container, Form, Button, Table } from 'react-bootstrap';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 
@@ -8,12 +8,9 @@ const AdminMonographs = () => {
   const [monographs, setMonographs] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
-    description: '',
-    file: '',
-    image: '',
-    language: 'az'
+    file: null,
+    image: null
   });
-  const [editingId, setEditingId] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -30,45 +27,51 @@ const AdminMonographs = () => {
     }
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (e.target.name === 'file' && file.type === 'application/pdf') {
+        setFormData({ ...formData, file });
+      } else if (e.target.name === 'image' && file.type.startsWith('image/')) {
+        setFormData({ ...formData, image: file });
+      } else {
+        setError(e.target.name === 'file' ? 'Please select a PDF file' : 'Please select an image file');
+      }
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (editingId) {
-        await axios.put(`http://localhost:5000/api/monographs/${editingId}`, formData);
-      } else {
-        await axios.post('http://localhost:5000/api/monographs', formData);
-      }
+      const formDataToSend = new FormData();
+      formDataToSend.append('title', formData.title);
+      formDataToSend.append('file', formData.file);
+      formDataToSend.append('image', formData.image);
+
+      const response = await axios.post('http://localhost:5000/api/monographs', formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      setMonographs([...monographs, response.data]);
       setFormData({
         title: '',
-        description: '',
-        file: '',
-        image: '',
-        language: 'az'
+        file: null,
+        image: null
       });
-      setEditingId(null);
-      fetchMonographs();
+      setError(null);
     } catch (error) {
       setError('Error saving monograph');
       console.error('Error:', error);
     }
   };
 
-  const handleEdit = (monograph) => {
-    setFormData({
-      title: monograph.title,
-      description: monograph.description,
-      file: monograph.file,
-      image: monograph.image,
-      language: monograph.language
-    });
-    setEditingId(monograph._id);
-  };
-
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this monograph?')) {
       try {
         await axios.delete(`http://localhost:5000/api/monographs/${id}`);
-        fetchMonographs();
+        setMonographs(monographs.filter(monograph => monograph._id !== id));
       } catch (error) {
         setError('Error deleting monograph');
         console.error('Error:', error);
@@ -78,82 +81,41 @@ const AdminMonographs = () => {
 
   return (
     <Container className="mt-4">
-      <h2>{editingId ? 'Edit Monograph' : 'Add New Monograph'}</h2>
+      <h2>Add New Monograph</h2>
       {error && <div className="alert alert-danger">{error}</div>}
       <Form onSubmit={handleSubmit}>
-        <Row>
-          <Col md={6}>
-            <Form.Group className="mb-3">
-              <Form.Label>Title</Form.Label>
-              <Form.Control
-                type="text"
-                value={formData.title}
-                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                required
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group className="mb-3">
-              <Form.Label>Language</Form.Label>
-              <Form.Select
-                value={formData.language}
-                onChange={(e) => setFormData({ ...formData, language: e.target.value })}
-              >
-                <option value="az">Azerbaijani</option>
-                <option value="en">English</option>
-              </Form.Select>
-            </Form.Group>
-          </Col>
-        </Row>
         <Form.Group className="mb-3">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>File URL</Form.Label>
+          <Form.Label>Title</Form.Label>
           <Form.Control
             type="text"
-            value={formData.file}
-            onChange={(e) => setFormData({ ...formData, file: e.target.value })}
+            value={formData.title}
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             required
           />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Image URL</Form.Label>
+          <Form.Label>PDF File</Form.Label>
           <Form.Control
-            type="text"
-            value={formData.image}
-            onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+            type="file"
+            name="file"
+            accept=".pdf"
+            onChange={handleFileChange}
+            required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Cover Image</Form.Label>
+          <Form.Control
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleFileChange}
             required
           />
         </Form.Group>
         <Button type="submit" variant="primary">
-          {editingId ? 'Update' : 'Add'} Monograph
+          Add Monograph
         </Button>
-        {editingId && (
-          <Button
-            variant="secondary"
-            className="ms-2"
-            onClick={() => {
-              setEditingId(null);
-              setFormData({
-                title: '',
-                description: '',
-                file: '',
-                image: '',
-                language: 'az'
-              });
-            }}
-          >
-            Cancel
-          </Button>
-        )}
       </Form>
 
       <h3 className="mt-4">Monographs List</h3>
@@ -161,7 +123,8 @@ const AdminMonographs = () => {
         <thead>
           <tr>
             <th>Title</th>
-            <th>Language</th>
+            <th>Cover</th>
+            <th>File</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -169,16 +132,19 @@ const AdminMonographs = () => {
           {monographs.map((monograph) => (
             <tr key={monograph._id}>
               <td>{monograph.title}</td>
-              <td>{monograph.language}</td>
               <td>
-                <Button
-                  variant="warning"
-                  size="sm"
-                  className="me-2"
-                  onClick={() => handleEdit(monograph)}
-                >
-                  Edit
-                </Button>
+                <img 
+                  src={`http://localhost:5000${monograph.image}`} 
+                  alt={monograph.title}
+                  style={{ width: '100px', height: 'auto' }}
+                />
+              </td>
+              <td>
+                <a href={`http://localhost:5000${monograph.file}`} target="_blank" rel="noopener noreferrer">
+                  View PDF
+                </a>
+              </td>
+              <td>
                 <Button
                   variant="danger"
                   size="sm"
