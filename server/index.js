@@ -7,11 +7,22 @@ require('dotenv').config();
 
 const app = express();
 
-// Create uploads directory if it doesn't exist
-const uploadsDir = path.join(__dirname, 'uploads', 'monographs');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
-}
+// Create all necessary upload directories
+const uploadDirs = [
+  'uploads/articles',
+  'uploads/articles/images',
+  'uploads/monographs',
+  'uploads/monographs/images',
+  'uploads/dissertations',
+  'uploads/dissertations/images'
+];
+
+uploadDirs.forEach(dir => {
+  const fullPath = path.join(__dirname, dir);
+  if (!fs.existsSync(fullPath)) {
+    fs.mkdirSync(fullPath, { recursive: true });
+  }
+});
 
 // Middleware
 app.use(cors({
@@ -21,7 +32,18 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Serve static files from the uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.pdf')) {
+      res.set('Content-Type', 'application/pdf');
+    }
+  }
+}));
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Import routes
 const authRoutes = require('./routes/auth');
@@ -31,6 +53,7 @@ const videoRoutes = require('./routes/videos');
 const monographRoutes = require('./routes/monographs');
 const articleRoutes = require('./routes/articles');
 const dissertationRoutes = require('./routes/dissertations');
+const titlesRouter = require('./routes/titles');
 
 // Use routes
 app.use('/api/auth', authRoutes);
@@ -40,6 +63,7 @@ app.use('/api/videos', videoRoutes);
 app.use('/api/monographs', monographRoutes);
 app.use('/api/articles', articleRoutes);
 app.use('/api/dissertations', dissertationRoutes);
+app.use('/api/titles', titlesRouter);
 
 // MongoDB Connection
 const MONGODB_URI = 'mongodb+srv://javidbaku1991:bObGBgvj6rdcWfCD@cluster0.leawlg5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';

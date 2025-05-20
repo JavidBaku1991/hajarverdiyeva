@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Grid, Card, CardContent, CardMedia, Typography, Button, Dialog, DialogContent, DialogTitle, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import FallbackImage from '../components/FallbackImage';
 import '../css/dissertations.css';
 
 const Articles = () => {
@@ -11,6 +12,7 @@ const Articles = () => {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [failedImages, setFailedImages] = useState(new Set());
 
   useEffect(() => {
     fetchArticles();
@@ -54,18 +56,6 @@ const Articles = () => {
     }
   };
 
-  // Add a refresh function
-  const refreshArticles = () => {
-    setLoading(true);
-    fetchArticles();
-  };
-
-  // Add useEffect to refresh articles every 30 seconds
-  useEffect(() => {
-    const interval = setInterval(refreshArticles, 30000);
-    return () => clearInterval(interval);
-  }, []);
-
   const handleClickOpen = (article) => {
     console.log('Opening article:', article);
     setSelectedArticle(article);
@@ -77,13 +67,20 @@ const Articles = () => {
     setSelectedArticle(null);
   };
 
-  const handleImageError = (article, e) => {
-    console.error('Error loading image:', article.image);
-    e.target.src = 'https://via.placeholder.com/200x200?text=No+Image';
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return null;
+    if (imagePath.startsWith('http')) return imagePath;
+    return `http://localhost:5000${imagePath}`;
   };
 
-  const handlePdfError = (article, e) => {
-    console.error('Error loading PDF:', article.file);
+  const getPdfUrl = (pdfPath) => {
+    if (!pdfPath) return null;
+    if (pdfPath.startsWith('http')) return pdfPath;
+    return `http://localhost:5000${pdfPath}`;
+  };
+
+  const handleImageError = (articleId) => {
+    setFailedImages(prev => new Set([...prev, articleId]));
   };
 
   return (
@@ -102,13 +99,17 @@ const Articles = () => {
           {articles.map((article) => (
             <Grid item xs={12} sm={6} md={4} key={article._id}>
               <Card className="article-card dissertation-card">
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={`http://localhost:5000${article.image}`}
-                  alt={article.title}
-                  onError={(e) => handleImageError(article, e)}
-                />
+                {!failedImages.has(article._id) && article.image ? (
+                  <CardMedia
+                    component="img"
+                    height="200"
+                    image={getImageUrl(article.image)}
+                    alt={article.title}
+                    onError={() => handleImageError(article._id)}
+                  />
+                ) : (
+                  <FallbackImage width={200} height={200} />
+                )}
                 <CardContent>
                   <Box display="flex" flexDirection="column" justifyContent="space-between" alignItems="center">
                     <Box>
@@ -123,12 +124,12 @@ const Articles = () => {
                       <Button 
                         variant="contained" 
                         color="secondary" 
-                        href={`http://localhost:5000${article.file}`} 
+                        href={getPdfUrl(article.file)}
                         download
                         onClick={(e) => {
                           if (!article.file) {
                             e.preventDefault();
-                            console.error('No file URL available');
+                            console.error('No PDF file available');
                           }
                         }}
                       >
@@ -151,13 +152,16 @@ const Articles = () => {
       >
         <DialogTitle>{selectedArticle?.title}</DialogTitle>
         <DialogContent>
-          {selectedArticle && (
+          {selectedArticle && selectedArticle.file && (
             <iframe
-              src={`http://localhost:5000${selectedArticle.file}`}
+              src={getPdfUrl(selectedArticle.file)}
               title={selectedArticle.title}
               width="100%"
               height="600px"
-              onError={(e) => handlePdfError(selectedArticle, e)}
+              onError={(e) => {
+                console.error('Error loading PDF:', selectedArticle.file);
+                e.target.parentNode.innerHTML = '<div style="padding: 20px; text-align: center;">Error loading PDF. Please try downloading instead.</div>';
+              }}
             />
           )}
         </DialogContent>

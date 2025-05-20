@@ -40,11 +40,11 @@ const TitleComponent = ({ titles }) => {
         {titles.map((title) => (
           <div key={title._id} className="title-item">
             <div className="title-content">
-              <img src={title.image} alt={title.name} className="title-image" />
+              <img src={title.image} alt={title.title} className="title-image" />
               <div className="title-text">
                 <h4>
                   <a href={title.url} target="_blank" rel="noopener noreferrer" className="title-link">
-                    {title.name}
+                    {title.title}
                   </a>
                 </h4>
               </div>

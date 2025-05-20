@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const titleSchema = new mongoose.Schema({
-  name: {
+  title: {
     type: String,
     required: true
   },
@@ -12,16 +12,9 @@ const titleSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true
-  },
-  language: {
-    type: String,
-    enum: ['az', 'en'],
-    default: 'az'
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
   }
+}, {
+  timestamps: true
 });
 
 module.exports = mongoose.model('Title', titleSchema); 

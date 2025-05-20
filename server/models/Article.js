@@ -5,16 +5,18 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  file: {
+  pdfFile: {
     type: String,
     required: true
   },
-  image: {
+  imageFile: {
     type: String,
     required: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
-}, {
-  timestamps: true
 });
 
 module.exports = mongoose.model('Article', articleSchema); 

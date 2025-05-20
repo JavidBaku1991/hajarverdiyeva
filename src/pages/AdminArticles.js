@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Container, Form, Button, Table } from 'react-bootstrap';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
+import FallbackImage from '../components/FallbackImage';
 
 const AdminArticles = () => {
   const { t } = useTranslation();
   const [articles, setArticles] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
-    file: null,
-    image: null
+    pdfFile: null,
+    imageFile: null
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -46,14 +47,14 @@ const AdminArticles = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (e.target.name === 'file' && file.type === 'application/pdf') {
-        setFormData({ ...formData, file });
+      if (e.target.name === 'pdfFile' && file.type === 'application/pdf') {
+        setFormData({ ...formData, pdfFile: file });
         setError(null);
-      } else if (e.target.name === 'image' && file.type.startsWith('image/')) {
-        setFormData({ ...formData, image: file });
+      } else if (e.target.name === 'imageFile' && file.type.startsWith('image/')) {
+        setFormData({ ...formData, imageFile: file });
         setError(null);
       } else {
-        setError(e.target.name === 'file' ? 'Please select a PDF file' : 'Please select an image file');
+        setError(e.target.name === 'pdfFile' ? 'Please select a PDF file' : 'Please select an image file');
       }
     }
   };
@@ -66,14 +67,14 @@ const AdminArticles = () => {
     try {
       console.log('Submitting article with data:', {
         title: formData.title,
-        file: formData.file?.name,
-        image: formData.image?.name
+        pdfFile: formData.pdfFile?.name,
+        imageFile: formData.imageFile?.name
       });
 
       const formDataToSend = new FormData();
       formDataToSend.append('title', formData.title);
-      formDataToSend.append('file', formData.file);
-      formDataToSend.append('image', formData.image);
+      formDataToSend.append('pdfFile', formData.pdfFile);
+      formDataToSend.append('imageFile', formData.imageFile);
 
       const response = await axios.post('http://localhost:5000/api/articles', formDataToSend, {
         headers: {
@@ -83,18 +84,17 @@ const AdminArticles = () => {
 
       console.log('Article saved successfully:', response.data);
       
-      // Fetch all articles again to ensure we have the latest data
       await fetchArticles();
       
       setFormData({
         title: '',
-        file: null,
-        image: null
+        pdfFile: null,
+        imageFile: null
       });
       
       // Reset file inputs
-      document.querySelector('input[name="file"]').value = '';
-      document.querySelector('input[name="image"]').value = '';
+      document.querySelector('input[name="pdfFile"]').value = '';
+      document.querySelector('input[name="imageFile"]').value = '';
       
       setError(null);
     } catch (error) {
@@ -139,7 +139,7 @@ const AdminArticles = () => {
           <Form.Label>PDF File</Form.Label>
           <Form.Control
             type="file"
-            name="file"
+            name="pdfFile"
             accept=".pdf"
             onChange={handleFileChange}
             required
@@ -152,7 +152,7 @@ const AdminArticles = () => {
           <Form.Label>Cover Image</Form.Label>
           <Form.Control
             type="file"
-            name="image"
+            name="imageFile"
             accept="image/*"
             onChange={handleFileChange}
             required
@@ -181,16 +181,36 @@ const AdminArticles = () => {
             <tr key={article._id}>
               <td>{article.title}</td>
               <td>
-                <img 
-                  src={`http://localhost:5000${article.image}`} 
-                  alt={article.title}
-                  style={{ width: '100px', height: 'auto' }}
-                />
+                {article.imageFile ? (
+                  <img 
+                    src={article.imageFile.startsWith('http') 
+                      ? article.imageFile 
+                      : `http://localhost:5000${article.imageFile}`}
+                    alt={article.title}
+                    style={{ width: '100px', height: 'auto' }}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.parentNode.appendChild(<FallbackImage />);
+                    }}
+                  />
+                ) : (
+                  <FallbackImage />
+                )}
               </td>
               <td>
-                <a href={`http://localhost:5000${article.file}`} target="_blank" rel="noopener noreferrer">
-                  View PDF
-                </a>
+                {article.pdfFile ? (
+                  <a 
+                    href={article.pdfFile.startsWith('http') 
+                      ? article.pdfFile 
+                      : `http://localhost:5000${article.pdfFile}`}
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    View PDF
+                  </a>
+                ) : (
+                  <span>No PDF available</span>
+                )}
               </td>
               <td>
                 <Button

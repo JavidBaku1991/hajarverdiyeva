@@ -6,7 +6,6 @@ const Title = require('../models/Title');
 router.get('/', async (req, res) => {
   try {
     const titles = await Title.find().sort({ createdAt: -1 });
-    console.log('Fetched titles:', titles);
     res.json(titles);
   } catch (error) {
     console.error('Error fetching titles:', error);
@@ -17,14 +16,26 @@ router.get('/', async (req, res) => {
 // Add a new title
 router.post('/', async (req, res) => {
   try {
-    console.log('Received title data:', req.body);
-    const title = new Title(req.body);
-    const savedTitle = await title.save();
-    console.log('Saved title:', savedTitle);
-    res.status(201).json(savedTitle);
+    console.log('Received request body:', req.body);
+    console.log('Request headers:', req.headers);
+    
+    if (!req.body.title) {
+      console.log('Title is missing from request body');
+      return res.status(400).json({ message: 'Title is required' });
+    }
+
+    const title = new Title({
+      title: req.body.title
+    });
+
+    console.log('Creating new title:', title);
+    await title.save();
+    console.log('Title saved successfully:', title);
+    
+    res.status(201).json(title);
   } catch (error) {
-    console.error('Error creating title:', error);
-    res.status(400).json({ message: 'Error creating title', error: error.message });
+    console.error('Error saving title:', error);
+    res.status(500).json({ message: 'Error saving title', error: error.message });
   }
 });
 
@@ -54,6 +65,7 @@ router.delete('/:id', async (req, res) => {
     }
     res.json({ message: 'Title deleted successfully' });
   } catch (error) {
+    console.error('Error deleting title:', error);
     res.status(500).json({ message: 'Error deleting title', error: error.message });
   }
 });

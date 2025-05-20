@@ -109,8 +109,9 @@ const Home = () => {
         const interviewsResponse = await axios.get('http://localhost:5000/api/interviews');
         setInterviews(interviewsResponse.data);
 
-        // Fetch titles from articles endpoint
-        const titlesResponse = await axios.get('http://localhost:5000/api/articles');
+        // Fetch titles from titles endpoint
+        const titlesResponse = await axios.get('http://localhost:5000/api/titles');
+        console.log('Fetched titles:', titlesResponse.data);
         setTitles(titlesResponse.data);
 
         setError(null);

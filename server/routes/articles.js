@@ -4,15 +4,26 @@ const Article = require('../models/Article');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const { auth, isAdmin } = require('../middleware/auth');
+
+// Create upload directories if they don't exist
+const uploadDirs = ['uploads/articles', 'uploads/articles/images'];
+uploadDirs.forEach(dir => {
+  const fullPath = path.join(__dirname, '..', dir);
+  if (!fs.existsSync(fullPath)) {
+    fs.mkdirSync(fullPath, { recursive: true });
+  }
+});
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadPath = file.fieldname === 'file' ? 'uploads/articles' : 'uploads/articles/images';
-    if (!fs.existsSync(uploadPath)) {
-      fs.mkdirSync(uploadPath, { recursive: true });
+    const uploadDir = path.join(__dirname, '../uploads/articles');
+    // Create directory if it doesn't exist
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
     }
-    cb(null, uploadPath);
+    cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -20,36 +31,32 @@ const storage = multer.diskStorage({
   }
 });
 
-const fileFilter = (req, file, cb) => {
-  if (file.fieldname === 'file') {
-    if (file.mimetype !== 'application/pdf') {
-      return cb(new Error('Only PDF files are allowed for the article file'));
-    }
-  } else if (file.fieldname === 'image') {
-    if (!file.mimetype.startsWith('image/')) {
-      return cb(new Error('Only image files are allowed for the cover image'));
-    }
-  }
-  cb(null, true);
-};
-
 const upload = multer({ 
   storage: storage,
-  fileFilter: fileFilter,
-  limits: {
-    fileSize: 10 * 1024 * 1024 // 10MB limit for files
+  fileFilter: function (req, file, cb) {
+    if (file.mimetype === 'application/pdf' || file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type. Only PDF and images are allowed.'), false);
+    }
   }
 });
+
+// Error handling middleware for multer
+const handleMulterError = (err, req, res, next) => {
+  console.error('Multer error:', err);
+  if (err instanceof multer.MulterError) {
+    return res.status(400).json({ message: err.message });
+  } else if (err) {
+    return res.status(400).json({ message: err.message });
+  }
+  next();
+};
 
 // Get all articles
 router.get('/', async (req, res) => {
   try {
-    console.log('Fetching all articles...');
-    const articles = await Article.find()
-      .sort({ createdAt: -1 })
-      .lean();
-    
-    console.log('Total articles found:', articles.length);
+    const articles = await Article.find().sort({ createdAt: -1 });
     res.json(articles);
   } catch (error) {
     console.error('Error fetching articles:', error);
@@ -58,30 +65,29 @@ router.get('/', async (req, res) => {
 });
 
 // Add a new article
-router.post('/', upload.fields([
-  { name: 'file', maxCount: 1 },
-  { name: 'image', maxCount: 1 }
+router.post('/', auth, isAdmin, upload.fields([
+  { name: 'pdfFile', maxCount: 1 },
+  { name: 'imageFile', maxCount: 1 }
 ]), async (req, res) => {
   try {
     console.log('Received files:', req.files);
     console.log('Received body:', req.body);
 
-    if (!req.files || !req.files.file || !req.files.image) {
-      return res.status(400).json({ message: 'Both PDF file and image are required' });
+    if (!req.files || !req.files.pdfFile || !req.files.imageFile) {
+      return res.status(400).json({ message: 'Both PDF and image files are required' });
     }
 
     const article = new Article({
       title: req.body.title,
-      file: `/uploads/articles/${req.files.file[0].filename}`,
-      image: `/uploads/articles/images/${req.files.image[0].filename}`
+      pdfFile: `/uploads/articles/${req.files.pdfFile[0].filename}`,
+      imageFile: `/uploads/articles/${req.files.imageFile[0].filename}`
     });
 
-    const savedArticle = await article.save();
-    console.log('Saved article:', savedArticle);
-    res.status(201).json(savedArticle);
+    await article.save();
+    res.status(201).json(article);
   } catch (error) {
     console.error('Error creating article:', error);
-    res.status(400).json({ message: 'Error creating article', error: error.message });
+    res.status(500).json({ message: 'Error creating article', error: error.message });
   }
 });
 
@@ -103,21 +109,20 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete an article
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, isAdmin, async (req, res) => {
   try {
     const article = await Article.findById(req.params.id);
     if (!article) {
       return res.status(404).json({ message: 'Article not found' });
     }
 
-    // Delete the files from the filesystem
-    const filePath = path.join(__dirname, '..', article.file);
-    const imagePath = path.join(__dirname, '..', article.image);
-    
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
+    // Delete the files
+    const pdfPath = path.join(__dirname, '..', article.pdfFile);
+    const imagePath = path.join(__dirname, '..', article.imageFile);
+
+    if (fs.existsSync(pdfPath)) {
+      fs.unlinkSync(pdfPath);
     }
-    
     if (fs.existsSync(imagePath)) {
       fs.unlinkSync(imagePath);
     }
