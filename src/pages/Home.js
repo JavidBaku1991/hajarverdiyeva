@@ -12,6 +12,9 @@ import TitleLine from '../components/TitleLine';
 import SocialSpeedDial from '../components/SocialSpeedDial';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // PDF imports
 import nem from '../pdf/monoqrafiyalar/nem.pdf';
@@ -84,7 +87,7 @@ const Home = () => {
     return initialInterviews;
   });
 
-  const [titles, setTitles] = useState([]);
+  const [articles, setArticles] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -109,10 +112,24 @@ const Home = () => {
         const interviewsResponse = await axios.get('http://localhost:5000/api/interviews');
         setInterviews(interviewsResponse.data);
 
-        // Fetch titles from titles endpoint
-        const titlesResponse = await axios.get('http://localhost:5000/api/titles');
-        console.log('Fetched titles:', titlesResponse.data);
-        setTitles(titlesResponse.data);
+        // Fetch articles
+        const articlesResponse = await axios.get('http://localhost:5000/api/articles');
+        console.log('Raw articles data:', articlesResponse.data);
+        
+        if (!Array.isArray(articlesResponse.data)) {
+          console.error('Articles data is not an array:', articlesResponse.data);
+          setArticles([]);
+          return;
+        }
+
+        // Sort articles by date and take the last 5
+        const sortedArticles = articlesResponse.data
+          .filter(article => article && article.title) // Filter out invalid articles
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          .slice(0, 5);
+        
+        console.log('Sorted articles:', sortedArticles);
+        setArticles(sortedArticles);
 
         setError(null);
       } catch (err) {
@@ -131,6 +148,43 @@ const Home = () => {
     localStorage.setItem('interviews', JSON.stringify(interviews));
   }, [interviews]);
 
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return '/placeholder-image.jpg';
+    if (imagePath.startsWith('http')) return imagePath;
+    if (imagePath.startsWith('D:/')) {
+      // Convert absolute path to relative URL
+      const relativePath = imagePath.split('server')[1].replace(/\\/g, '/');
+      return `http://localhost:5000${relativePath}`;
+    }
+    return `http://localhost:5000${imagePath}`;
+  };
+
   return (
     <div className="bg-light text-dark">
       <div className="hero-container">
@@ -147,16 +201,53 @@ const Home = () => {
             <Books books={books} />
           </Col>
         </Row>
-        <TitleLine title={t('titles-title')} />
+        <TitleLine title={t('articles-title')} />
 
-        <Row className='home-titles-container mt-5'>
+        <Row className='home-articles-container mt-5'>
           <Col>
             {loading ? (
-              <div className="text-center w-100">Loading titles...</div>
-            ) : titles.length === 0 ? (
-              <div className="text-center w-100">No titles available</div>
+              <div className="text-center w-100">Loading articles...</div>
+            ) : articles.length === 0 ? (
+              <div className="text-center w-100">No articles available</div>
             ) : (
-              <TitleComponent titles={titles} />
+              <Slider {...sliderSettings}>
+                {articles.map((article) => {
+                  console.log('Rendering article:', article);
+                  const imageUrl = getImageUrl(article.image);
+                  console.log('Image URL:', imageUrl);
+                  return (
+                    <div key={article._id} className="px-2">
+                      <div className="title-card">
+                        <div className="title-image-container">
+                          <img 
+                            src={imageUrl}
+                            alt={article.title}
+                            className="title-image"
+                            onError={(e) => {
+                              console.error('Image failed to load:', imageUrl);
+                              e.target.onerror = null;
+                              e.target.src = '/placeholder-image.jpg';
+                            }}
+                          />
+                        </div>
+                        <div className="title-content">
+                          <h3 className="title-text">{article.title}</h3>
+                          {article.pdfFile && (
+                            <a 
+                              href={getImageUrl(article.pdfFile)}
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="btn btn-primary"
+                            >
+                              Read More
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </Slider>
             )}
           </Col>
         </Row>
@@ -236,20 +327,33 @@ const Home = () => {
         <section className="mb-5">
           <h2>{t('home.titles')}</h2>
           <div className="row">
-            {titles.map((title, index) => (
+            {articles.map((article, index) => (
               <div key={index} className="col-md-4 mb-4">
                 <div className="card h-100">
                   <img 
-                    src={title.image} 
+                    src={article.imageFile && article.imageFile.startsWith('http') 
+                      ? article.imageFile 
+                      : article.imageFile 
+                        ? `http://localhost:5000${article.imageFile}`
+                        : 'https://via.placeholder.com/300x200?text=No+Image'}
                     className="card-img-top" 
-                    alt={title.title}
+                    alt={article.title}
                     style={{ height: '200px', objectFit: 'cover' }}
                   />
                   <div className="card-body">
-                    <h5 className="card-title">{title.title}</h5>
-                    <a href={title.url} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                      {t('home.readMore')}
-                    </a>
+                    <h5 className="card-title">{article.title}</h5>
+                    {article.pdfFile && (
+                      <a 
+                        href={article.pdfFile.startsWith('http') 
+                          ? article.pdfFile 
+                          : `http://localhost:5000${article.pdfFile}`}
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="btn btn-primary"
+                      >
+                        {t('home.readMore')}
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>

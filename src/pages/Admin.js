@@ -10,13 +10,11 @@ import '../css/admin.css';
 const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('interviews');
-  const [titles, setTitles] = useState([]);
   const [formData, setFormData] = useState({
-    name: '',
+    title: '',
     description: '',
-    file: '',
-    image: '',
     url: '',
+    image: '',
     language: 'az'
   });
   const [editingId, setEditingId] = useState(null);
@@ -28,7 +26,6 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
     try {
       const response = await axios.get('http://localhost:5000/api/titles');
       console.log('Fetched titles:', response.data);
-      setTitles(response.data);
     } catch (error) {
       setError('Error fetching titles');
       console.error('Error:', error);
@@ -42,62 +39,74 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
   // Handle form submission for each section
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
     
     if (activeTab === 'articles') {
-      formData.append('title', formData.title);
-      formData.append('pdfFile', formData.pdfFile);
-      formData.append('imageFile', formData.imageFile);
+      const formDataToSend = new FormData();
+      formDataToSend.append('title', formData.title);
+      formDataToSend.append('pdfFile', formData.pdfFile);
+      formDataToSend.append('imageFile', formData.imageFile);
+      
+      try {
+        const response = await axios.post('http://localhost:5000/api/articles', formDataToSend, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        // ... rest of articles handling
+      } catch (error) {
+        console.error('Error saving:', error);
+        setError(`Error saving ${activeTab}: ${error.response?.data?.message || error.message}`);
+      }
     } else {
-      if (activeTab === 'titles') {
-        if (!formData.name || !formData.url || !formData.image) {
-          alert('Title, URL, and Image URL are required');
-          return;
+      try {
+        if (activeTab === 'videos') {
+          const response = await axios.post('http://localhost:5000/api/videos', {
+            title: formData.title,
+            videoId: formData.videoId,
+            description: formData.description
+          });
+          setVideos([...videos, response.data]);
+          setFormData({
+            ...formData,
+            title: '',
+            videoId: '',
+            description: ''
+          });
+        } else if (activeTab === 'interviews') {
+          if (!formData.title || !formData.url || !formData.image) {
+            alert('Title, URL, and Image URL are required');
+            return;
+          }
+
+          const response = await axios.post('http://localhost:5000/api/interviews', {
+            title: formData.title,
+            url: formData.url,
+            image: formData.image,
+            description: formData.description || '',
+            language: formData.language || 'az'
+          });
+          
+          console.log('Sending interview data:', {
+            title: formData.title,
+            url: formData.url,
+            image: formData.image,
+            description: formData.description || '',
+            language: formData.language || 'az'
+          });
+          
+          setInterviews([...interviews, response.data]);
+          setFormData({
+            title: '',
+            url: '',
+            image: '',
+            description: '',
+            language: 'az'
+          });
         }
-
-        formData.append('title', formData.name);
-        formData.append('url', formData.url);
-        formData.append('image', formData.image);
-      } else if (activeTab === 'videos') {
-        formData.append('title', formData.title);
-        formData.append('videoId', formData.videoId);
-        formData.append('description', formData.description);
-      } else if (activeTab === 'interviews') {
-        formData.append('title', formData.title);
-        formData.append('url', formData.url);
-        formData.append('image', formData.image);
-        formData.append('description', formData.description);
+      } catch (error) {
+        console.error('Error saving:', error);
+        setError(`Error saving ${activeTab}: ${error.response?.data?.message || error.message}`);
       }
-    }
-
-    try {
-      if (activeTab === 'titles') {
-        const response = await axios.post('http://localhost:5000/api/titles', formData);
-        console.log('Server response:', response.data);
-        await fetchTitles();
-        setFormData({ name: '', url: '', image: '' });
-      } else if (activeTab === 'videos') {
-        const response = await axios.post('http://localhost:5000/api/videos', formData);
-        setVideos([...videos, response.data]);
-        setFormData({
-          ...formData,
-          title: '',
-          videoId: '',
-          description: ''
-        });
-      } else if (activeTab === 'interviews') {
-        const response = await axios.post('http://localhost:5000/api/interviews', formData);
-        setInterviews([...interviews, response.data]);
-        setFormData({
-          title: '',
-          url: '',
-          image: '',
-          description: ''
-        });
-      }
-    } catch (error) {
-      console.error('Error saving:', error);
-      setError(`Error saving ${activeTab}: ${error.response?.data?.message || error.message}`);
     }
   };
 
@@ -105,10 +114,7 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
   const handleDelete = async (id, type) => {
     if (window.confirm(`Are you sure you want to delete this ${type.slice(0, -1)}?`)) {
       try {
-        if (type === 'titles') {
-          await axios.delete(`http://localhost:5000/api/titles/${id}`);
-          await fetchTitles();
-        } else if (type === 'videos') {
+        if (type === 'videos') {
           await axios.delete(`http://localhost:5000/api/videos/${id}`);
           setVideos(videos.filter(video => video._id !== id));
         } else if (type === 'interviews') {
@@ -125,11 +131,6 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
   // Render form for each section
   const renderForm = (type) => {
     const formFields = {
-      titles: [
-        { name: 'name', label: 'Title', type: 'text', required: true },
-        { name: 'url', label: 'URL', type: 'text', required: true },
-        { name: 'image', label: 'Image URL', type: 'text', required: true }
-      ],
       videos: [
         { name: 'title', label: 'Title', type: 'text', required: true },
         { name: 'videoId', label: 'Video ID', type: 'text', required: true },
@@ -139,7 +140,11 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
         { name: 'title', label: 'Title', type: 'text', required: true },
         { name: 'url', label: 'URL', type: 'text', required: true },
         { name: 'image', label: 'Image URL', type: 'text', required: true },
-        { name: 'description', label: 'Description', type: 'text', required: true }
+        { name: 'description', label: 'Description', type: 'text', required: false },
+        { name: 'language', label: 'Language', type: 'select', required: true, options: [
+          { value: 'az', label: 'Azerbaijani' },
+          { value: 'en', label: 'English' }
+        ]}
       ]
     };
 
@@ -153,13 +158,29 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
         {formFields[type].map((field) => (
           <Form.Group key={field.name} className="mb-3">
             <Form.Label>{field.label}</Form.Label>
-            <Form.Control
-              type={field.type}
-              name={field.name}
-              value={formData[field.name] || ''}
-              onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
-              required={field.required}
-            />
+            {field.type === 'select' ? (
+              <Form.Control
+                as="select"
+                name={field.name}
+                value={formData[field.name] || ''}
+                onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
+                required={field.required}
+              >
+                {field.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Form.Control>
+            ) : (
+              <Form.Control
+                type={field.type}
+                name={field.name}
+                value={formData[field.name] || ''}
+                onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
+                required={field.required}
+              />
+            )}
           </Form.Group>
         ))}
         <Button variant="primary" type="submit">
@@ -231,9 +252,6 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
             <Nav.Link eventKey="interviews">Interviews</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="titles">Titles</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
             <Nav.Link eventKey="videos">Videos</Nav.Link>
           </Nav.Item>
           <Nav.Item>
@@ -254,15 +272,6 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
                 <h3>Manage Interviews</h3>
                 {renderForm('interviews')}
                 {renderTable(interviews, 'interviews')}
-              </Col>
-            </Row>
-          </Tab.Pane>
-          <Tab.Pane eventKey="titles">
-            <Row>
-              <Col>
-                <h3>Manage Titles</h3>
-                {renderForm('titles')}
-                {renderTable(titles, 'titles')}
               </Col>
             </Row>
           </Tab.Pane>

@@ -17,24 +17,38 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     console.log('Received request body:', req.body);
-    console.log('Request headers:', req.headers);
     
-    if (!req.body.title) {
-      console.log('Title is missing from request body');
-      return res.status(400).json({ message: 'Title is required' });
+    // Validate required fields
+    if (!req.body.title || !req.body.url || !req.body.image) {
+      return res.status(400).json({ 
+        message: 'Missing required fields',
+        required: ['title', 'url', 'image'],
+        received: req.body
+      });
     }
 
     const title = new Title({
-      title: req.body.title
+      title: req.body.title,
+      url: req.body.url,
+      image: req.body.image
     });
 
     console.log('Creating new title:', title);
-    await title.save();
-    console.log('Title saved successfully:', title);
+    const savedTitle = await title.save();
+    console.log('Title saved successfully:', savedTitle);
     
-    res.status(201).json(title);
+    res.status(201).json(savedTitle);
   } catch (error) {
     console.error('Error saving title:', error);
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({ 
+        message: 'Validation error', 
+        errors: Object.keys(error.errors).map(key => ({
+          field: key,
+          message: error.errors[key].message
+        }))
+      });
+    }
     res.status(500).json({ message: 'Error saving title', error: error.message });
   }
 });

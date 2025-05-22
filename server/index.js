@@ -33,14 +33,8 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files from the uploads directory
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
-  setHeaders: (res, path) => {
-    if (path.endsWith('.pdf')) {
-      res.set('Content-Type', 'application/pdf');
-    }
-  }
-}));
+// Serve static files from uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
