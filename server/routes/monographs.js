@@ -12,7 +12,12 @@ const storage = multer.diskStorage({
     cb(null, uploadPath);
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
+    // Generate a shorter filename using timestamp and a random number
+    const timestamp = Date.now();
+    const randomNum = Math.floor(Math.random() * 1000);
+    const ext = path.extname(file.originalname);
+    const filename = `${timestamp}-${randomNum}${ext}`;
+    cb(null, filename);
   }
 });
 

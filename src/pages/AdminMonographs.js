@@ -30,23 +30,57 @@ const AdminMonographs = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (e.target.name === 'file' && file.type === 'application/pdf') {
-        setFormData({ ...formData, file });
-      } else if (e.target.name === 'image' && file.type.startsWith('image/')) {
-        setFormData({ ...formData, image: file });
-      } else {
-        setError(e.target.name === 'file' ? 'Please select a PDF file' : 'Please select an image file');
+      console.log('File selected:', {
+        name: file.name,
+        type: file.type,
+        size: file.size
+      });
+
+      if (e.target.name === 'file') {
+        if (file.type === 'application/pdf') {
+          setFormData(prev => ({ ...prev, file }));
+          setError(null);
+        } else {
+          setError('Please select a PDF file');
+          e.target.value = ''; // Clear the input
+        }
+      } else if (e.target.name === 'image') {
+        if (file.type.startsWith('image/')) {
+          setFormData(prev => ({ ...prev, image: file }));
+          setError(null);
+        } else {
+          setError('Please select an image file');
+          e.target.value = ''; // Clear the input
+        }
       }
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate files before submission
+    if (!formData.file || !formData.image) {
+      setError('Both PDF file and image are required');
+      return;
+    }
+
     try {
+      console.log('Form data before submission:', {
+        title: formData.title,
+        file: formData.file?.name,
+        image: formData.image?.name
+      });
+
       const formDataToSend = new FormData();
       formDataToSend.append('title', formData.title);
       formDataToSend.append('file', formData.file);
       formDataToSend.append('image', formData.image);
+
+      // Log the FormData contents
+      for (let pair of formDataToSend.entries()) {
+        console.log(pair[0] + ': ' + (pair[1] instanceof File ? pair[1].name : pair[1]));
+      }
 
       const response = await axios.post('http://localhost:5000/api/monographs', formDataToSend, {
         headers: {
@@ -60,10 +94,13 @@ const AdminMonographs = () => {
         file: null,
         image: null
       });
+      // Reset file inputs
+      document.querySelector('input[name="file"]').value = '';
+      document.querySelector('input[name="image"]').value = '';
       setError(null);
     } catch (error) {
-      setError('Error saving monograph');
-      console.error('Error:', error);
+      console.error('Error details:', error.response?.data || error.message);
+      setError(error.response?.data?.message || 'Error saving monograph');
     }
   };
 
