@@ -124,7 +124,25 @@ const Home = () => {
 
         // Sort articles by date and take the last 5
         const sortedArticles = articlesResponse.data
-          .filter(article => article && article.title) // Filter out invalid articles
+          .filter(article => {
+            // Check for required fields based on article type
+            const hasRequiredFields = 
+              article.title && // Title is required for all articles
+              (
+                // Type 1: Articles with PDF and image files (new format)
+                (article.pdfFile && article.imageFile) ||
+                // Type 2: Articles with URL and image
+                (article.url && article.image) ||
+                // Type 3: Articles with file and image (old format)
+                (article.file && article.image)
+              );
+
+            if (!hasRequiredFields) {
+              console.error('Invalid article data:', article);
+              return false;
+            }
+            return true;
+          })
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
           .slice(0, 5);
         
@@ -175,7 +193,7 @@ const Home = () => {
   };
 
   const getImageUrl = (imagePath) => {
-    if (!imagePath) return '/placeholder-image.jpg';
+    if (!imagePath) return '/logo512.png';
     if (imagePath.startsWith('http')) return imagePath;
     if (imagePath.startsWith('D:/')) {
       // Convert absolute path to relative URL
@@ -216,7 +234,7 @@ const Home = () => {
               <Slider {...sliderSettings}>
                 {articles.map((article) => {
                   console.log('Rendering article:', article);
-                  const imageUrl = getImageUrl(article.image);
+                  const imageUrl = getImageUrl(article.imageFile || article.image);
                   console.log('Image URL:', imageUrl);
                   return (
                     <div key={article._id} className="px-2">
@@ -229,20 +247,20 @@ const Home = () => {
                             onError={(e) => {
                               console.error('Image failed to load:', imageUrl);
                               e.target.onerror = null;
-                              e.target.src = '/placeholder-image.jpg';
+                              e.target.src = '/logo512.png';
                             }}
                           />
                         </div>
                         <div className="title-content">
                           <h3 className="title-text">{article.title}</h3>
-                          {article.pdfFile && (
+                          {(article.pdfFile || article.file || article.url) && (
                             <a 
-                              href={getImageUrl(article.pdfFile)}
+                              href={article.url || getImageUrl(article.pdfFile || article.file)}
                               target="_blank" 
                               rel="noopener noreferrer"
                               className="btn btn-primary"
                             >
-                              Read More
+                              {article.url ? t('view') : t('read-more')}
                             </a>
                           )}
                         </div>
