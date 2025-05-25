@@ -201,14 +201,17 @@ const Home = () => {
             <Books books={books} />
           </Col>
         </Row>
-        <TitleLine title={t('articles-title')} />
+        <TitleLine title={t('titles')} />
 
         <Row className='home-articles-container mt-5'>
           <Col>
+            <h2>Articles</h2>
             {loading ? (
-              <div className="text-center w-100">Loading articles...</div>
+              <p>Loading articles...</p>
+            ) : error ? (
+              <p className="text-danger">{error}</p>
             ) : articles.length === 0 ? (
-              <div className="text-center w-100">No articles available</div>
+              <p>No articles available</p>
             ) : (
               <Slider {...sliderSettings}>
                 {articles.map((article) => {
@@ -274,7 +277,7 @@ const Home = () => {
           ) : videos.length === 0 ? (
             <div className="text-center w-100">No videos available</div>
           ) : (
-            videos.map((video, index) => (
+            videos.slice(0, 3).map((video, index) => (
               <Col md={4} key={video._id} className="d-flex justify-content-center mt-2 mb-5">
                 <div style={{ width: '100%', maxWidth: '400px' }}>
                   <YouTubeVideo 
@@ -299,67 +302,9 @@ const Home = () => {
           </p>
         </Row>
 
-        {/* Videos Section */}
-        <section className="mb-5">
-          <h2>{t('home.videos')}</h2>
-          <div className="row">
-            {videos.map((video, index) => (
-              <div key={index} className="col-md-4 mb-4">
-                <div className="card h-100">
-                  <div className="ratio ratio-16x9">
-                    <iframe
-                      src={`https://www.youtube.com/embed/${video.videoId}`}
-                      title={video.title}
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                  <div className="card-body">
-                    <h5 className="card-title">{video.title}</h5>
-                    <p className="card-text">{video.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+   
 
-        {/* Titles Section */}
-        <section className="mb-5">
-          <h2>{t('home.titles')}</h2>
-          <div className="row">
-            {articles.map((article, index) => (
-              <div key={index} className="col-md-4 mb-4">
-                <div className="card h-100">
-                  <img 
-                    src={article.imageFile && article.imageFile.startsWith('http') 
-                      ? article.imageFile 
-                      : article.imageFile 
-                        ? `http://localhost:5000${article.imageFile}`
-                        : 'https://via.placeholder.com/300x200?text=No+Image'}
-                    className="card-img-top" 
-                    alt={article.title}
-                    style={{ height: '200px', objectFit: 'cover' }}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{article.title}</h5>
-                    {article.pdfFile && (
-                      <a 
-                        href={article.pdfFile.startsWith('http') 
-                          ? article.pdfFile 
-                          : `http://localhost:5000${article.pdfFile}`}
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="btn btn-primary"
-                      >
-                        {t('home.readMore')}
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+    
       </Container>
       <SocialSpeedDial />
     </div>

@@ -1,57 +1,62 @@
 .contacts-page {
 	padding: 2rem 0;
 	margin-top: 70px;
-  }
-  
-  .contacts-title {
+	background-color: #ffffff;
+}
+
+.contacts-title {
 	margin-bottom: 2rem;
 	text-align: center;
-  }
-  
-  .contact-form {
+}
+
+.contact-form {
 	width: 100%;
-  }
-  
-  .contact-image-container {
+	padding: 2rem;
+	background-color: #ffffff;
+	border-radius: 15px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-image-container {
 	position: relative;
 	display: inline-block;
 	width: 100%;
-  }
-  
-  .contact-image {
-	margin-top: 20px;
+}
+
+.contact-image {
 	width: 100%;
 	height: auto;
-	border-radius: 15px; /* Rounded corners */
-	border: 5px solid #ddd; /* Add a border */
-  }
-  
-  .contact-image-container::before,
-  .contact-image-container::after {
+	border-radius: 15px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	margin-top: 20px;
+}
+
+.contact-image-container::before,
+.contact-image-container::after {
 	content: '';
 	position: absolute;
 	width: 50%;
 	height: 2px;
 	background-color: #333;
 	transition: all 0.3s ease;
-  }
-  
-  .contact-image-container::before {
+}
+
+.contact-image-container::before {
 	top: 0;
 	left: 0;
-  }
-  
-  .contact-image-container::after {
+}
+
+.contact-image-container::after {
 	bottom: 0;
 	right: 0;
-  }
-  
-  .contact-image-container:hover::before,
-  .contact-image-container:hover::after {
+}
+
+.contact-image-container:hover::before,
+.contact-image-container:hover::after {
 	width: 100%; /* Extend the lines on hover */
-  }
-  
-  .contact-button {
+}
+
+.contact-button {
 	position: relative;
 	display: inline-block;
 	padding: 0.75rem 2rem;
@@ -64,14 +69,14 @@
 	overflow: hidden;
 	cursor: pointer;
 	transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .contact-button:hover {
+}
+
+.contact-button:hover {
 	background-color: #0056b3;
 	color: #fff;
-  }
-  
-  .contact-button::before {
+}
+
+.contact-button::before {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -83,30 +88,30 @@
 	box-sizing: border-box;
 	animation: circle-border 1.5s linear infinite;
 	pointer-events: none;
-  }
-  
-  @keyframes circle-border {
+}
+
+@keyframes circle-border {
 	0% {
-	  transform: scale(1);
-	  border-color: rgba(255, 255, 255, 0.5);
+		transform: scale(1);
+		border-color: rgba(255, 255, 255, 0.5);
 	}
 	50% {
-	  transform: scale(1.5);
-	  border-color: rgba(255, 255, 255, 0.2);
+		transform: scale(1.5);
+		border-color: rgba(255, 255, 255, 0.2);
 	}
 	100% {
-	  transform: scale(1);
-	  border-color: rgba(255, 255, 255, 0.5);
+		transform: scale(1);
+		border-color: rgba(255, 255, 255, 0.5);
 	}
-  }
-  
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
 	.contact-image-container {
-	  margin-top: 1rem;
+		margin-top: 1rem;
 	}
-  
+
 	.contact-button {
-	  width: 100%; /* Make the button full width on mobile */
-	  padding: 10px; /* Adjust padding for better appearance */
+		width: 100%; /* Make the button full width on mobile */
+		padding: 10px; /* Adjust padding for better appearance */
 	}
-  }
+}

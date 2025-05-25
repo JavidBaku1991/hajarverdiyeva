@@ -1,24 +1,37 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
+import axios from 'axios';
 import '../css/admin.css';
 
 const AdminLogin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError('');
     
-    // In a real application, you would verify credentials against a backend
-    // For now, we'll use a simple hardcoded check
-    if (username === 'admin' && password === 'admin123') {
-      localStorage.setItem('adminToken', 'dummy-token');
-      navigate('/admin/dashboard');
-    } else {
-      setError('Invalid credentials');
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
+        username,
+        password
+      });
+
+      if (response.data.token) {
+        localStorage.setItem('adminToken', response.data.token);
+        navigate('/admin');
+      } else {
+        setError('Invalid response from server');
+      }
+    } catch (error) {
+      setError(error.response?.data?.message || 'Login failed');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,8 +59,8 @@ const AdminLogin = () => {
               required
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
-            Login
+          <Button variant="primary" type="submit" disabled={loading}>
+            {loading ? 'Logging in...' : 'Login'}
           </Button>
         </Form>
       </div>

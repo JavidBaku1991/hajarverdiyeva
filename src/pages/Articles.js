@@ -32,7 +32,7 @@ const Articles = () => {
 
       // Validate each article has required fields
       const validArticles = response.data.filter(article => {
-        if (!article.title || !article.file || !article.image) {
+        if (!article.title || !article.pdfFile || !article.imageFile) {
           console.error('Invalid article data:', article);
           return false;
         }
@@ -85,7 +85,7 @@ const Articles = () => {
 
   return (
     <Container className="dissertations-container">
-      <Typography variant="h4" component="h1" gutterBottom className="articles-title title text-center">
+      <Typography variant="h4" component="h1" gutterBottom className="articles-title">
         Articles
       </Typography>
       {loading ? (
@@ -99,11 +99,11 @@ const Articles = () => {
           {articles.map((article) => (
             <Grid item xs={12} sm={6} md={4} key={article._id}>
               <Card className="article-card dissertation-card">
-                {!failedImages.has(article._id) && article.image ? (
+                {!failedImages.has(article._id) && article.imageFile ? (
                   <CardMedia
                     component="img"
                     height="200"
-                    image={getImageUrl(article.image)}
+                    image={getImageUrl(article.imageFile)}
                     alt={article.title}
                     onError={() => handleImageError(article._id)}
                   />
@@ -124,10 +124,10 @@ const Articles = () => {
                       <Button 
                         variant="contained" 
                         color="secondary" 
-                        href={getPdfUrl(article.file)}
+                        href={getPdfUrl(article.pdfFile)}
                         download
                         onClick={(e) => {
-                          if (!article.file) {
+                          if (!article.pdfFile) {
                             e.preventDefault();
                             console.error('No PDF file available');
                           }
@@ -152,14 +152,14 @@ const Articles = () => {
       >
         <DialogTitle>{selectedArticle?.title}</DialogTitle>
         <DialogContent>
-          {selectedArticle && selectedArticle.file && (
+          {selectedArticle && selectedArticle.pdfFile && (
             <iframe
-              src={getPdfUrl(selectedArticle.file)}
+              src={getPdfUrl(selectedArticle.pdfFile)}
               title={selectedArticle.title}
               width="100%"
               height="600px"
               onError={(e) => {
-                console.error('Error loading PDF:', selectedArticle.file);
+                console.error('Error loading PDF:', selectedArticle.pdfFile);
                 e.target.parentNode.innerHTML = '<div style="padding: 20px; text-align: center;">Error loading PDF. Please try downloading instead.</div>';
               }}
             />
