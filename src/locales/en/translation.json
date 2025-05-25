@@ -4,13 +4,15 @@
     "home": "Home",
     "photos": "Photos",
     "about": "About",
+    "publications": "Publications",
     "monographies": "Monographies",
     "dissertations": "Dissertations",
     "videos": "Videos",
     "contact": "Contact",
     "doctors": "Doctors",
     "lawyers": "Lawyers",
-     "titles":"Articles"
+    "titles": "Articles",
+    "articles": "Articles"
   },
   "contacts": {
     "title": "Contact Us",

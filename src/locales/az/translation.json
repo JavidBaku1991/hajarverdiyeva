@@ -11,7 +11,8 @@
     "contact": "Əlaqə",
     "doctors": "Həkimlər",
     "lawyers": "Hüquqşünaslar",
-    "titles":"Məqalələr"
+    "titles": "Məqalələr",
+    "articles": "Məqalələr"
   },
   "contacts": {
     "title": "Bizimlə əlaqə saxlayın",
@@ -42,10 +43,10 @@
         "linkedin": "LinkedIn",
         "academia": "Academia"
     }
-}    
-,"open":"Aç",
-"download":"Yüklə",
-"about": {
+  },
+  "open":"Aç",
+  "download":"Yüklə",
+  "about": {
     "brand": "Həcər Verdiyeva",
     "researchInterests": {
       "title": "Elmi tədqiqatlar",
@@ -64,7 +65,7 @@
     },
     "research": {
       "title": "Elmi fəaliyyət",
-      "description": "H.Y.Verdiyeva 1993-cü ildə “XIX əsrin birinci yarısında Şimali Azərbaycanın əhalisi” adlı namizədlik dissertasiyasını, 2005-ci ildə “XIX-XX əsrin əvvəllərində Rusiya imperiyasının Şimali Azərbaycanda köçürmə siyasəti” adlı doktorluq dissertasiyasını müdafiə etmişdir. Rusiya Federasiyası, Almaniya, Türkiyə və Azərbaycan Respublikasında keçirilmiş beynəlxalq konfransların iştirakçısı olmuşdur. Azərbaycan tarixinin Yeni və Ən Yeni dövrlərinin etno-konfessional, konfliktologiya və Qafqazın aktual problemlərini öyrənir. O, 9 monoqrafiya, 101 elmi məqalənin müəllifidir. 4 dərsliyin həmmüəllifidir. H.Y.Verdiyeva ARP İİ SSA tərəfindən nəşr edilən “В поисках истины…Лицо армянства. Архив Политических Документов Управления Делами Президента Азербайджанской Республики.Документы свидетельствуют” adlı sənədlər toplu-kitabının(2011) həmmüəllifi, «Неизвестные страницы истории: беженцы - мусульмане (1918-1920 гг.)» sənədlər toplusunun (2018) tərtibatçısıdır. "
+      "description": "H.Y.Verdiyeva 1993-cü ildə \"XIX əsrin birinci yarısında Şimali Azərbaycanın əhalisi\" adlı namizədlik dissertasiyasını, 2005-ci ildə \"XIX-XX əsrin əvvəllərində Rusiya imperiyasının Şimali Azərbaycanda köçürmə siyasəti\" adlı doktorluq dissertasiyasını müdafiə etmişdir. Rusiya Federasiyası, Almaniya, Türkiyə və Azərbaycan Respublikasında keçirilmiş beynəlxalq konfransların iştirakçısı olmuşdur. Azərbaycan tarixinin Yeni və Ən Yeni dövrlərinin etno-konfessional, konfliktologiya və Qafqazın aktual problemlərini öyrənir. O, 9 monoqrafiya, 101 elmi məqalənin müəllifidir. 4 dərsliyin həmmüəllifidir. H.Y.Verdiyeva ARP İİ SSA tərəfindən nəşr edilən \"В поисках истины…Лицо армянства. Архив Политических Документов Управления Делами Президента Азербайджанской Республики.Документы свидетельствуют\" adlı sənədlər toplu-kitabının(2011) həmmüəllifi, «Неизвестные страницы истории: беженцы - мусульмане (1918-1920 гг.)» sənədlər toplusunun (2018) tərtibatçısıdır."
     },
     "otherActivities": {
       "title": "Digər fəaliyyətlər",
@@ -72,7 +73,6 @@
     }
   },
   "not-found":"404 - Axtardığınız səhifə tapılmadı.",
-  "not-found-description":"Bu səhifə erməni tarixçilərinin yazdığı həqiqətlər qədər gerçəkdi. ",
+  "not-found-description":"Bu səhifə erməni tarixçilərinin yazdığı həqiqətlər qədər gerçəkdi.",
   "go-home":"Ana səhifəyə qayıt"
-
 }
