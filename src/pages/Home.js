@@ -15,6 +15,8 @@ import axios from 'axios';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import BakRabochiyPdf from '../pdf/kitablar/bakrabochiy.pdf';
+import BakRabochiy from '../pdf/kitablar/BakRabochiy.png'
 
 // PDF imports
 import nem from '../pdf/monoqrafiyalar/nem.pdf';
@@ -27,15 +29,6 @@ import kitab2 from '../photos/books/nem.png';
 import kitab1 from '../photos/books/dok.jpg';
 import kitab3 from '../photos/books/cingiz.jpg';
 import rodos1 from '../photos/books/rodos.jpg';
-
-// images for titles
-import hecer1 from '../photos/titles/home1.jpg';
-import hecer2 from '../photos/titles/home2.jpg';
-import hecer3 from '../photos/hajar12.png';
-import hecer4 from '../photos/titles/home4.jpg';
-import hecer5 from '../photos/hajar11.png';
-import hecer8 from '../photos/hajar1.jpg';
-import hecer7 from '../photos/interview4.png';
 
 // Initial state values
 const initialVideos = [];
@@ -92,10 +85,36 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   const books = [
-    { title: 'Немцы  в Северном  Азербайджане', image: kitab2, url: nem },
-    { title: 'Немцы в Азербайджане', image: kitab3, url: cin },
-    { title: '«РОДОСЛОВНАЯ» АРМЯН И ИХ МИГРАЦИЯ НА КАВКАЗ С БАЛКАН', image: rodos1, url: rodos },
-    { title: 'Докавказская история армян ', image: kitab1, url: dok },
+    { 
+      title: 'Немцы в Северном Азербайджане', 
+      image: kitab2, 
+      url: nem,
+      description: 'Research on German communities in Northern Azerbaijan'
+    },
+    { 
+      title: 'Немцы в Азербайджане', 
+      image: kitab3, 
+      url: cin,
+      description: 'Comprehensive study of German presence in Azerbaijan'
+    },
+    { 
+      title: '«РОДОСЛОВНАЯ» АРМЯН И ИХ МИГРАЦИЯ НА КАВКАЗ С БАЛКАН', 
+      image: rodos1, 
+      url: rodos,
+      description: 'Study of Armenian genealogy and migration from the Balkans to the Caucasus'
+    },
+    { 
+      title: 'Докавказская история армян', 
+      image: kitab1, 
+      url: dok,
+      description: 'Pre-Caucasian history of Armenians'
+    },
+    { 
+      title: 'На матрице истины: армяне - аллохтонына Кавказе', 
+      image: BakRabochiy, // Temporarily using dok.jpg as placeholder
+      url: BakRabochiyPdf,
+      description: 'Research on Armenians as allochthons in the Caucasus'
+    },
   ];
 
   useEffect(() => {
@@ -206,24 +225,26 @@ const Home = () => {
   return (
     <div className="bg-light text-dark">
       <div className="hero-container">
-        <img src={heroImg} alt="Hero" className="hero-image" />
+        <img src={heroImg} alt="Hajar Verdiyeva" className="hero-image" />
         <div className="hero-content">
-          <h1 className="hero-title">{t('hero.title')}</h1>
-          <h2 className="hero-subtitle">{t('hero.subtitle')}</h2>
-          <p className="hero-description">{t('hero.description')}</p>
+          <h1 className="hero-title">Hajar Verdiyeva</h1>
+          <h2 className="hero-subtitle">Doctor of Historical Sciences</h2>
+          <p className="hero-description">
+            The website presents the historian's activities, scientific research, publications, and other information.
+          </p>
         </div>
       </div>
       <Container>
-        <Row>
+        <Row className="mb-5">
           <Col>
+            <TitleLine title={t('publications')} />
             <Books books={books} />
           </Col>
         </Row>
-        <TitleLine title={t('titles')} />
 
-        <Row className='home-articles-container mt-5'>
+        <Row className='home-articles-container mb-5'>
           <Col>
-            <h2>Articles</h2>
+            <TitleLine title={t('articles')} />
             {loading ? (
               <p>Loading articles...</p>
             ) : error ? (
@@ -233,9 +254,7 @@ const Home = () => {
             ) : (
               <Slider {...sliderSettings}>
                 {articles.map((article) => {
-                  console.log('Rendering article:', article);
                   const imageUrl = getImageUrl(article.imageFile || article.image);
-                  console.log('Image URL:', imageUrl);
                   return (
                     <div key={article._id} className="px-2">
                       <div className="title-card">
@@ -252,7 +271,7 @@ const Home = () => {
                           />
                         </div>
                         <div className="title-content">
-                          <h3 className="title-text">{article.title}</h3>
+                          <h6 className="title-text">{article.title}</h6>
                           {(article.pdfFile || article.file || article.url) && (
                             <a 
                               href={article.url || getImageUrl(article.pdfFile || article.file)}
@@ -273,8 +292,8 @@ const Home = () => {
           </Col>
         </Row>
 
-        <Row>
-          <Col className='mt-5'>
+        <Row className='mb-5'>
+          <Col>
             <TitleLine title={t('interviews-title')} />
             {loading ? (
               <div className="text-center w-100">Loading interviews...</div>
@@ -286,43 +305,44 @@ const Home = () => {
           </Col>
         </Row>
 
-        <Row className='mb-5 mt-5'>
-          <TitleLine title={t('videos-title')} />
-          <div className='mb-4'></div>
-          {error && <div className="alert alert-danger">{error}</div>}
-          {loading ? (
-            <div className="text-center w-100">Loading videos...</div>
-          ) : videos.length === 0 ? (
-            <div className="text-center w-100">No videos available</div>
-          ) : (
-            videos.slice(0, 3).map((video, index) => (
-              <Col md={4} key={video._id} className="d-flex justify-content-center mt-2 mb-5">
-                <div style={{ width: '100%', maxWidth: '400px' }}>
-                  <YouTubeVideo 
-                    videoId={video.videoId} 
-                    title={video.title}
-                    description={video.description}
-                  />
+        <Row className='mb-5'>
+          <Col>
+            <TitleLine title={t('videos-title')} />
+            {error && <div className="alert alert-danger">{error}</div>}
+            {loading ? (
+              <div className="text-center w-100">Loading videos...</div>
+            ) : videos.length === 0 ? (
+              <div className="text-center w-100">No videos available</div>
+            ) : (
+              <>
+                <Row>
+                  {videos.slice(0, 3).map((video, index) => (
+                    <Col md={4} key={video._id} className="d-flex justify-content-center mt-2 mb-5">
+                      <div style={{ width: '100%', maxWidth: '400px' }}>
+                        <YouTubeVideo 
+                          videoId={video.videoId} 
+                          title={video.title}
+                          description={video.description}
+                        />
+                      </div>
+                    </Col>
+                  ))}
+                </Row>
+                <div className="d-flex justify-content-center">
+                  <Button
+                    component={RouterLink}
+                    to="/videos"
+                    variant="contained"
+                    color="primary"
+                    className="more-link"
+                  >
+                    {t('read-more')}
+                  </Button>
                 </div>
-              </Col>
-            ))
-          )}
-          <p className="d-flex justify-content-center">
-            <Button
-              component={RouterLink}
-              to="/videos"
-              variant="contained"
-              color="primary"
-              className="more-link"
-            >
-              {t('read-more')}
-            </Button>
-          </p>
+              </>
+            )}
+          </Col>
         </Row>
-
-   
-
-    
       </Container>
       <SocialSpeedDial />
     </div>

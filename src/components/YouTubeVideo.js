@@ -31,18 +31,7 @@ const YouTubeVideo = ({ videoId, title, description }) => {
           style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
         />
       </div>
-      <div className="youtube-video-info">
-        {title && (
-          <div className="youtube-video-title">
-            <h4>{title}</h4>
-          </div>
-        )}
-        {description && (
-          <div className="youtube-video-description">
-            <p>{description}</p>
-          </div>
-        )}
-      </div>
+    
     </div>
   );
 };

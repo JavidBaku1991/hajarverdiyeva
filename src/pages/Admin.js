@@ -61,16 +61,15 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
       try {
         if (activeTab === 'videos') {
           const response = await axios.post('http://localhost:5000/api/videos', {
-            title: formData.title,
             videoId: formData.videoId,
-            description: formData.description
+            title: 'Video',  // Default title
+            description: '',  // Empty description
+            language: 'en'    // Default language
           });
           setVideos([...videos, response.data]);
           setFormData({
             ...formData,
-            title: '',
-            videoId: '',
-            description: ''
+            videoId: ''
           });
         } else if (activeTab === 'interviews') {
           if (!formData.title || !formData.url || !formData.image) {
@@ -112,18 +111,35 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
 
   // Handle delete for each section
   const handleDelete = async (id, type) => {
+    if (!id) {
+      setError('Invalid ID provided for deletion');
+      return;
+    }
+
     if (window.confirm(`Are you sure you want to delete this ${type.slice(0, -1)}?`)) {
       try {
+        const headers = {
+          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+        };
+
         if (type === 'videos') {
-          await axios.delete(`http://localhost:5000/api/videos/${id}`);
-          setVideos(videos.filter(video => video._id !== id));
+          // First try to find the video by videoId
+          const video = videos.find(v => v.videoId === id);
+          if (!video) {
+            setError('Video not found');
+            return;
+          }
+          
+          // Use the video's _id for deletion
+          await axios.delete(`http://localhost:5000/api/videos/${video._id}`, { headers });
+          setVideos(videos.filter(v => v._id !== video._id));
         } else if (type === 'interviews') {
-          await axios.delete(`http://localhost:5000/api/interviews/${id}`);
+          await axios.delete(`http://localhost:5000/api/interviews/${id}`, { headers });
           setInterviews(interviews.filter(interview => interview._id !== id));
         }
       } catch (error) {
-        setError(`Error deleting ${type.slice(0, -1)}`);
-        console.error('Error:', error);
+        console.error('Error details:', error.response?.data || error);
+        setError(`Error deleting ${type.slice(0, -1)}: ${error.response?.data?.message || error.message}`);
       }
     }
   };
@@ -132,9 +148,7 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
   const renderForm = (type) => {
     const formFields = {
       videos: [
-        { name: 'title', label: 'Title', type: 'text', required: true },
-        { name: 'videoId', label: 'Video ID', type: 'text', required: true },
-        { name: 'description', label: 'Description', type: 'text', required: true }
+        { name: 'videoId', label: 'Video ID', type: 'text', required: true }
       ],
       interviews: [
         { name: 'title', label: 'Title', type: 'text', required: true },
@@ -156,7 +170,7 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
     return (
       <Form onSubmit={(e) => handleSubmit(e)}>
         {formFields[type].map((field) => (
-          <Form.Group key={field.name} className="mb-3">
+          <Form.Group key={field.name} className="mb-3 ">
             <Form.Label>{field.label}</Form.Label>
             {field.type === 'select' ? (
               <Form.Control
@@ -196,25 +210,35 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
       return <p>No items added yet.</p>;
     }
 
+    // Define which fields to display for each type
+    const displayFields = {
+      videos: ['videoId'],  // Only show videoId for videos
+      interviews: ['title', 'url', 'image', 'description', 'language']
+    };
+
     return (
       <Table striped bordered hover>
         <thead>
           <tr>
-            {Object.keys(items[0]).map(key => (
-              <th key={key}>{key}</th>
+            {displayFields[type].map(field => (
+              <th key={field}>{field.charAt(0).toUpperCase() + field.slice(1)}</th>
             ))}
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {items.map((item, index) => (
-            <tr key={item._id || index}>
-              {Object.entries(item).map(([key, value]) => (
-                <td key={key}>
-                  {key === 'image' && typeof value === 'string' && value.startsWith('blob:') ? (
-                    <img src={value} alt="Item" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+          {items.map((item) => (
+            <tr key={item._id || item.videoId}>
+              {displayFields[type].map(field => (
+                <td key={field}>
+                  {field === 'image' && typeof item[field] === 'string' ? (
+                    <img 
+                      src={item[field]} 
+                      alt={item.title} 
+                      style={{ maxWidth: '100px', maxHeight: '100px' }} 
+                    />
                   ) : (
-                    value
+                    item[field] || '-'
                   )}
                 </td>
               ))}
@@ -222,7 +246,7 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
                 <Button
                   variant="danger"
                   size="sm"
-                  onClick={() => handleDelete(item._id, type)}
+                  onClick={() => handleDelete(type === 'videos' ? item.videoId : item._id, type)}
                 >
                   Delete
                 </Button>
@@ -236,7 +260,7 @@ const Admin = ({ videos, setVideos, interviews, setInterviews }) => {
 
   return (
     <Container className="admin-dashboard">
-      <div className="admin-header">
+      <div className="admin-header mt-5">
         <h2>Admin Dashboard</h2>
         <Button variant="danger" onClick={() => {
           localStorage.removeItem('adminToken');

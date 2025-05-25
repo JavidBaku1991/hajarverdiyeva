@@ -110,7 +110,11 @@ const AdminArticles = () => {
     if (window.confirm('Are you sure you want to delete this article?')) {
       try {
         console.log('Deleting article:', id);
-        await axios.delete(`http://localhost:5000/api/articles/${id}`);
+        await axios.delete(`http://localhost:5000/api/articles/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+          }
+        });
         console.log('Article deleted successfully');
         
         // Fetch all articles again to ensure we have the latest data
