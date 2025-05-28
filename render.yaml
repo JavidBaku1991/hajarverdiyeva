@@ -11,4 +11,6 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: NODE_ENV
-        value: production 
+        value: production
+      - key: PORT
+        value: 10000 
