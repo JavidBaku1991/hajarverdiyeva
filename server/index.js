@@ -68,17 +68,14 @@ mongoose.connect(MONGODB_URI, {
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000,
   socketTimeoutMS: 45000,
-  retryWrites: true,
-  w: 'majority',
   maxPoolSize: 10,
   minPoolSize: 5,
   connectTimeoutMS: 30000,
   heartbeatFrequencyMS: 10000,
   retryReads: true,
+  retryWrites: true,
   ssl: true,
-  tls: true,
-  tlsAllowInvalidCertificates: true,
-  tlsAllowInvalidHostnames: true
+  tls: true
 })
 .then(() => console.log('Connected to MongoDB Atlas'))
 .catch(err => {
