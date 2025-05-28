@@ -2,8 +2,9 @@ services:
   - type: web
     name: hajarverdiyeva-backend
     env: node
-    buildCommand: npm install
-    startCommand: node server/index.js
+    nodeVersion: 18.x
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
     envVars:
       - key: MONGODB_URI
         value: mongodb+srv://javidbaku1991:bObGBgvj6rdcWfCD@cluster0.leawlg5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
