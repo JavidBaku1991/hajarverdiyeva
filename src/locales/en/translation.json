@@ -11,7 +11,8 @@
     "contact": "Contact",
     "doctors": "Doctors",
     "lawyers": "Lawyers",
-     "titles":"Articles"
+    "titles": "Articles",
+    "articles": "Articles"
   },
   "contacts": {
     "title": "Contact Us",

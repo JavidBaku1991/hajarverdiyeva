@@ -1,0 +1,93 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const path = require('path');
+const fs = require('fs');
+require('dotenv').config();
+
+const app = express();
+
+// Create all necessary upload directories
+const uploadDirs = [
+  'uploads/articles',
+  'uploads/articles/images',
+  'uploads/monographs',
+  'uploads/monographs/images',
+  'uploads/dissertations',
+  'uploads/dissertations/images'
+];
+
+uploadDirs.forEach(dir => {
+  const fullPath = path.join(__dirname, dir);
+  if (!fs.existsSync(fullPath)) {
+    fs.mkdirSync(fullPath, { recursive: true });
+  }
+});
+
+// Middleware
+app.use(cors({
+  origin: ['https://hajarverdiyeva.az', 'http://localhost:3000'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Serve static files from uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Import routes
+const authRoutes = require('./routes/auth');
+const uploadRoutes = require('./routes/upload');
+const interviewRoutes = require('./routes/interviews');
+const videoRoutes = require('./routes/videos');
+const monographRoutes = require('./routes/monographs');
+const articleRoutes = require('./routes/articles');
+const dissertationRoutes = require('./routes/dissertations');
+const titlesRouter = require('./routes/titles');
+
+// Use routes
+app.use('/api/auth', authRoutes);
+app.use('/api/upload', uploadRoutes);
+app.use('/api/interviews', interviewRoutes);
+app.use('/api/videos', videoRoutes);
+app.use('/api/monographs', monographRoutes);
+app.use('/api/articles', articleRoutes);
+app.use('/api/dissertations', dissertationRoutes);
+app.use('/api/titles', titlesRouter);
+
+// MongoDB Connection
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://javidbaku1991:bObGBgvj6rdcWfCD@cluster0.leawlg5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 30000,
+  socketTimeoutMS: 45000,
+})
+.then(() => console.log('Connected to MongoDB Atlas'))
+.catch(err => {
+  console.error('MongoDB connection error:', err);
+  process.exit(1);
+});
+
+// Basic route
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to the Hajar Portfolio API' });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Something went wrong!', error: err.message });
+});
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+}); 

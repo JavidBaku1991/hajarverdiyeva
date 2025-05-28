@@ -1,3 +1,10 @@
+.title-slider-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
 .title-slider {
   width: 100%;
 }
@@ -9,11 +16,11 @@
 }
 
 .slick-dots {
-  bottom: -10px; /* Adjust this value to move the dots closer */
+  bottom: -30px;
 }
 
 .slick-dots li {
-  margin: 0 2px; /* Adjust this value to change the spacing between dots */
+  margin: 0 2px;
 }
 
 .slick-dots li button:before {
@@ -26,102 +33,72 @@
 }
 
 .title-item {
+  padding: 10px;
+  height: 200px;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  background: #ffffff;
-  border-radius: 20px;
-  margin-left: 3px;
-  padding: 5px;
-  margin: 70px; /* Ensure margin to add more space between titles */
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  height: 180px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
-}
-
-.title-item:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.title-image {
-  width: 50%; /* Ensure the image covers only 50% of the title */
-  height: auto;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-right: 10px;
 }
 
 .title-content {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 10px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.title-content:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.title-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.title-text {
+  flex: 1;
 }
 
 .title-text h4 {
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 16px;
+  margin: 0;
   color: #333;
-}
-
-.download-link {
-  text-decoration: none;
-  background-color: #007bff;
-  color: white;
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-size: 14px;
-  transition: background 0.3s;
-}
-
-.download-link:hover {
-  background-color: #0056b3;
+  line-height: 1.4;
 }
 
 .title-link {
   text-decoration: none;
   color: inherit;
+  display: block;
 }
 
 .title-link:hover {
-  text-decoration: underline;
+  color: #007bff;
 }
 
 @media (max-width: 768px) {
-  .title-slider {
-    width: 95%;
-  }
-
-  .title-item {
+  .title-content {
     padding: 10px;
   }
 
+  .title-image {
+    width: 100px;
+    height: 100px;
+  }
+
   .title-text h4 {
-    font-size: 16px;
+    font-size: 14px;
   }
-
-  .download-link {
-    font-size: 12px;
-    padding: 6px 12px;
-  }
-}
-
-.title-slider {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.title-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.title-image {
-  max-width: 100%;
-  height: auto;
 }

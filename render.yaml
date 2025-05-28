@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: hajarverdiyeva-backend
+    env: node
+    nodeVersion: 18.x
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://javidbaku1991:bObGBgvj6rdcWfCD@cluster0.leawlg5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      - key: JWT_SECRET
+        generateValue: true
+      - key: NODE_ENV
+        value: production 
