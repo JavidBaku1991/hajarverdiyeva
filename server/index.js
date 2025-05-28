@@ -26,7 +26,7 @@ uploadDirs.forEach(dir => {
 
 // Middleware
 app.use(cors({
-  origin: ['https://hajarverdiyeva.az', 'http://localhost:3000'],
+  origin: ['https://hajarverdiyeva.az', 'http://localhost:3000', 'https://hajarverdiyeva-backend.onrender.com'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -68,11 +68,23 @@ mongoose.connect(MONGODB_URI, {
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000,
   socketTimeoutMS: 45000,
+  maxPoolSize: 10,
+  minPoolSize: 5,
+  connectTimeoutMS: 30000,
+  heartbeatFrequencyMS: 10000,
+  retryReads: true,
+  retryWrites: true,
+  ssl: true,
+  tls: true
 })
 .then(() => console.log('Connected to MongoDB Atlas'))
 .catch(err => {
   console.error('MongoDB connection error:', err);
-  process.exit(1);
+  // Don't exit on first error, try to reconnect
+  setTimeout(() => {
+    console.log('Attempting to reconnect to MongoDB...');
+    mongoose.connect(MONGODB_URI);
+  }, 5000);
 });
 
 // Basic route
