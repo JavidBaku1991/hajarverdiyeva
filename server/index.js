@@ -61,12 +61,12 @@ app.use('/api/dissertations', dissertationRoutes);
 app.use('/api/titles', titlesRouter);
 
 // MongoDB Connection
-const MONGODB_URI = 'mongodb+srv://javidbaku1991:bObGBgvj6rdcWfCD@cluster0.leawlg5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://javidbaku1991:bObGBgvj6rdcWfCD@cluster0.leawlg5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 5000,
+  serverSelectionTimeoutMS: 30000,
   socketTimeoutMS: 45000,
 })
 .then(() => console.log('Connected to MongoDB Atlas'))
