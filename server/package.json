@@ -4,7 +4,7 @@
   "description": "Backend for Hajar Verdiyeva portfolio",
   "main": "index.js",
   "engines": {
-    "node": "18.x"
+    "node": "18.19.1"
   },
   "scripts": {
     "start": "node index.js",

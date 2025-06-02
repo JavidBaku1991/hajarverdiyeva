@@ -81,8 +81,8 @@ mongoose.connect(MONGODB_URI, {
   retryWrites: true,
   ssl: true,
   tls: true,
-  tlsInsecure: true,
-  directConnection: true
+  directConnection: true,
+  tlsAllowInvalidCertificates: true
 })
 .then(() => console.log('Connected to MongoDB Atlas'))
 .catch(err => {
