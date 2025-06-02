@@ -61,7 +61,12 @@ app.use('/api/dissertations', dissertationRoutes);
 app.use('/api/titles', titlesRouter);
 
 // MongoDB Connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://javidbaku1991:bObGBgvj6rdcWfCD@cluster0.leawlg5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+  console.error('MONGODB_URI environment variable is not set');
+  process.exit(1);
+}
 
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
@@ -75,7 +80,10 @@ mongoose.connect(MONGODB_URI, {
   retryReads: true,
   retryWrites: true,
   ssl: true,
-  tls: true
+  tls: true,
+  tlsAllowInvalidCertificates: true,
+  tlsAllowInvalidHostnames: true,
+  tlsInsecure: true
 })
 .then(() => console.log('Connected to MongoDB Atlas'))
 .catch(err => {
