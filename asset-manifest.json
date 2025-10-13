@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.56c46dfe.css",
-    "main.js": "/static/js/main.29826141.js",
+    "main.js": "/static/js/main.da73e3ed.js",
     "static/media/cingiz.pdf": "/static/media/cingiz.01babaad8b529c12b901.pdf",
     "static/media/peres.pdf": "/static/media/peres.1ba5810bea6839d425e0.pdf",
     "static/media/tarihi.pdf": "/static/media/tarihi.866ed691a97ce3ac5cb9.pdf",
@@ -14,6 +14,7 @@
     "static/media/tarheq.pdf": "/static/media/tarheq.578679581381a4135f52.pdf",
     "static/media/amea.pdf": "/static/media/amea.106c95ae82d654584a82.pdf",
     "static/media/soceco.pdf": "/static/media/soceco.04c7c91d2408e58198a1.pdf",
+    "static/media/fransa.png": "/static/media/fransa.41bdab963d590f0bdf1d.png",
     "static/media/interview4.png": "/static/media/interview4.7be7c4ea5625ab451d9d.png",
     "static/media/gerceginmatrisi.pdf": "/static/media/gerceginmatrisi.fae10afe06a640087af9.pdf",
     "static/media/ermenisorunu.pdf": "/static/media/ermenisorunu.f5b2c337da92b3165d35.pdf",
@@ -39,10 +40,10 @@
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/index.html",
     "main.56c46dfe.css.map": "/static/css/main.56c46dfe.css.map",
-    "main.29826141.js.map": "/static/js/main.29826141.js.map"
+    "main.da73e3ed.js.map": "/static/js/main.da73e3ed.js.map"
   },
   "entrypoints": [
     "static/css/main.56c46dfe.css",
-    "static/js/main.29826141.js"
+    "static/js/main.da73e3ed.js"
   ]
 }
