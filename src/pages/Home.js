@@ -34,6 +34,7 @@ import hecer3 from '../photos/hajar12.png';
 import hecer4 from '../photos/titles/home4.jpg';
 import hecer5 from '../photos/hajar11.png';
 import hecer8 from '../photos/hajar1.jpg';
+import fransa from '../photos/titles/fransa.png';
 import { useTranslation } from 'react-i18next';
 
 
@@ -58,7 +59,8 @@ const titles = [
   { name: 'Первая мировая война и беженцы — мусульмане Кавказа', url: 'https://1905.az/ru/%D0%BF%D0%B5%D1%80%D0%B2%D0%B0%D1%8F-%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%8F-%D0%B2%D0%BE%D0%B9%D0%BD%D0%B0-%D0%B8-%D0%B1%D0%B5%D0%B6%D0%B5%D0%BD%D1%86%D1%8B-%D0%BC%D1%83%D1%81%D1%83%D0%BB%D1%8C/', image: hecer1 },
   { name: '“Erməni-qriqoryan kilsəsi XIX əsr ərzində alban irsini məhv edib, qarət edirdi”', url: 'https://1905.az/erm%C9%99ni-qriqoryan-kils%C9%99si-xix-%C9%99sr-%C9%99rzind%C9%99-alban-irsini-m%C9%99hv-edib-qar%C9%99t-edirdi/', image: hecer2 },
   { name: '“На матрице истины”', url: 'https://br.az/politics/71069/na-matrice-istiny/', image: hecer3 },
-];
+
+{name:'Fransa mediası Alban Həvari kilsəsi haqqında məqalə dərc edib', url:'https://turkic.world/az/articles/other/41074', image: fransa}];
 
 const books = [
   { title: 'Немцы  в Северном  Азербайджане', image: kitab2, url: nem},
