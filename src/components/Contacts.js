@@ -27,12 +27,33 @@ const Contacts = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
+    
+    // Create template parameters to ensure proper data mapping
+    const templateParams = {
+      name: formData.name,
+      surname: formData.surname,
+      email: formData.email,
+      message: formData.message,
+      reply_to: formData.email, // This sets the reply-to address
+    };
+
     emailjs
-      .sendForm('service_ursknit', 'template_64qmekz', e.target, 'RV22WzPhD0vnOR09L')
+      .send('service_ursknit', 'template_64qmekz', templateParams, 'RV22WzPhD0vnOR09L')
       .then((res) => {
-        console.log(res);
+        console.log('Email sent successfully:', res);
+        alert('Message sent successfully!');
+        // Reset form
+        setFormData({
+          name: '',
+          surname: '',
+          email: '',
+          message: '',
+        });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error('Email sending failed:', err);
+        alert('Failed to send message. Please try again.');
+      });
     navigate('/');
   };
 
